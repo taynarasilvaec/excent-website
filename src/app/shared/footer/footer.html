@@ -1,0 +1,108 @@
+<footer id="app-footer" data-cy="app-footer" class="footer">
+  <div
+    id="footer-brand-nav-group"
+    data-cy="footer-brand-nav-group"
+    class="footer__brand-nav-group contents tablet:flex tablet:flex-col tablet:gap-[51px] desktop:flex-row desktop:gap-[120px] desktop:items-start">
+    <div
+      id="footer-brand-group"
+      data-cy="footer-brand-group"
+      class="footer__brand-group contents tablet:flex tablet:flex-col tablet:justify-between tablet:items-start tablet:self-stretch tablet:gap-20">
+    <div id="footer-brand" data-cy="footer-brand" class="footer__brand">
+      <img
+        id="footer-logo"
+        data-cy="footer-logo"
+        class="footer__logo"
+        alt="Excent Capital"
+        width="200"
+        height="34"
+        [src]="logoSrc()" />
+      <p id="footer-tagline" data-cy="footer-tagline" class="footer__tagline">
+        {{ 'footer.tagline' | translate }}
+      </p>
+    </div>
+
+    <div id="footer-socials" data-cy="footer-socials" class="footer__socials">
+      @for (social of socials; track social.id) {
+        <a
+          [id]="'footer-social-' + social.id"
+          [attr.data-cy]="'footer-social-' + social.id"
+          class="footer__social"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="social.ariaLabel"
+          [href]="social.href">
+          <img alt="" aria-hidden="true" width="16" height="16" [src]="social.icon" />
+        </a>
+      }
+    </div>
+  </div>
+
+  <nav id="footer-nav" data-cy="footer-nav" class="footer__nav" aria-label="Footer navigation">
+    @for (group of navGroups; track group.titleKey) {
+      <div
+        [id]="'footer-nav-group-' + group.titleKey"
+        [attr.data-cy]="'footer-nav-group-' + group.titleKey"
+        class="footer__nav-group">
+        @if (group.href) {
+          <a
+            class="footer__nav-title footer__nav-title--link"
+            [href]="group.href"
+            [attr.target]="group.external ? '_blank' : null"
+            [attr.rel]="group.external ? 'noopener noreferrer' : null">
+            {{ group.titleKey | translate }}
+            @if (group.external) {
+              <img alt="" aria-hidden="true" width="10" height="10" src="/assets/icons/arrow-right-up.svg" />
+            }
+          </a>
+        } @else {
+          <h3 class="footer__nav-title">{{ group.titleKey | translate }}</h3>
+        }
+
+        @if (group.items?.length) {
+          <ul class="footer__nav-list">
+            @for (item of group.items; track item.labelKey) {
+              <li>
+                <a
+                  class="footer__nav-link"
+                  [href]="item.href"
+                  [attr.target]="item.external ? '_blank' : null"
+                  [attr.rel]="item.external ? 'noopener noreferrer' : null">
+                  {{ item.labelKey | translate }}
+                  @if (item.external) {
+                    <img alt="" aria-hidden="true" width="10" height="10" src="/assets/icons/arrow-right-up.svg" />
+                  }
+                </a>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    }
+  </nav>
+  </div>
+
+  <hr class="footer__divider" />
+
+  <div id="footer-disclaimer" data-cy="footer-disclaimer" class="footer__disclaimer">
+    <p class="footer__disclaimer-paragraph">{{ 'footer.disclaimer-intro' | translate }}</p>
+    <p class="footer__disclaimer-paragraph">{{ 'footer.disclaimer-entities' | translate }}</p>
+    <p class="footer__disclaimer-paragraph">{{ 'footer.disclaimer-jurisdictions' | translate }}</p>
+    <p class="footer__disclaimer-paragraph">{{ 'footer.disclaimer-investment' | translate }}</p>
+  </div>
+
+  <hr class="footer__divider" />
+
+  <div id="footer-bottom" data-cy="footer-bottom" class="footer__bottom">
+    <div id="footer-bottom-links" data-cy="footer-bottom-links" class="footer__bottom-links">
+      <a id="footer-money-safe-info" data-cy="footer-money-safe-info" class="footer__bottom-link" href="#">
+        {{ 'footer.learn-how-money-safe' | translate }}
+      </a>
+      <a id="footer-privacy-policy" data-cy="footer-privacy-policy" class="footer__bottom-link" href="#">
+        {{ 'footer.privacy-policy' | translate }}
+      </a>
+    </div>
+    <p id="footer-copyright" data-cy="footer-copyright" class="footer__copyright">
+      {{ 'footer.copyright' | translate: { year: currentYear } }}
+    </p>
+  </div>
+</footer>

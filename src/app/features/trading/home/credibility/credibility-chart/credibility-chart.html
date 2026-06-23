@@ -1,0 +1,32 @@
+<div class="credibility-chart">
+  <header class="credibility-chart__header">
+    <div class="credibility-chart__title-row">
+      <excent-static-icon
+        class="credibility-chart__symbol-icon"
+        [name]="iconName()"
+        [type]="iconType()"
+        [shape]="iconShape()"
+        [size]="36" />
+      <span class="credibility-chart__symbol-name">{{ symbol() }}</span>
+    </div>
+
+    <div class="credibility-chart__price-row">
+      <span class="credibility-chart__price">{{ currentPrice() }}</span>
+      <span class="credibility-chart__price-change">
+        <img class="credibility-chart__price-change-icon" alt="" aria-hidden="true" src="/assets/icons/alta.svg" />
+        {{ priceChange() }}
+      </span>
+    </div>
+  </header>
+
+  <div class="credibility-chart__market-status">
+    <span class="credibility-chart__market-dot" aria-hidden="true"></span>
+    <span class="credibility-chart__market-label">Market Open</span>
+  </div>
+
+  <div
+    #chartContainer
+    [id]="chartId"
+    class="credibility-chart__canvas"
+    aria-hidden="true"></div>
+</div>

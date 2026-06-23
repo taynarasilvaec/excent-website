@@ -1,0 +1,44 @@
+<div
+  id="excent-static-icon"
+  data-cy="excent-static-icon"
+  class="excent-static-icon"
+  [class.excent-static-icon--round]="shape() === 'round'"
+  [class.excent-static-icon--square]="shape() === 'square'"
+  [class.excent-static-icon--filled]="filled()"
+  [style.height.px]="size()"
+  [style.width.px]="size()"
+  [style.min-width.px]="size()"
+  [style.border-radius.px]="radius()"
+  [style.background]="resolvedBackground()"
+>
+  @if (filled()) {
+    <img
+      aria-hidden="true"
+      alt=""
+      class="excent-static-icon__fill-bg"
+      [src]="resolvedSrc()" />
+  }
+
+  <img
+    id="excent-static-icon-img"
+    data-cy="excent-static-icon-img"
+    alt=""
+    loading="lazy"
+    class="excent-static-icon__img"
+    [attr.crossorigin]="tinted() ? 'anonymous' : null"
+    [src]="resolvedSrc()"
+    [style.height.px]="size()"
+    [style.width.px]="size()"
+    (load)="onImageLoad($event)"
+    (error)="onImageError($event)" />
+
+  @if (isLoading()) {
+    <div
+      id="excent-static-icon-skeleton"
+      data-cy="excent-static-icon-skeleton"
+      class="excent-static-icon__skeleton">
+      <span class="excent-static-icon__ping"></span>
+      <span class="excent-static-icon__ping excent-static-icon__ping--delayed"></span>
+    </div>
+  }
+</div>

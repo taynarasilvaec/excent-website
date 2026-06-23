@@ -1,0 +1,658 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.home-reviews {
+  display: flex;
+  width: 100%;
+  padding: 0;
+}
+
+.home-reviews__card {
+  width: 100%;
+
+  ::ng-deep .excent-card {
+    background: linear-gradient(152deg, #0D3062 37.48%, #010933 82.45%);
+  }
+
+  ::ng-deep .excent-card__content {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+}
+
+.home-reviews__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  gap: 16px;
+}
+
+.home-reviews__pill {
+  display: inline-flex;
+  width: auto;
+  // Fade-in: arranca oculto y aparece junto con el badge en desktop tras el
+  // slide de los reviews. Manejado por .is-revealed desde el TS.
+  opacity: 0;
+  transition: opacity 800ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  &.is-revealed {
+    opacity: 1;
+  }
+
+  ::ng-deep .excent-card {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.04) 55%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  ::ng-deep .excent-card__content {
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    height: 17px;
+  }
+}
+
+.home-reviews__pill-label,
+.home-reviews__pill-value,
+.home-reviews__pill-of,
+.home-reviews__pill-brand {
+  font-family: 'Helvetica Neue';
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.home-reviews__pill-label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.home-reviews__pill-value {
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.home-reviews__pill-of {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.home-reviews__pill-icon {
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* LIGHT MODE — pill, title, review cards and rating badge -> light surfaces
+   with near-black text. Review-card avatars keep their own colors. */
+:host-context(html:not(.dark)) {
+  // The whole reviews panel -> light surface, blue glow removed.
+  .home-reviews__card ::ng-deep .excent-card {
+    background: #F4F6FA;
+    border: 1px solid var(--excent-hairline);
+  }
+  .home-reviews__card ::ng-deep .excent-card::before { background: none; }
+
+  // Award badges -> blue in light mode (source SVGs are light, invisible on white).
+  .home-reviews__badge--icon {
+    filter: brightness(0) saturate(100%) invert(34%) sepia(96%) saturate(1900%) hue-rotate(208deg) brightness(101%) contrast(101%);
+  }
+
+  .home-reviews__pill ::ng-deep .excent-card {
+    background: linear-gradient(90deg, rgba(17, 24, 39, 0.06) 0%, rgba(17, 24, 39, 0.02) 55%, rgba(17, 24, 39, 0) 100%);
+  }
+  .home-reviews__pill-label,
+  .home-reviews__pill-value,
+  .home-reviews__pill-of,
+  .home-reviews__pill-brand { color: #111827; }
+  .home-reviews__pill-label { color: rgba(17, 24, 39, 0.85); }
+  .home-reviews__pill-of { color: rgba(17, 24, 39, 0.65); }
+
+  .home-reviews__title ::ng-deep .excent-text { color: #111827; }
+
+  .home-reviews__review {
+    background:
+      radial-gradient(231% 135.8% at 0.9% 2.98%, rgba(17, 24, 39, 0.05) 0%, rgba(17, 24, 39, 0) 100%),
+      #F4F6FA;
+    color: #111827;
+    border: 1px solid var(--excent-hairline);
+  }
+  .home-reviews__review-name { color: #111827; }
+  .home-reviews__review-content { color: rgba(17, 24, 39, 0.80); }
+  .home-reviews__review-verify { color: rgba(17, 24, 39, 0.80); }
+  .home-reviews__review-date { color: rgba(17, 24, 39, 0.60); }
+  .home-reviews__badge--rating { color: #111827; }
+}
+
+.home-reviews__title-slide {
+  max-width: 100%;
+}
+
+.home-reviews__title {
+  width: 325px;
+  max-width: 100%;
+
+  ::ng-deep .excent-text {
+    color: #fff;
+    text-align: center;
+    font-family: 'Helvetica Neue';
+    font-size: 33px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+}
+
+.home-reviews__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-left: -24px;
+  margin-right: -24px;
+  width: calc(100% + 48px);
+  // Slide-down de entrada: no usamos <slide-effect> aqui porque la fila
+  // marquee se extiende fuera del padding del card (margenes negativos) y
+  // un overflow:hidden externo cortaria ese bleed lateral. Hacemos el
+  // efecto con transform+opacity directos.
+  opacity: 0;
+  transform: translateY(-30px);
+  transition:
+    opacity 3800ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 3800ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  &.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.has-effect {
+    mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+}
+
+.home-reviews__row {
+  overflow: hidden;
+  width: 100%;
+}
+
+.home-reviews__track {
+  display: flex;
+  width: max-content;
+  flex-shrink: 0;
+}
+
+.home-reviews__track .home-reviews__review {
+  margin-right: 12px;
+}
+
+.home-reviews__row--ltr .home-reviews__track {
+  animation: home-reviews-cycle-ltr 32s linear infinite;
+}
+
+.home-reviews__row--rtl .home-reviews__track {
+  animation: home-reviews-cycle-rtl 32s linear infinite;
+}
+
+.home-reviews__row:hover .home-reviews__track {
+  animation-play-state: paused;
+}
+
+@keyframes home-reviews-cycle-ltr {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.3333%); }
+}
+
+@keyframes home-reviews-cycle-rtl {
+  0%   { transform: translateX(-33.3333%); }
+  100% { transform: translateX(0); }
+}
+
+.home-reviews__review {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7.825px;
+  width: 320px;
+  padding: 10.433px;
+  border-radius: 10.433px;
+  background:
+    radial-gradient(231% 135.8% at 0.9% 2.98%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(0, 43, 127, 0.20);
+  box-shadow: 0 2.608px 7.825px 0 rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.home-reviews__review-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.home-reviews__review-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.home-reviews__review-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #FFF7C2;
+  color: #001D45;
+  font-family: 'Helvetica Neue';
+  font-size: 11px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.home-reviews__review-name {
+  font-family: 'Helvetica Neue';
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-reviews__review-stars {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+
+  img.is-empty { opacity: 0.25; }
+}
+
+.home-reviews__review-content {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Helvetica Neue';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.home-reviews__review-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.home-reviews__review-verify {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Helvetica Neue';
+  font-size: 11px;
+  font-weight: 400;
+  text-decoration: underline;
+  transition: opacity 0.15s ease;
+
+  &:hover { opacity: 0.7; }
+}
+
+.home-reviews__review-date {
+  color: rgba(255, 255, 255, 0.65);
+  font-family: 'Helvetica Neue';
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.home-reviews__cta-slide {
+  width: 100%;
+}
+
+.home-reviews__cta {
+  width: 100%;
+}
+
+.home-reviews__cta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: inherit;
+  font-family: 'Helvetica Neue';
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+// ===== TABLET + DESKTOP shared styles =====
+@media (min-width: 1024px) {
+  .home-reviews__pill {
+    display: none !important;
+  }
+
+  .home-reviews__card {
+    border-radius: 22px !important;
+
+    ::ng-deep .excent-card {
+      border-radius: 22px !important;
+    }
+
+    ::ng-deep .excent-card__content {
+      gap: 80px;
+    }
+  }
+
+  .home-reviews__title {
+    width: 592px;
+
+    ::ng-deep .excent-text {
+      font-size: 48px;
+      // line-height 1.2 deja espacio para descendentes (y, g, p) que
+      // el overflow:hidden del slide-effect recortaria con line-height 100%.
+      line-height: 1.2;
+      text-transform: capitalize;
+    }
+  }
+
+  .home-reviews__trust-badge {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    flex-shrink: 0;
+    // Fade-in cuando playTrust se activa al entrar al viewport.
+    opacity: 0;
+    transition: opacity 800ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    &.is-revealed {
+      opacity: 1;
+    }
+  }
+
+  .home-reviews__cta-slide {
+    width: 302.23px;
+    flex-shrink: 0;
+  }
+
+  .home-reviews__badge {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+
+    &.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .home-reviews__badge--icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .home-reviews__badge--rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    color: #fff;
+    font-family: 'Helvetica Neue';
+  }
+
+  .home-reviews__badge-score {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .home-reviews__badge-stars {
+    display: flex;
+    gap: 3px;
+
+    img {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    img.is-empty {
+      opacity: 0.25;
+    }
+  }
+
+  .home-reviews__badge-label {
+    font-size: 13px;
+    font-weight: 400;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  .home-reviews__badge-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    font-weight: 500;
+
+    img {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+  }
+
+  .home-reviews__cta {
+    width: 302.23px !important;
+    flex-shrink: 0;
+
+    ::ng-deep .excent-btn {
+      width: 100%;
+      height: 48px;
+      padding: 10px 30px;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .home-reviews__cta-label {
+    gap: 10px;
+  }
+}
+
+// ===== TABLET ONLY (1024px - 1439px) =====
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .home-reviews__rows {
+    gap: 12px;
+  }
+
+  .home-reviews__review {
+    width: 378px;
+    height: 146px;
+    padding: 12px;
+    border-radius: 12px;
+    gap: 8px;
+  }
+
+  .home-reviews__review-avatar {
+    width: 30px;
+    height: 30px;
+    padding: 5.391px 0 4.336px 0;
+    border-radius: 749.25px;
+  }
+
+  .home-reviews__review-name {
+    font-family: 'Helvetica Neue';
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15px;
+    color: #FEF9F6;
+    font-feature-settings: 'liga' off, 'clig' off;
+  }
+
+  .home-reviews__review-content {
+    flex: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    font-family: 'Helvetica Neue';
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #D8D8D8;
+    font-feature-settings: 'liga' off, 'clig' off;
+  }
+
+  .home-reviews__review-stars img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .home-reviews__card ::ng-deep .excent-card {
+    padding: 90px 35px 60px !important;
+    background: #000A1B;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .home-reviews__card ::ng-deep .excent-card::before {
+    content: '';
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    height: 240%;
+    width: 75%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      #0046A6 0%,
+      #102C74 35%,
+      #041B44 60%,
+      transparent 80%
+    );
+    filter: blur(60px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .home-reviews__card ::ng-deep .excent-card__content {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ===== DESKTOP ONLY (1440px+) =====
+@media (min-width: 1440px) {
+  .home-reviews__track .home-reviews__review {
+    margin-right: 16px;
+  }
+
+  .home-reviews__review {
+    width: 504px;
+    height: 188px;
+    padding: 16px;
+    border-radius: 16px;
+    gap: 12px;
+  }
+
+  .home-reviews__review-avatar {
+    width: 40px;
+    height: 40px;
+    padding: 7.188px 0 5.781px 0;
+    border-radius: 999px;
+  }
+
+  .home-reviews__review-name {
+    font-family: 'Helvetica Neue';
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #FEF9F6;
+    font-feature-settings: 'liga' off, 'clig' off;
+  }
+
+  .home-reviews__review-content {
+    flex: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    font-family: 'Helvetica Neue';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #D8D8D8;
+    font-feature-settings: 'liga' off, 'clig' off;
+  }
+
+  .home-reviews__review-stars img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .home-reviews__review-verify {
+    font-family: 'Helvetica Neue';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.70);
+    font-feature-settings: 'liga' off, 'clig' off;
+  }
+
+  .home-reviews__review-date {
+    font-family: 'Helvetica Neue';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #A9A7A3;
+    font-feature-settings: 'liga' off, 'clig' off;
+  }
+
+  .home-reviews__card ::ng-deep .excent-card {
+    padding: 90px 90px 60px !important;
+    background: #000A1B;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .home-reviews__card ::ng-deep .excent-card::before {
+    content: '';
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    height: 150%;
+    width: 85%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      #0046A6 0%,
+      #102C74 35%,
+      #041B44 60%,
+      transparent 80%
+    );
+    filter: blur(60px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .home-reviews__card ::ng-deep .excent-card__content {
+    position: relative;
+    z-index: 1;
+  }
+}

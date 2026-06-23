@@ -1,0 +1,226 @@
+<section id="credibility-section" data-cy="credibility-section" class="credibility flex flex-col gap-2.5 desktop:gap-4 w-full">
+  <div
+    id="credibility-row-top"
+    data-cy="credibility-row-top"
+    class="credibility__row credibility__row--top flex flex-col tablet:flex-row gap-2.5 desktop:gap-4 w-full">
+    <excent-card
+      id="credibility-card-top-movers"
+      data-cy="credibility-card-top-movers"
+      color="blue"
+      background="grid"
+      padding="25px 25px 0 25px"
+      class="credibility__card credibility__card--top-movers w-full tablet:w-[51%]! desktop:w-[35%]! h-144.75"
+      >
+      <div class="credibility__top-movers-header">
+        <excent-text
+          variant="title"
+          as="h3"
+          color="primary"
+          class="credibility__top-movers-title">
+          {{ 'home.credibility.diversify-title' | translate }}
+        </excent-text>
+        <span class="credibility__top-movers-label">
+          {{ 'home.credibility.top-movers' | translate }}
+        </span>
+      </div>
+
+      <ul class="credibility__top-movers-list">
+        @for (mover of topMovers(); track $index; let i = $index) {
+          <li
+            [id]="'credibility-top-mover-' + i"
+            [attr.data-cy]="'credibility-top-mover-' + i"
+            class="credibility__top-mover-item"
+            [class.is-selected]="isSelected(mover)"
+            [class.is-closing]="isClosing(mover)"
+            tabindex="0"
+            role="button"
+            [attr.aria-pressed]="isSelected(mover)"
+            (click)="onTopMoverClick(mover)"
+            (keydown.enter)="onTopMoverClick(mover)"
+            (keydown.space)="onTopMoverClick(mover)">
+            <excent-symbol-card class="credibility__top-mover-symbol" variant="compact" [iconSize]="32" [data]="mover" />
+            @if ((isSelected(mover) || isClosing(mover)) && isMobile()) {
+              <app-credibility-chart
+                class="credibility__top-mover-chart"
+                [class.is-closing]="isClosing(mover)"
+                [symbol]="mover.symbol"
+                [iconName]="mover.iconName"
+                [iconShape]="mover.iconShape ?? 'round'"
+                [iconType]="mover.iconType ?? 'symbol'"
+                [livePrice]="chartLiveTick()"
+                (animationend)="onChartAnimEnd($event, mover)" />
+            }
+          </li>
+        }
+      </ul>
+    </excent-card>
+
+    <excent-card
+      id="credibility-card-chart"
+      data-cy="credibility-card-chart"
+      color="blue"
+      background="grid"
+      padding="25px"
+      class="credibility__card credibility__card--chart !hidden tablet:!block tablet:flex-[1_0_0] tablet:h-144.75"
+      >
+      <app-credibility-chart
+        [symbol]="selectedSymbol().symbol"
+        [iconName]="selectedSymbol().iconName"
+        [iconShape]="selectedSymbol().iconShape ?? 'round'"
+        [iconType]="selectedSymbol().iconType ?? 'symbol'"
+        [livePrice]="chartLiveTick()" />
+    </excent-card>
+  </div>
+
+  <div
+    id="credibility-row-bottom"
+    data-cy="credibility-row-bottom"
+    class="credibility__row credibility__row--bottom flex flex-col tablet:flex-row gap-2.5 desktop:gap-4 w-full">
+    <excent-card
+      id="credibility-card-support"
+      data-cy="credibility-card-support"
+      color="blue"
+      background="grid"
+      class="credibility__card credibility__card--support w-full tablet:w-[56%]! desktop:w-auto! desktop:flex-1!"
+      >
+      <div
+        id="credibility-support-group"
+        data-cy="credibility-support-group"
+        class="credibility__support-group flex flex-col items-center self-stretch gap-14 tablet:gap-20.25 desktop:gap-20">
+        <excent-card
+          id="credibility-support-pill"
+          data-cy="credibility-support-pill"
+          color="blue-bright"
+          background="none"
+          radius="9999px"
+          padding="6px 16px"
+          [fit]="true"
+          class="credibility__support-pill inline-flex! w-auto!">
+          {{ 'home.credibility.support-24-7' | translate }}
+        </excent-card>
+
+        <div
+          id="credibility-support-chat"
+          data-cy="credibility-support-chat"
+          class="credibility__support-chat flex justify-center items-start gap-4.5 desktop:gap-[21.081px] self-stretch">
+          <excent-static-icon
+            id="credibility-support-agent"
+            data-cy="credibility-support-agent"
+            type="image"
+            shape="round"
+            src="/assets/images/gustavo.svg"
+            [size]="65"
+            class="credibility__support-agent" />
+          <div id="credibility-support-bubble" data-cy="credibility-support-bubble" class="credibility__support-bubble">
+            {{ 'home.credibility.support-greeting' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div id="credibility-support-tagline" data-cy="credibility-support-tagline" class="credibility__support-tagline">
+        <excent-text variant="title" as="p" color="primary">
+          <span class="credibility__tagline-strong">
+            {{ 'home.credibility.support-tagline-strong' | translate }}
+          </span>
+          <span class="credibility__tagline-light">
+            {{ 'home.credibility.support-tagline-light' | translate }}
+          </span>
+        </excent-text>
+      </div>
+    </excent-card>
+
+    <excent-card
+      id="credibility-card-performers"
+      data-cy="credibility-card-performers"
+      color="blue"
+      background="grid"
+      padding="44px 25px"
+      class="credibility__card credibility__card--performers w-full tablet:flex-[1_0_0]! tablet:h-142.75"
+      >
+      <div id="credibility-performers-pill-row" data-cy="credibility-performers-pill-row" class="credibility__performers-pill-row">
+        <excent-card
+          id="credibility-performers-pill"
+          data-cy="credibility-performers-pill"
+          color="blue-bright"
+          background="none"
+          radius="9999px"
+          padding="6px 16px"
+          [fit]="true"
+          class="credibility__performers-pill inline-flex! w-auto!">
+          {{ 'home.credibility.biggest-gainers' | translate }}
+        </excent-card>
+      </div>
+
+      <excent-text
+        id="credibility-performers-title"
+        data-cy="credibility-performers-title"
+        variant="title"
+        as="h2"
+        color="primary"
+        class="credibility__performers-title">
+        {{ 'home.credibility.best-performers-year' | translate }}
+      </excent-text>
+
+      <div id="credibility-performers-list" data-cy="credibility-performers-list" class="credibility__performers-list">
+        @for (item of bestPerformers; track item.symbol; let i = $index) {
+          <div
+            [id]="'credibility-performer-' + i"
+            [attr.data-cy]="'credibility-performer-' + i"
+            class="credibility__performer-card">
+            <excent-static-icon
+              class="credibility__performer-icon"
+              [name]="item.iconName ?? ''"
+              [type]="item.iconType ?? 'symbol'"
+              shape="round"
+              [size]="66" />
+            <div class="credibility__performer-content">
+              <div class="credibility__performer-info">
+                <span class="credibility__performer-name">{{ item.symbol }}</span>
+                @if (item.category) {
+                  <span class="credibility__performer-category">{{ item.category! | translate }}</span>
+                }
+              </div>
+              <div class="credibility__performer-meta">
+                <svg
+                  class="credibility__performer-spark"
+                  [attr.viewBox]="'0 0 ' + sparklineWidth + ' ' + sparklineHeight"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true">
+                  <defs>
+                    <linearGradient [attr.id]="'perf-spark-area-' + i" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" [attr.stop-color]="item.trend === 'down' ? '#ef4444' : '#23FF71'" stop-opacity="0.25" />
+                      <stop offset="100%" [attr.stop-color]="item.trend === 'down' ? '#ef4444' : '#23FF71'" stop-opacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    [attr.d]="sparklineAreaPath(item.chartData)"
+                    [attr.fill]="'url(#perf-spark-area-' + i + ')'" />
+                  <path
+                    stroke-width="1.5"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    [attr.d]="sparklinePath(item.chartData)"
+                    [attr.stroke]="item.trend === 'down' ? '#ef4444' : '#23FF71'" />
+                </svg>
+                <img
+                  class="credibility__performer-trend"
+                  alt=""
+                  aria-hidden="true"
+                  [src]="item.trend === 'down' ? '/assets/icons/baja.svg' : '/assets/icons/alta.svg'" />
+                <span
+                  class="credibility__performer-change"
+                  [class.credibility__performer-change--up]="item.trend === 'up'"
+                  [class.credibility__performer-change--down]="item.trend === 'down'">
+                  {{ (item.change ?? '').replace('+', '').replace('-', '') }}
+                </span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </excent-card>
+  </div>
+
+</section>

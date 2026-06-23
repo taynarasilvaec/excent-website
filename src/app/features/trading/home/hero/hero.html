@@ -1,0 +1,109 @@
+<section id="hero-section" data-cy="hero-section" class="home-hero" [class.home-hero--intro]="playIntro() && !introDone()">
+  @if (playIntro()) {
+    <video
+      id="hero-intro-video"
+      data-cy="hero-intro-video"
+      class="home-hero__video"
+      [class.home-hero__video--done]="introDone()"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+      [poster]="introPoster"
+      [src]="introVideo"
+      (loadeddata)="onIntroReady($event)"
+      (ended)="onIntroEnded()"
+      (error)="onIntroError()">
+    </video>
+    <div class="home-hero__video-scrim" [class.home-hero__video-scrim--done]="introDone()" aria-hidden="true"></div>
+  }
+
+  <div
+    id="hero-body"
+    data-cy="hero-body"
+    class="home-hero__body"
+    [class.is-revealed]="contentRevealed()">
+    <div id="hero-content" data-cy="hero-content" class="home-hero__content">
+      <excent-text
+        appReveal
+        [delay]="200"
+        id="hero-title"
+        data-cy="hero-title"
+        variant="display">
+        {{ 'home.hero.title' | translate }}
+      </excent-text>
+
+      <excent-text
+        appReveal
+        [delay]="500"
+        id="hero-description"
+        data-cy="hero-description"
+        variant="body"
+        class="home-hero__description">
+        {{ 'home.hero.description' | translate }}
+      </excent-text>
+    </div>
+
+    <div id="hero-actions" data-cy="hero-actions" class="home-hero__actions">
+      <slide-effect
+        id="hero-cta"
+        data-cy="hero-cta"
+        from="left"
+        [fade]="false"
+        [delay]="800"
+        [duration]="800">
+        <excent-button
+          id="hero-start-trading-btn"
+          data-cy="hero-start-trading-btn"
+          color="white"
+          radius="sm"
+          size="lg"
+          width="auto"
+          (click)="onStartTrading()">
+          {{ 'home.hero.start-trading' | translate }}
+          <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+      </slide-effect>
+
+      <slide-effect
+        id="hero-app-badges"
+        data-cy="hero-app-badges"
+        from="right"
+        fromMobile="up"
+        [fade]="false"
+        [delay]="800"
+        [duration]="800">
+        <div id="hero-app-badges-inner" data-cy="hero-app-badges-inner" class="home-hero__badges-inner">
+          <a
+            id="hero-app-store-link"
+            data-cy="hero-app-store-link"
+            class="home-hero__badge"
+            target="_blank"
+            rel="noopener"
+            aria-label="App Store"
+            [href]="appStoreUrl">
+            <img class="home-hero__badge-icon" alt="" width="32" height="32" src="/assets/icons/apple-store.svg" />
+            <excent-text variant="footer-text" as="span">{{ appStoreRating }}</excent-text>
+            <img alt="" width="14" height="14" src="/assets/icons/star.svg" />
+            <excent-text variant="footer-text" as="span">{{ 'home.hero.on-app-store' | translate }}</excent-text>
+          </a>
+
+          <a
+            id="hero-google-play-link"
+            data-cy="hero-google-play-link"
+            class="home-hero__badge"
+            target="_blank"
+            rel="noopener"
+            aria-label="Google Play"
+            [href]="googlePlayUrl">
+            <img class="home-hero__badge-icon" alt="" width="32" height="32" src="/assets/icons/android-store.svg" />
+            <excent-text variant="footer-text" as="span">{{ googlePlayRating }}</excent-text>
+            <img alt="" width="14" height="14" src="/assets/icons/star.svg" />
+            <excent-text variant="footer-text" as="span">{{ 'home.hero.on-google-play' | translate }}</excent-text>
+          </a>
+        </div>
+      </slide-effect>
+    </div>
+  </div>
+</section>

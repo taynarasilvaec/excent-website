@@ -1,0 +1,149 @@
+<div
+  appReveal
+  [delay]="200"
+  [distance]="100"
+  [from]="'down'"
+  [fade]="false"
+  id="navbar-wrapper"
+  data-cy="navbar-wrapper"
+  class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md px-2 pt-2 tablet:px-2.5 tablet:pt-2.5 desktop:px-5 desktop:pt-5">
+  <app-navbar
+    #navbar
+    id="app-navbar"
+    data-cy="app-navbar"
+    [items]="NAVBAR_ITEMS"
+    [logo]="navbarLogo()">
+
+    <div id="navbar-actions-slot" data-cy="navbar-actions-slot" navbar-actions class="flex items-center gap-2.5">
+      <div id="navbar-create-account-wrapper" data-cy="navbar-create-account-wrapper" class="hidden tablet:flex">
+        <excent-button
+          id="navbar-create-account-btn"
+          data-cy="navbar-create-account-btn"
+          color="white"
+          radius="sm"
+          width="auto"
+          (click)="onCreateAccount()">
+          {{ 'navbar.create-account' | translate }}
+          <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+      </div>
+
+      <div
+        id="navbar-sign-in-wrapper"
+        data-cy="navbar-sign-in-wrapper"
+        class="tablet:block"
+        [class.hidden]="navbar.isOpen()">
+        <excent-button
+          id="navbar-sign-in-btn"
+          data-cy="navbar-sign-in-btn"
+          color="white"
+          radius="sm"
+          width="auto"
+          (click)="onSignIn()">
+          {{ 'navbar.sign-in' | translate }}
+        </excent-button>
+      </div>
+    </div>
+
+    <div id="navbar-icon-buttons-slot" data-cy="navbar-icon-buttons-slot" navbar-icon-buttons class="flex gap-0">
+      <div
+        id="navbar-language-wrapper"
+        data-cy="navbar-language-wrapper"
+        class="navbar-language-wrapper tablet:block"
+        [class.hidden]="!navbar.isOpen()">
+        <button
+          id="navbar-language-btn"
+          data-cy="navbar-language-btn"
+          type="button"
+          class="navbar-icon-btn"
+          [attr.aria-label]="'navbar.language' | translate"
+          [attr.aria-expanded]="isLangMenuOpen()"
+          (click)="onLanguageClick()">
+          <img alt="" width="24" height="24" src="/assets/icons/globe.svg" />
+        </button>
+        @if (isLangMenuOpen()) {
+          <div
+            id="navbar-language-dropdown"
+            data-cy="navbar-language-dropdown"
+            class="navbar-language-dropdown">
+            <language-menu
+              id="navbar-language-menu"
+              data-cy="navbar-language-menu"
+              [options]="LANGUAGE_OPTIONS"
+              [currentLang]="currentLang()"
+              (select)="onLanguageSelect($event)">
+            </language-menu>
+          </div>
+        }
+      </div>
+      <div
+        id="navbar-apps-wrapper"
+        data-cy="navbar-apps-wrapper"
+        class="navbar-apps-wrapper tablet:block"
+        [class.hidden]="!navbar.isOpen()">
+        <button
+          id="navbar-apps-btn"
+          data-cy="navbar-apps-btn"
+          type="button"
+          class="navbar-icon-btn"
+          [attr.aria-label]="'navbar.apps' | translate"
+          [attr.aria-expanded]="isAppsMenuOpen()"
+          (click)="onAppsClick()">
+          <img alt="" width="18" height="18" src="/assets/icons/four-menu.svg" />
+        </button>
+        @if (isAppsMenuOpen()) {
+          <div
+            id="navbar-apps-dropdown"
+            data-cy="navbar-apps-dropdown"
+            class="navbar-apps-dropdown">
+            <apps-menu
+              id="navbar-apps-menu"
+              data-cy="navbar-apps-menu"
+              [apps]="ECOSYSTEM_APPS"
+              (navigate)="onAppNavigate($event)">
+            </apps-menu>
+          </div>
+        }
+      </div>
+      <div
+        id="navbar-theme-wrapper"
+        data-cy="navbar-theme-wrapper"
+        class="tablet:block"
+        [class.hidden]="!navbar.isOpen()">
+        <button
+          id="navbar-theme-btn"
+          data-cy="navbar-theme-btn"
+          type="button"
+          class="navbar-icon-btn"
+          [attr.aria-label]="(isDark() ? 'navbar.light-mode' : 'navbar.dark-mode') | translate"
+          (click)="onThemeToggle()">
+          @if (isDark()) {
+            <img alt="" width="20" height="20" src="/assets/icons/moon.svg" />
+          } @else {
+            <img alt="" width="20" height="20" src="/assets/icons/sun.svg" />
+          }
+        </button>
+      </div>
+    </div>
+
+    <div id="navbar-mobile-actions-slot" data-cy="navbar-mobile-actions-slot" navbar-mobile-actions class="tablet:hidden grid grid-cols-2 gap-3">
+      <excent-button
+        id="navbar-mobile-create-account-btn"
+        data-cy="navbar-mobile-create-account-btn"
+        color="white"
+        radius="sm"
+        (click)="onCreateAccount()">
+        {{ 'navbar.create-account' | translate }}
+        <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+      </excent-button>
+      <excent-button
+        id="navbar-mobile-sign-in-btn"
+        data-cy="navbar-mobile-sign-in-btn"
+        color="white"
+        radius="sm"
+        (click)="onSignIn()">
+        {{ 'navbar.sign-in' | translate }}
+      </excent-button>
+    </div>
+  </app-navbar>
+</div>

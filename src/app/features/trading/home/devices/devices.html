@@ -1,0 +1,146 @@
+<section id="devices-section" data-cy="devices-section" class="home-devices">
+  <div
+    id="devices-card"
+    data-cy="devices-card"
+    class="home-devices__card w-full min-h-[700px] rounded-md px-6 py-10 items-center
+           tablet:items-start tablet:min-h-0 tablet:h-auto tablet:aspect-[3703/1632] tablet:rounded-[16.09px] tablet:px-[35px] tablet:py-[44px]
+           desktop:rounded-[22px] desktop:px-[90px] desktop:py-[60px]"
+    [class.is-background-revealed]="playBackground()">
+    <div
+      id="devices-content"
+      data-cy="devices-content"
+      class="home-devices__content w-full self-stretch flex-1 items-center
+             tablet:w-[420px] tablet:max-w-full tablet:self-start tablet:items-start
+             desktop:w-[420px]">
+      <div
+        id="devices-title"
+        data-cy="devices-title"
+        class="home-devices__title">
+        <slide-effect
+          id="devices-title-line1-slide"
+          data-cy="devices-title-line1-slide"
+          class="home-devices__title-line-slide"
+          from="down"
+          fromMobile="up"
+          [block]="true"
+          [fade]="false"
+          [play]="playTitleLine1()"
+          [duration]="line1DurationMs()">
+          <excent-text
+            id="devices-title-line1"
+            data-cy="devices-title-line1"
+            variant="title"
+            class="home-devices__title-line">
+            {{ 'home.devices.title-line-1' | translate }}
+          </excent-text>
+        </slide-effect>
+
+        <slide-effect
+          id="devices-title-line2-slide"
+          data-cy="devices-title-line2-slide"
+          class="home-devices__title-line-slide"
+          from="down"
+          fromMobile="up"
+          [block]="true"
+          [fade]="false"
+          [play]="playTitleLine2()"
+          [duration]="line2DurationMs()">
+          <excent-text
+            id="devices-title-line2"
+            data-cy="devices-title-line2"
+            variant="title"
+            class="home-devices__title-line">
+            {{ 'home.devices.title-line-2' | translate }}
+          </excent-text>
+        </slide-effect>
+      </div>
+
+      <div
+        id="devices-bottom"
+        data-cy="devices-bottom"
+        class="home-devices__bottom items-center gap-4
+               tablet:items-start tablet:gap-[23px]">
+        <slide-effect
+          id="devices-description-slide"
+          data-cy="devices-description-slide"
+          class="home-devices__description-slide"
+          from="up"
+          [block]="true"
+          [fade]="false"
+          [play]="playDescription()"
+          [duration]="descriptionDurationMs()">
+          <excent-text
+            id="devices-description"
+            data-cy="devices-description"
+            variant="body"
+            class="home-devices__description w-[278px] max-w-full tablet:w-full">
+            {{ 'home.devices.description' | translate }}
+          </excent-text>
+        </slide-effect>
+
+        <div
+          id="devices-actions"
+          data-cy="devices-actions"
+          class="home-devices__actions w-full items-center justify-center gap-2.5
+                 tablet:items-start tablet:justify-start tablet:gap-[14.629px]
+                 desktop:gap-5">
+          <slide-effect
+            id="devices-app-store-slide"
+            data-cy="devices-app-store-slide"
+            class="home-devices__store-btn-slide w-1/2 tablet:w-auto tablet:flex-none"
+            from="left"
+            [block]="true"
+            [fade]="false"
+            [play]="playButton1()"
+            [duration]="600">
+            <excent-button
+              id="devices-app-store-link"
+              data-cy="devices-app-store-link"
+              class="home-devices__store-btn w-full"
+              color="white"
+              radius="sm"
+              size="md"
+              width="100%"
+              ariaLabel="App Store"
+              (click)="openStore(appStoreUrl)">
+              <img
+                btn-icon-left
+                alt=""
+                class="w-[13px] h-[13px] tablet:w-4 tablet:h-4 desktop:w-[22px] desktop:h-[22px]"
+                src="/assets/icons/apple.svg" />
+              {{ 'home.devices.app-store' | translate }}
+            </excent-button>
+          </slide-effect>
+
+          <slide-effect
+            id="devices-play-store-slide"
+            data-cy="devices-play-store-slide"
+            class="home-devices__store-btn-slide w-1/2 tablet:w-auto tablet:flex-none"
+            from="left"
+            [block]="true"
+            [fade]="false"
+            [play]="playButton2()"
+            [duration]="600">
+            <excent-button
+              id="devices-play-store-link"
+              data-cy="devices-play-store-link"
+              class="home-devices__store-btn w-full"
+              color="white"
+              radius="sm"
+              size="md"
+              width="100%"
+              ariaLabel="Play Store"
+              (click)="openStore(playStoreUrl)">
+              <img
+                btn-icon-left
+                alt=""
+                class="w-[13px] h-[13px] tablet:w-4 tablet:h-4 desktop:w-[22px] desktop:h-[22px]"
+                src="/assets/icons/android.svg" />
+              {{ 'home.devices.play-store' | translate }}
+            </excent-button>
+          </slide-effect>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

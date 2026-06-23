@@ -1,0 +1,27 @@
+<ul
+  id="language-menu"
+  data-cy="language-menu"
+  class="language-menu"
+  role="listbox">
+  @for (option of options(); track option.code) {
+    <li
+      [id]="'language-menu-item-' + option.code"
+      [attr.data-cy]="'language-menu-item-' + option.code"
+      class="language-menu__item"
+      [class.language-menu__item--selected]="isSelected(option.code)"
+      role="option"
+      [attr.aria-selected]="isSelected(option.code)"
+      (click)="onSelect(option.code)">
+      <img
+        class="language-menu__flag"
+        [src]="option.flag"
+        [alt]="option.label"
+        width="20"
+        height="20" />
+      <span class="language-menu__label">{{ option.label }}</span>
+      @if (isSelected(option.code)) {
+        <span class="language-menu__check" aria-hidden="true">✓</span>
+      }
+    </li>
+  }
+</ul>

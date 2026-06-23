@@ -1,0 +1,67 @@
+:host {
+  display: inline-block;
+}
+
+.excent-static-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.excent-static-icon--round { border-radius: 50%; }
+.excent-static-icon--square { border-radius: 8px; }
+
+.excent-static-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.excent-static-icon__fill-bg {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  filter: blur(20px) saturate(1.6);
+  transform: scale(2);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.excent-static-icon--filled .excent-static-icon__img {
+  position: relative;
+  z-index: 1;
+}
+
+.excent-static-icon__skeleton {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.excent-static-icon__ping {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border-radius: inherit;
+  background: rgba(7, 89, 133, 0.4);
+  animation: excent-static-icon-ping 1.4s ease-out infinite;
+}
+
+.excent-static-icon__ping--delayed {
+  width: 55%;
+  height: 55%;
+  animation-delay: 0.7s;
+}
+
+@keyframes excent-static-icon-ping {
+  0%   { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(1.5); opacity: 0; }
+}

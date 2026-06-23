@@ -1,0 +1,175 @@
+<section id="blog-posts-section" data-cy="blog-posts-section" class="home-blog-posts relative">
+  <div class="home-blog-posts__section-glow tablet:hidden" aria-hidden="true"></div>
+
+  <div id="blog-posts-title-wrap" data-cy="blog-posts-title-wrap" class="home-blog-posts__title-wrap tablet:contents">
+    <h2
+      id="blog-posts-title"
+      data-cy="blog-posts-title"
+      class="home-blog-posts__title m-0 w-[70%] mx-auto text-white text-center text-[33px] font-normal leading-[normal] tablet:w-auto tablet:mx-0 tablet:self-stretch tablet:text-left tablet:text-[48px] tablet:capitalize"
+      [class.is-revealed]="playTitle()">
+      {{ 'home.blog-posts.title' | translate }}
+    </h2>
+  </div>
+
+  <div id="blog-posts-featured-wrap" data-cy="blog-posts-featured-wrap" class="home-blog-posts__featured-wrap relative">
+    <div class="home-blog-posts__featured-glow" aria-hidden="true"></div>
+    <excent-card
+      id="blog-posts-featured"
+      data-cy="blog-posts-featured"
+      color="transparent"
+      radius="20px"
+      padding="12px 12px 24px 12px"
+      class="home-blog-posts__featured block w-full min-h-127.25 mx-auto rounded-[20px] tablet:max-w-[378.523px]"
+      [class.is-revealed]="playCard()">
+      <div
+        class="home-blog-posts__featured-content flex flex-col items-center gap-5 w-full h-full"
+        [class.is-revealed]="playContent()">
+        <slide-effect
+          class="home-blog-posts__featured-image-slide self-stretch"
+          from="down"
+          [wipeZoomMobile]="true"
+          [block]="true"
+          [fade]="false"
+          [play]="playContent()"
+          [duration]="1000">
+          <a
+            class="home-blog-posts__featured-image-link relative block w-full min-w-88.5 min-h-68 rounded-[14px] overflow-hidden flex-1"
+            [href]="featured().url">
+            @if (featured().isLatest) {
+              <span class="home-blog-posts__badge absolute top-3 left-3 z-10 inline-flex items-center justify-center gap-0.5 px-2 py-0.5 rounded-full bg-[#086EF9] text-[#E2E2E2] text-[11px] font-normal leading-[normal] text-center">
+                {{ 'home.blog-posts.latest-badge' | translate }}
+              </span>
+            }
+            <img
+              class="home-blog-posts__featured-image w-full h-full object-cover"
+              alt=""
+              [src]="featured().image" />
+          </a>
+        </slide-effect>
+
+        <h3 class="home-blog-posts__featured-title self-stretch m-0">
+          {{ featured().title }}
+        </h3>
+
+        <p class="home-blog-posts__featured-description self-stretch m-0">
+          {{ featured().description }}
+        </p>
+
+        <div class="home-blog-posts__featured-meta self-stretch flex items-center gap-2">
+          <img
+            class="home-blog-posts__author-avatar"
+            alt=""
+            [src]="featured().author.avatar" />
+          <span class="home-blog-posts__author-name">{{ featured().author.name }}</span>
+          <span class="home-blog-posts__meta-dot" aria-hidden="true">·</span>
+          <span class="home-blog-posts__featured-date">{{ featured().date }}</span>
+        </div>
+      </div>
+    </excent-card>
+  </div>
+
+  <div
+    id="blog-posts-list"
+    data-cy="blog-posts-list"
+    class="home-blog-posts__list"
+    [class.is-revealed]="playList()">
+    @for (post of posts(); track post.id) {
+      <article
+        [id]="'blog-posts-item-' + post.id"
+        [attr.data-cy]="'blog-posts-item-' + post.id"
+        class="home-blog-posts__item">
+        <header class="home-blog-posts__item-meta">
+          <span class="home-blog-posts__item-category">{{ post.category }}</span>
+          <span class="home-blog-posts__meta-dot" aria-hidden="true">·</span>
+          <span class="home-blog-posts__item-date">{{ post.date }}</span>
+        </header>
+
+        <a class="home-blog-posts__item-title-link" [href]="post.url">
+          <h3 class="home-blog-posts__item-title">{{ post.title }}</h3>
+        </a>
+
+        <p class="home-blog-posts__item-description">{{ post.description }}</p>
+
+        <div class="home-blog-posts__item-author">
+          <img
+            class="home-blog-posts__author-avatar"
+            alt=""
+            [src]="post.author.avatar" />
+          <span class="home-blog-posts__author-name">{{ post.author.name }}</span>
+        </div>
+      </article>
+    }
+  </div>
+
+  <div id="blog-posts-cta" data-cy="blog-posts-cta" class="home-blog-posts__cta flex flex-col gap-10 tablet:contents">
+    <div id="blog-posts-see-all" data-cy="blog-posts-see-all" class="home-blog-posts__see-all">
+      <slide-effect
+        id="blog-posts-see-all-slide"
+        data-cy="blog-posts-see-all-slide"
+        class="home-blog-posts__see-all-slide"
+        from="left"
+        [block]="true"
+        [fade]="false"
+        [play]="playSeeAll()"
+        [duration]="seeAllDurationMs">
+        <excent-button
+          id="blog-posts-see-all-btn"
+          data-cy="blog-posts-see-all-btn"
+          color="white"
+          radius="sm"
+          size="lg"
+          width="100%"
+          (click)="onSeeAll()">
+          {{ 'home.blog-posts.see-all' | translate }}
+        </excent-button>
+      </slide-effect>
+    </div>
+
+    <div id="blog-posts-subscribe" data-cy="blog-posts-subscribe" class="home-blog-posts__subscribe">
+      <p
+        class="home-blog-posts__subscribe-text"
+        [class.is-revealed]="playSubscribeContent()">
+        {{ 'home.blog-posts.subscribe-text' | translate }}
+      </p>
+
+      <form
+        id="blog-posts-subscribe-form"
+        data-cy="blog-posts-subscribe-form"
+        class="home-blog-posts__subscribe-form flex items-center gap-2 self-stretch"
+        (ngSubmit)="onSubscribe()">
+        <input
+          id="blog-posts-subscribe-email"
+          data-cy="blog-posts-subscribe-email"
+          class="home-blog-posts__subscribe-input flex flex-[1_0_0] min-w-0 min-h-10 items-center gap-2 px-3 py-2 rounded border-[0.5px] border-[rgba(210,210,210,0.30)] outline-none text-white text-[14px]"
+          [class.is-revealed]="playSubscribeContent()"
+          type="email"
+          autocomplete="email"
+          [placeholder]="'home.blog-posts.email-placeholder' | translate"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+          name="email" />
+
+        <slide-effect
+          id="blog-posts-subscribe-btn-slide"
+          data-cy="blog-posts-subscribe-btn-slide"
+          class="home-blog-posts__subscribe-btn-slide"
+          from="left"
+          [fade]="false"
+          [play]="playSubscribeBtn()"
+          [duration]="subscribeBtnDurationMs">
+          <excent-button
+            id="blog-posts-subscribe-btn"
+            data-cy="blog-posts-subscribe-btn"
+            color="white"
+            radius="sm"
+            size="md"
+            width="auto"
+            type="submit">
+            {{ 'home.blog-posts.subscribe-cta' | translate }}
+            <img btn-icon-right alt="" width="14" height="14" src="/assets/icons/arrow-right.svg" />
+          </excent-button>
+        </slide-effect>
+      </form>
+    </div>
+  </div>
+</section>

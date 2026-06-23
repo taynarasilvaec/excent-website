@@ -1,0 +1,190 @@
+<div id="mam" data-cy="mam" class="mam">
+
+  <!-- ============ Hero ============ -->
+  <section id="mam-hero" data-cy="mam-hero" class="mam-hero">
+    <img class="mam-hero__bg" alt="" [src]="heroImage" />
+    <div class="mam-hero__overlay"></div>
+
+    <div appReveal [fade]="true" id="mam-hero-content" data-cy="mam-hero-content" class="mam-hero__content">
+      <excent-text id="mam-hero-title" data-cy="mam-hero-title" variant="display" as="h1" color="inherit" class="mam-hero__title">
+        Trade Once
+        <span class="mam-hero__title-accent">Mirror Everywhere</span>
+      </excent-text>
+      <excent-text id="mam-hero-sub" data-cy="mam-hero-sub" variant="body" color="inherit" class="mam-hero__sub">
+        Execute a trade once and replicate it instantly across your entire client structure.
+      </excent-text>
+      <div id="mam-hero-actions" data-cy="mam-hero-actions" class="mam-hero__actions">
+        <excent-button id="mam-hero-apply-btn" data-cy="mam-hero-apply-btn" color="white" radius="sm" size="lg" width="auto" (click)="onApply()">
+          Apply For MAM Account
+          <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+        <excent-button id="mam-hero-talk-btn" data-cy="mam-hero-talk-btn" color="outline-white" radius="sm" size="lg" width="auto" (click)="onTalkToTeam()">
+          Talk To Our Team
+          <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+      </div>
+    </div>
+  </section>
+
+  <div class="mam__container">
+
+    <!-- ============ Bento ============ -->
+    <section id="mam-bento" data-cy="mam-bento" class="mam-section mam-bento">
+      <div appReveal class="mam-bento__left">
+        <div class="mam-card mam-card--bright mam-bento__feature">
+          <span class="mam-icon"><img alt="" src="/assets/icons/terminal.svg" /></span>
+        </div>
+        <div class="mam-bento__lead">
+          <!-- PLACEHOLDER copy (Figma) — confirmar texto final -->
+          <excent-text variant="subtitle" as="p" class="mam-section__muted">Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus.</excent-text>
+          <excent-button id="mam-bento-get-started" data-cy="mam-bento-get-started" color="white" radius="sm" size="md" width="auto" (click)="onApply()">
+            Get Started
+            <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
+          </excent-button>
+        </div>
+      </div>
+
+      <div appReveal [delay]="120" class="mam-bento__right">
+        <article class="mam-card mam-card--bright mam-bento__cell">
+          <span class="mam-icon"><img alt="" src="/assets/icons/balance.svg" /></span>
+          <excent-text variant="subtitle" as="h3" class="mam-card__title">Manage More, Operate Less</excent-text>
+        </article>
+        <article class="mam-card mam-card--grid mam-bento__cell">
+          <span class="mam-icon"><img alt="" src="/assets/icons/security.svg" /></span>
+          <div class="mam-bento__stat">
+            <span class="mam-bento__stat-value">24/7</span>
+            <span class="mam-bento__stat-label">Dedicated support</span>
+          </div>
+        </article>
+        <article class="mam-card mam-card--grid mam-bento__wide">
+          <span class="mam-icon"><img alt="" src="/assets/icons/coins.svg" /></span>
+          <!-- PLACEHOLDER copy (Figma) — confirmar texto final -->
+          <excent-text variant="subtitle" as="p" class="mam-bento__wide-text">Tempus leo eu aenean sed diam urna tempor sulvinar vivamus fringilla lacus nec metus bibendum egestas.</excent-text>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ Open Your Account (interactive stepper) ============ -->
+    <section id="mam-open" data-cy="mam-open" class="mam-section mam-open">
+      <div appReveal class="mam-open__left">
+        <div class="mam-open__text">
+          @for (s of flow; track s.short; let i = $index) {
+            @if (activeStep() === i) {
+              <div class="mam-open__text-inner">
+                <excent-text variant="title" as="h2" class="mam-section__title">{{ s.title }}</excent-text>
+                <excent-text variant="body" class="mam-section__muted mam-open__desc">{{ s.description }}</excent-text>
+              </div>
+            }
+          }
+        </div>
+
+        <ol class="mam-open__steps">
+          @for (s of flow; track s.short; let i = $index) {
+            <li>
+              <button
+                type="button"
+                [id]="'mam-open-step-' + i"
+                [attr.data-cy]="'mam-open-step-' + i"
+                class="mam-open__step"
+                [class.mam-open__step--active]="activeStep() === i"
+                [attr.aria-pressed]="activeStep() === i"
+                (click)="setStep(i)">
+                <span class="mam-open__step-num">{{ i + 1 }}</span>
+                @if (activeStep() === i) {
+                  <span class="mam-open__step-label">{{ s.short }}</span>
+                }
+              </button>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <div appReveal [delay]="120" [from]="'right'" class="mam-open__visual">
+        @for (s of flow; track s.short; let i = $index) {
+          @if (activeStep() === i) {
+            <div class="mam-open__panel">
+              <span class="mam-open__panel-num">0{{ i + 1 }}</span>
+              <span class="mam-open__panel-label">{{ s.short }}</span>
+            </div>
+          }
+        }
+      </div>
+    </section>
+
+    <!-- ============ Designed For Serious Traders ============ -->
+    <section id="mam-personas" data-cy="mam-personas" class="mam-section">
+      <header class="mam-section__head mam-section__head--center">
+        <excent-text appReveal variant="title" as="h2" class="mam-section__title">Designed For Serious Traders</excent-text>
+        <excent-text appReveal [delay]="120" variant="body" class="mam-section__muted mam-section__lead">Whether you manage client capital, trade independently, or build a book of business, the Excent Capital MAM Ecosystem is designed to match your structure and scale with your ambition.</excent-text>
+      </header>
+
+      <div class="mam-grid mam-grid--3">
+        @for (p of personas; track p.title; let i = $index) {
+          <article appReveal [delay]="i * 90" [id]="'mam-persona-' + i" [attr.data-cy]="'mam-persona-' + i" class="mam-card mam-card--blue mam-persona">
+            <excent-text variant="title" as="h3" class="mam-persona__title">{{ p.title }}</excent-text>
+            <excent-text variant="body" class="mam-persona__desc">{{ p.description }}</excent-text>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- ============ Set Your Own Performance Fee ============ -->
+    <section id="mam-fees" data-cy="mam-fees" class="mam-section">
+      <header class="mam-fees__head">
+        <excent-text appReveal variant="title" as="h2" class="mam-section__title mam-fees__title">Set Your Own Performance Fee</excent-text>
+        <excent-button appReveal [delay]="120" id="mam-fees-apply-btn" data-cy="mam-fees-apply-btn" color="white" radius="sm" size="md" width="auto" (click)="onApply()">
+          Apply for MAM account
+          <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+      </header>
+
+      <div class="mam-grid mam-grid--3 mam-fees__grid">
+        @for (f of feeItems; track f.title; let i = $index) {
+          <div appReveal [delay]="i * 90" [id]="'mam-fee-' + i" [attr.data-cy]="'mam-fee-' + i" class="mam-fee">
+            <span class="mam-icon"><img alt="" [src]="f.icon" /></span>
+            <div class="mam-fee__body">
+              <span class="mam-fee__title">{{ f.title }}</span>
+              <excent-text variant="body" class="mam-section__muted">{{ f.description }}</excent-text>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ How Your Profit Is Measured (blue band) ============ -->
+  <section id="mam-profit" data-cy="mam-profit" class="mam-profit">
+    <div appReveal class="mam-profit__inner">
+      <excent-text variant="title" as="h2" color="inherit" class="mam-profit__title">How Your Profit Is Measured</excent-text>
+      <excent-text variant="body" color="inherit" class="mam-profit__desc">The High-Water Mark ensures your performance fees are tied to genuine results. Fees are only charged when you deliver new profit highs. This protects your clients and strengthens the trust that grows your business.</excent-text>
+    </div>
+  </section>
+
+  <div class="mam__container">
+    <!-- ============ Final CTA ============ -->
+    <section id="mam-cta" data-cy="mam-cta" class="mam-section mam-cta">
+      <!-- PLACEHOLDER heading in Figma ("Tempus leo eu aenean") — draft copy, confirm -->
+      <excent-text appReveal variant="title" as="h2" class="mam-section__title">Start Managing Capital With Excent</excent-text>
+      <excent-text appReveal [delay]="100" variant="body" class="mam-section__muted mam-cta__sub">Apply for a MAM account and run your entire client structure from a single Master account.</excent-text>
+      <div appReveal [delay]="200" class="mam-cta__actions">
+        <excent-button id="mam-cta-apply-btn" data-cy="mam-cta-apply-btn" color="white" radius="sm" size="lg" width="auto" (click)="onApply()">
+          Apply For MAM Account
+          <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+        <excent-button id="mam-cta-talk-btn" data-cy="mam-cta-talk-btn" color="outline" radius="sm" size="lg" width="auto" (click)="onTalkToTeam()">
+          Talk To Our Team
+        </excent-button>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="mam-faq" data-cy="mam-faq" class="mam-section mam-faq">
+      <excent-text appReveal variant="title" as="h2" class="mam-section__title mam-faq__title">FAQ</excent-text>
+      <excent-accordion id="mam-faq-accordion" data-cy="mam-faq-accordion" [initialActiveId]="1">
+        @for (faq of faqs; track faq.id) {
+          <excent-accordion-item [itemId]="faq.id" [question]="faq.question" [answer]="faq.answer" />
+        }
+      </excent-accordion>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,334 @@
+<section id="reviews-section" data-cy="reviews-section" class="home-reviews">
+  <excent-card
+    id="reviews-card"
+    data-cy="reviews-card"
+    class="home-reviews__card"
+    color="transparent"
+    background="none"
+    padding="40px 24px"
+    radius="6px">
+    <div id="reviews-header" data-cy="reviews-header" class="home-reviews__header">
+      <excent-card
+        id="reviews-pill"
+        data-cy="reviews-pill"
+        class="home-reviews__pill tablet:hidden"
+        [class.is-revealed]="playTrust()"
+        color="flag"
+        background="none"
+        [fit]="true"
+        padding="6px 16px"
+        radius="50000px">
+        <span class="home-reviews__pill-label">{{ 'home.reviews.pill-label' | translate }}</span>
+        <span class="home-reviews__pill-value">{{ trustpilotRating() }}</span>
+        <span class="home-reviews__pill-of">{{ 'home.reviews.pill-out-of' | translate }}</span>
+        <img
+          class="home-reviews__pill-icon"
+          alt=""
+          aria-hidden="true"
+          width="14"
+          height="14"
+          src="/assets/icons/star.svg" />
+      </excent-card>
+
+      <slide-effect
+        id="reviews-title-slide"
+        data-cy="reviews-title-slide"
+        class="home-reviews__title-slide"
+        from="down"
+        [block]="true"
+        [fade]="false"
+        [play]="playTitle()"
+        [duration]="titleDurationMs">
+        <excent-text
+          id="reviews-title"
+          data-cy="reviews-title"
+          variant="title"
+          class="home-reviews__title">
+          {{ 'home.reviews.title-line-1' | translate }}<br />
+          {{ 'home.reviews.title-line-2' | translate }}
+        </excent-text>
+      </slide-effect>
+    </div>
+
+    <div
+      id="reviews-rows"
+      data-cy="reviews-rows"
+      class="home-reviews__rows"
+      [class.has-effect]="showRowsEffect"
+      [class.is-revealed]="playRows()">
+      <div
+        id="reviews-row-1"
+        data-cy="reviews-row-1"
+        class="home-reviews__row home-reviews__row--ltr">
+        <div class="home-reviews__track">
+          @for (review of rowOne(); track review.id) {
+            <article
+              [id]="'reviews-card-' + review.id"
+              [attr.data-cy]="'reviews-card-' + review.id"
+              class="home-reviews__review">
+              <header class="home-reviews__review-head">
+                <div class="home-reviews__review-author">
+                  <span class="home-reviews__review-avatar">{{ review.initials }}</span>
+                  <span class="home-reviews__review-name">{{ review.name }}</span>
+                </div>
+                <div class="home-reviews__review-stars" [attr.aria-label]="review.rating + '/' + maxStars">
+                  @for (filled of starsArray(review.rating); track $index) {
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      [class.is-empty]="!filled"
+                      src="/assets/icons/star.svg" />
+                  }
+                </div>
+              </header>
+
+              <p class="home-reviews__review-content">{{ review.content }}</p>
+
+              <footer class="home-reviews__review-foot">
+                <a class="home-reviews__review-verify" [href]="review.verifyUrl" target="_blank" rel="noopener">
+                  {{ 'home.reviews.verify' | translate }}
+                </a>
+                <span class="home-reviews__review-date">{{ review.date }}</span>
+              </footer>
+            </article>
+          }
+          @for (review of rowOne(); track 'dup-' + review.id) {
+            <article
+              class="home-reviews__review"
+              aria-hidden="true">
+              <header class="home-reviews__review-head">
+                <div class="home-reviews__review-author">
+                  <span class="home-reviews__review-avatar">{{ review.initials }}</span>
+                  <span class="home-reviews__review-name">{{ review.name }}</span>
+                </div>
+                <div class="home-reviews__review-stars">
+                  @for (filled of starsArray(review.rating); track $index) {
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      [class.is-empty]="!filled"
+                      src="/assets/icons/star.svg" />
+                  }
+                </div>
+              </header>
+              <p class="home-reviews__review-content">{{ review.content }}</p>
+              <footer class="home-reviews__review-foot">
+                <a class="home-reviews__review-verify" [href]="review.verifyUrl" target="_blank" rel="noopener">
+                  {{ 'home.reviews.verify' | translate }}
+                </a>
+                <span class="home-reviews__review-date">{{ review.date }}</span>
+              </footer>
+            </article>
+          }
+          @for (review of rowOne(); track 'dup2-' + review.id) {
+            <article
+              class="home-reviews__review"
+              aria-hidden="true">
+              <header class="home-reviews__review-head">
+                <div class="home-reviews__review-author">
+                  <span class="home-reviews__review-avatar">{{ review.initials }}</span>
+                  <span class="home-reviews__review-name">{{ review.name }}</span>
+                </div>
+                <div class="home-reviews__review-stars">
+                  @for (filled of starsArray(review.rating); track $index) {
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      [class.is-empty]="!filled"
+                      src="/assets/icons/star.svg" />
+                  }
+                </div>
+              </header>
+              <p class="home-reviews__review-content">{{ review.content }}</p>
+              <footer class="home-reviews__review-foot">
+                <a class="home-reviews__review-verify" [href]="review.verifyUrl" target="_blank" rel="noopener">
+                  {{ 'home.reviews.verify' | translate }}
+                </a>
+                <span class="home-reviews__review-date">{{ review.date }}</span>
+              </footer>
+            </article>
+          }
+        </div>
+      </div>
+
+      <div
+        id="reviews-row-2"
+        data-cy="reviews-row-2"
+        class="home-reviews__row home-reviews__row--rtl">
+        <div class="home-reviews__track">
+          @for (review of rowTwo(); track review.id) {
+            <article
+              [id]="'reviews-card-' + review.id"
+              [attr.data-cy]="'reviews-card-' + review.id"
+              class="home-reviews__review">
+              <header class="home-reviews__review-head">
+                <div class="home-reviews__review-author">
+                  <span class="home-reviews__review-avatar">{{ review.initials }}</span>
+                  <span class="home-reviews__review-name">{{ review.name }}</span>
+                </div>
+                <div class="home-reviews__review-stars" [attr.aria-label]="review.rating + '/' + maxStars">
+                  @for (filled of starsArray(review.rating); track $index) {
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      [class.is-empty]="!filled"
+                      src="/assets/icons/star.svg" />
+                  }
+                </div>
+              </header>
+              <p class="home-reviews__review-content">{{ review.content }}</p>
+              <footer class="home-reviews__review-foot">
+                <a class="home-reviews__review-verify" [href]="review.verifyUrl" target="_blank" rel="noopener">
+                  {{ 'home.reviews.verify' | translate }}
+                </a>
+                <span class="home-reviews__review-date">{{ review.date }}</span>
+              </footer>
+            </article>
+          }
+          @for (review of rowTwo(); track 'dup-' + review.id) {
+            <article
+              class="home-reviews__review"
+              aria-hidden="true">
+              <header class="home-reviews__review-head">
+                <div class="home-reviews__review-author">
+                  <span class="home-reviews__review-avatar">{{ review.initials }}</span>
+                  <span class="home-reviews__review-name">{{ review.name }}</span>
+                </div>
+                <div class="home-reviews__review-stars">
+                  @for (filled of starsArray(review.rating); track $index) {
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      [class.is-empty]="!filled"
+                      src="/assets/icons/star.svg" />
+                  }
+                </div>
+              </header>
+              <p class="home-reviews__review-content">{{ review.content }}</p>
+              <footer class="home-reviews__review-foot">
+                <a class="home-reviews__review-verify" [href]="review.verifyUrl" target="_blank" rel="noopener">
+                  {{ 'home.reviews.verify' | translate }}
+                </a>
+                <span class="home-reviews__review-date">{{ review.date }}</span>
+              </footer>
+            </article>
+          }
+          @for (review of rowTwo(); track 'dup2-' + review.id) {
+            <article
+              class="home-reviews__review"
+              aria-hidden="true">
+              <header class="home-reviews__review-head">
+                <div class="home-reviews__review-author">
+                  <span class="home-reviews__review-avatar">{{ review.initials }}</span>
+                  <span class="home-reviews__review-name">{{ review.name }}</span>
+                </div>
+                <div class="home-reviews__review-stars">
+                  @for (filled of starsArray(review.rating); track $index) {
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      width="13"
+                      height="13"
+                      [class.is-empty]="!filled"
+                      src="/assets/icons/star.svg" />
+                  }
+                </div>
+              </header>
+              <p class="home-reviews__review-content">{{ review.content }}</p>
+              <footer class="home-reviews__review-foot">
+                <a class="home-reviews__review-verify" [href]="review.verifyUrl" target="_blank" rel="noopener">
+                  {{ 'home.reviews.verify' | translate }}
+                </a>
+                <span class="home-reviews__review-date">{{ review.date }}</span>
+              </footer>
+            </article>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="reviews-footer"
+      data-cy="reviews-footer"
+      class="home-reviews__footer w-full flex flex-col items-center gap-6 tablet:gap-8">
+      <div
+        id="reviews-trust-badge"
+        data-cy="reviews-trust-badge"
+        class="home-reviews__trust-badge hidden tablet:block"
+        [class.is-revealed]="playTrust()"
+        aria-hidden="true">
+        <div
+          class="home-reviews__badge home-reviews__badge--rating"
+          [class.is-active]="currentBadgeIndex() === 0">
+          <span class="home-reviews__badge-score">{{ trustpilotRating() }}</span>
+          <div
+            class="home-reviews__badge-stars"
+            [attr.aria-label]="trustpilotRating() + '/' + maxStars">
+            @for (type of stars(); track $index) {
+              @switch (type) {
+                @case ('filled') {
+                  <img alt="" aria-hidden="true" src="/assets/icons/star.svg" />
+                }
+                @case ('half') {
+                  <img alt="" aria-hidden="true" src="/assets/icons/star.svg" />
+                }
+                @case ('empty') {
+                  <img class="is-empty" alt="" aria-hidden="true" src="/assets/icons/star.svg" />
+                }
+              }
+            }
+          </div>
+          <span class="home-reviews__badge-label">
+            {{ 'home.reviews.rated' | translate }}
+            <strong>{{ 'home.reviews.excellent' | translate }}</strong>
+          </span>
+        </div>
+        <img
+          class="home-reviews__badge home-reviews__badge--icon"
+          [class.is-active]="currentBadgeIndex() === 1"
+          alt=""
+          aria-hidden="true"
+          src="/assets/icons/best-cfd-broker.svg" />
+        <img
+          class="home-reviews__badge home-reviews__badge--icon"
+          [class.is-active]="currentBadgeIndex() === 2"
+          alt=""
+          aria-hidden="true"
+          src="/assets/icons/best-trd-platform.svg" />
+      </div>
+
+      <slide-effect
+        id="reviews-cta-slide"
+        data-cy="reviews-cta-slide"
+        class="home-reviews__cta-slide"
+        from="left"
+        [block]="true"
+        [fade]="false"
+        [play]="playCta()"
+        [duration]="ctaDurationMs">
+        <excent-button
+          id="reviews-cta-btn"
+          data-cy="reviews-cta-btn"
+          color="white"
+          radius="sm"
+          size="lg"
+          width="auto"
+          class="home-reviews__cta"
+          (click)="onSeeReviews()">
+          <span class="home-reviews__cta-label">See Our Reviews</span>
+          <img btn-icon-right alt="" aria-hidden="true" width="16" height="16" src="/assets/icons/arrow-right.svg" />
+        </excent-button>
+      </slide-effect>
+    </div>
+  </excent-card>
+</section>

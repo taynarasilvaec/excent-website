@@ -1,0 +1,371 @@
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/assets/fonts/HelveticaNeue-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/assets/fonts/HelveticaNeue-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/assets/fonts/HelveticaNeue-Roman.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/assets/fonts/HelveticaNeue-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/assets/fonts/HelveticaNeue-Bold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/assets/fonts/HelveticaNeue-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  background-color: var(--excent-background);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* LIGHT THEME — clean & minimal. No blue gradients for now: flat white surfaces,
+   near-black text, hairline borders. The accent blue is kept but used sparingly. */
+:root {
+  --excent-background: #FFFFFF;
+  --excent-white: 17, 24, 39;          /* foreground base (rgb parts) — dark in light mode */
+
+  /* Navbar — frosted white, dark text/icons */
+  --excent-navbar-bg: rgba(255, 255, 255, 0.92);
+  --excent-navbar-border: rgba(17, 24, 39, 0.08);
+  --excent-navbar-text: rgb(17, 24, 39);
+  --excent-navbar-text-muted: rgba(17, 24, 39, 0.60);
+  --excent-navbar-divider: rgba(17, 24, 39, 0.10);
+  --excent-navbar-button-secondary: rgb(17, 24, 39);
+  --excent-navbar-button-secondary-text: rgb(255, 255, 255);
+  --excent-navbar-icon-filter: brightness(0) saturate(100%);  /* white SVG -> near-black */
+  --excent-logo-filter: none;          /* logo color comes from the per-theme SVG, not a filter */
+  /* Ecosystem launcher / open-menu surfaces */
+  --excent-navbar-bg-open: rgba(255, 255, 255, 0.98);
+  --excent-navbar-card-surface: rgba(17, 24, 39, 0.05);
+  --excent-navbar-card-border: rgba(17, 24, 39, 0.08);
+
+  /* "Text on dark" tokens double as the primary text scale — dark in light mode */
+  --excent-text-on-dark-primary: #111827;
+  --excent-text-on-dark-soft: rgba(17, 24, 39, 0.85);
+  --excent-text-on-dark-secondary: rgba(17, 24, 39, 0.78);
+  --excent-text-on-dark-muted: rgba(17, 24, 39, 0.62);
+  --excent-text-on-dark-dim: rgba(17, 24, 39, 0.50);
+  --excent-text-on-dark-faint: rgba(17, 24, 39, 0.40);
+
+  /* Link accent (no gradients in light) */
+  --excent-link-blue: #086EF9;
+
+  /* Semantic up/down (positive/negative) — deeper shades for contrast on light. */
+  --excent-positive: #15803d;
+  --excent-negative: #dc2626;
+
+  /* Surfaces / hairlines (used by cards across the site) */
+  --excent-card-blue-bg: #F4F6FA;
+  --excent-surface-translucent: rgba(17, 24, 39, 0.03);
+  --excent-hairline: rgba(17, 24, 39, 0.08);
+  --excent-hairline-strong: rgba(17, 24, 39, 0.14);
+
+  /* Pill (reusable across sections) */
+  --excent-pill-border: rgba(17, 24, 39, 0.12);
+  --excent-pill-gradient-start: rgba(17, 24, 39, 0.04);
+  --excent-pill-gradient-end: rgba(17, 24, 39, 0);
+  --excent-pill-label: rgba(17, 24, 39, 0.85);
+  --excent-pill-dot-green: #22c55e;
+  --excent-pill-dot-green-glow: rgba(34, 197, 94, 0.5);
+
+  /* Security section — light surfaces */
+  --excent-security-card-bg: #F4F6FA;
+  --excent-security-card-border: rgba(17, 24, 39, 0.06);
+  --excent-security-card-grid-line: rgba(8, 110, 249, 0.06);
+  --excent-security-card-glow-1: #80C4FF;
+  --excent-security-card-glow-2: #6BB3FF;
+  --excent-security-card-glow-3: #0074FF;
+  --excent-security-card-glow-4: #006DFF;
+  --excent-security-card-glow-5: #0050FF;
+  --excent-security-icon-bg: rgba(17, 24, 39, 0.04);
+  --excent-security-icon-shadow-inset: rgba(17, 24, 39, 0.04);
+  --excent-security-icon-shadow-drop: rgba(0, 0, 0, 0.06);
+}
+/* DARK THEME */
+.dark {
+  --excent-background: rgb(0, 0, 0);
+  --excent-white: 255, 255, 255;
+
+  --excent-navbar-bg: rgba(20, 25, 30, 0.95);
+  --excent-navbar-border: rgba(255, 255, 255, 0.08);
+  --excent-navbar-text: rgb(255, 255, 255);
+  --excent-navbar-text-muted: rgba(255, 255, 255, 0.6);
+  --excent-navbar-divider: rgba(255, 255, 255, 0.1);
+  --excent-navbar-button-secondary: rgb(255, 255, 255);
+  --excent-navbar-button-secondary-text: rgb(20, 25, 30);
+  --excent-navbar-icon-filter: none;
+  --excent-logo-filter: none;
+  /* Ecosystem launcher / open-menu surfaces */
+  --excent-navbar-bg-open: rgba(10, 12, 18, 1);
+  --excent-navbar-card-surface: rgba(255, 255, 255, 0.06);
+  --excent-navbar-card-border: rgba(255, 255, 255, 0.08);
+
+  /* Text on dark backgrounds */
+  --excent-text-on-dark-primary: #FFFFFF;
+  --excent-text-on-dark-soft: rgba(255, 255, 255, 0.85);
+  --excent-text-on-dark-secondary: rgba(255, 255, 255, 0.80);
+  --excent-text-on-dark-muted: rgba(255, 255, 255, 0.70);
+  --excent-text-on-dark-dim: rgba(255, 255, 255, 0.60);
+  --excent-text-on-dark-faint: rgba(255, 255, 255, 0.50);
+
+  /* Link accent */
+  --excent-link-blue: #086EF9;
+
+  /* Semantic up/down (positive/negative) — brighter shades for dark surfaces. */
+  --excent-positive: #22c55e;
+  --excent-negative: #ef4444;
+
+  /* Surfaces / hairlines */
+  --excent-card-blue-bg: #011C41;
+  --excent-surface-translucent: rgba(255, 255, 255, 0.03);
+  --excent-hairline: rgba(255, 255, 255, 0.08);
+  --excent-hairline-strong: rgba(255, 255, 255, 0.14);
+
+  /* Pill */
+  --excent-pill-border: rgba(210, 210, 210, 0.30);
+  --excent-pill-gradient-start: rgba(255, 255, 255, 0.16);
+  --excent-pill-gradient-end: rgba(255, 255, 255, 0);
+  --excent-pill-label: rgba(255, 255, 255, 0.85);
+  --excent-pill-dot-green: #22c55e;
+  --excent-pill-dot-green-glow: rgba(34, 197, 94, 0.6);
+
+  /* Security section */
+  --excent-security-card-bg: #011C41;
+  --excent-security-card-border: rgba(255, 255, 255, 0.06);
+  --excent-security-card-grid-line: rgba(59, 130, 246, 0.05);
+  --excent-security-card-glow-1: #80C4FF;
+  --excent-security-card-glow-2: #6BB3FF;
+  --excent-security-card-glow-3: #0074FF;
+  --excent-security-card-glow-4: #006DFF;
+  --excent-security-card-glow-5: #0050FF;
+  --excent-security-icon-bg: rgba(255, 255, 255, 0.03);
+  --excent-security-icon-shadow-inset: rgba(255, 255, 255, 0.03);
+  --excent-security-icon-shadow-drop: rgba(0, 0, 0, 0.06);
+}
+/* Per-route background overrides — toggled from Features via a class on <html>.
+   Only dark mode gets the deep-navy trading bg; light mode stays clean white. */
+.dark.bg-trading {
+  --excent-background: #030A1A;
+}
+
+/* ============================================================
+   LAYOUT SYSTEM — responsive lateral gutter + section width variants.
+   Tokens (no hardcoded numbers scattered around):
+     --excent-gutter        page lateral breathing (responsive)
+     --excent-fullbleed-pad inner padding of full-bleed sections
+     --excent-card-pad      card internal padding
+   ============================================================ */
+:root {
+  --excent-gutter: 6px;            /* mobile */
+  --excent-fullbleed-pad: 40px;
+  --excent-card-pad: 20px;
+}
+@media (min-width: 1024px) { :root { --excent-gutter: 16px; } }   /* tablet */
+@media (min-width: 1440px) { :root { --excent-gutter: 20px; } }   /* desktop */
+
+/* The page shell is FULL WIDTH with NO lateral gutter. The gutter is owned by
+   each section (via .section-contained), never imposed on everyone by the parent.
+   This lets full-bleed sections reach the viewport edges. */
+.page-shell {
+  width: 100%;
+}
+
+/* Contained section: applies its own lateral gutter. */
+.section-contained {
+  padding-inline: var(--excent-gutter);
+}
+
+/* Full-bleed: spans the full width of the (full-width) shell, no gutter. Inner
+   content gets a fixed 40px so text still lines up with contained sections. */
+.full-bleed {
+  width: 100%;
+}
+.full-bleed__inner {
+  padding-inline: var(--excent-fullbleed-pad);
+}
+
+/* === Mobile: scroll funciona pero la barra es invisible ==================
+   Aplica a cualquier contenedor scrolleable. Solo afecta < 1024px. */
+@media (max-width: 1023px) {
+  * {
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE / legacy Edge */
+  }
+  *::-webkit-scrollbar {
+    display: none;                /* Chrome / Safari / Opera / Edge moderno */
+  }
+}
+
+/* === Design system: botón-icono =========================================
+   Clase global porque la usan tanto el <app-navbar> internamente como
+   los consumidores en sus slots (los estilos scoped de un componente
+   no llegan al contenido proyectado por ng-content). */
+.navbar-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.navbar-icon-btn img { filter: var(--excent-navbar-icon-filter, none); }
+.navbar-icon-btn:hover { background-color: rgba(var(--excent-white), 0.08); }
+.navbar-icon-btn:focus-visible {
+  outline: 1px solid rgba(var(--excent-white), 0.4);
+  outline-offset: 1px;
+}
+
+/* Logo: white wordmark on dark, darkened to black in light mode. */
+#navbar-logo img { filter: var(--excent-logo-filter, none); }
+
+/* The navbar card hardcodes `text-white`; in light mode drive it from tokens
+   (id+class beats the utility class, so no !important needed). */
+html:not(.dark) #navbar-card.text-white { color: var(--excent-navbar-text); }
+
+/* ============================================================
+   Reveal directive: slide-in animations.
+   Aplicada por la directiva [appReveal] del shared.
+   Usa CSS animation (no transition) para que el efecto corra automatico al
+   montar el elemento, sin depender de toggle de clase via JS — esto resuelve
+   problemas de timing entre paints en modo zoneless.
+   ============================================================ */
+.reveal {
+  --reveal-delay: 0ms;
+  --reveal-duration: 700ms;
+  --reveal-distance: 20px;
+  animation-duration: var(--reveal-duration);
+  animation-delay: var(--reveal-delay);
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-fill-mode: both;
+  will-change: opacity, transform;
+}
+
+/* Slide CON fade: opacity 0 -> 1 mientras desliza. */
+@keyframes reveal-from-up {
+  from { opacity: 0; transform: translateY(var(--reveal-distance)); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes reveal-from-down {
+  from { opacity: 0; transform: translateY(calc(-1 * var(--reveal-distance))); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes reveal-from-left {
+  from { opacity: 0; transform: translateX(calc(-1 * var(--reveal-distance))); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes reveal-from-right {
+  from { opacity: 0; transform: translateX(var(--reveal-distance)); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Slide SIN fade: opacity siempre 1, solo translate. */
+@keyframes reveal-from-up-nf   { from { transform: translateY(var(--reveal-distance)); }            to { transform: none; } }
+@keyframes reveal-from-down-nf { from { transform: translateY(calc(-1 * var(--reveal-distance))); } to { transform: none; } }
+@keyframes reveal-from-left-nf { from { transform: translateX(calc(-1 * var(--reveal-distance))); } to { transform: none; } }
+@keyframes reveal-from-right-nf{ from { transform: translateX(var(--reveal-distance)); }            to { transform: none; } }
+
+.reveal.reveal--from-up    { animation-name: reveal-from-up; }
+.reveal.reveal--from-down  { animation-name: reveal-from-down; }
+.reveal.reveal--from-left  { animation-name: reveal-from-left; }
+.reveal.reveal--from-right { animation-name: reveal-from-right; }
+.reveal.reveal--fade       { animation-name: reveal-fade; }
+
+.reveal.reveal--from-up.reveal--no-fade    { animation-name: reveal-from-up-nf; }
+.reveal.reveal--from-down.reveal--no-fade  { animation-name: reveal-from-down-nf; }
+.reveal.reveal--from-left.reveal--no-fade  { animation-name: reveal-from-left-nf; }
+.reveal.reveal--from-right.reveal--no-fade { animation-name: reveal-from-right-nf; }
+
+/* Wipe-zoom-mobile: la imagen inicia mas grande (scale 1.6 anclado arriba)
+   y se retrae a scale 1. Combinado con overflow:visible en el host, el
+   contenido escalado "tapa" temporalmente lo que esta debajo y va abriendo
+   de arriba para abajo conforme se reduce a su tamano original. */
+.reveal.reveal--wipe-zoom-mobile { animation-name: reveal-wipe-zoom-mobile; }
+
+@keyframes reveal-wipe-zoom-mobile {
+  from { transform: scale(1.6); }
+  to   { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Wipe mode: el elemento ya tiene su forma final, una mascara clip-path
+   lo va destapando lateralmente. No usa opacity ni translate. */
+.reveal.reveal--wipe {
+  opacity: 1;
+  transform: none;
+  transition:
+    clip-path var(--reveal-duration) cubic-bezier(0.22, 0.61, 0.36, 1) var(--reveal-delay);
+}
+
+.reveal--wipe.reveal--from-left:not(.is-revealed) {
+  /* Estado inicial: todo recortado desde la izquierda. Se va revelando
+     desde el lateral derecho hacia el izquierdo. */
+  clip-path: inset(0 0 0 100%);
+}
+
+.reveal--wipe.reveal--from-right:not(.is-revealed) {
+  /* Espejo: se revela desde el lateral izquierdo hacia el derecho. */
+  clip-path: inset(0 100% 0 0);
+}
+
+.reveal--wipe.is-revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.reveal--wipe {
+    clip-path: none;
+    transition: none;
+  }
+}

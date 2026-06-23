@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  /* Breakpoints */
+  --breakpoint-mobile: 402px;
+  --breakpoint-tablet: 1024px;
+  --breakpoint-desktop: 1440px;
+  /* Fuentes */
+  --font-sans: "HelveticaNeue", Helvetica, Arial, sans-serif;
+  --font-heading: "HelveticaNeue", Helvetica, Arial, sans-serif;
+  /* Colors estatics */
+  --color-excent_blue-100: #0066FF;
+  --color-excent_blue-700: #062A61;
+  --color-excent_gray: #C5CED6;
+  --color-excent_red-100: #F14437;
+  --color-excent_red-300: #D92D20;
+  --color-excent_red-500: #55160C;
+  --color-excent_red-600: #F97066;
+  --color-excent_orange: #EF6600;
+  --color-excent_yellow: #FFA900;
+  --color-excent_card_title: oklch(12.9% 0.042 264.695);
+  --color-excent_title_tabs: oklch(12.9% 0.042 264.695);
+  /* Colors */
+  --color-excent_white: rgba(var(--excent-white));
+  --color-excent_background: var(--excent-background);
+
+  /* Navbar */
+  --color-excent_navbar_bg: var(--excent-navbar-bg);
+  --color-excent_navbar_border: var(--excent-navbar-border);
+  --color-excent_navbar_text: var(--excent-navbar-text);
+  --color-excent_navbar_text_muted: var(--excent-navbar-text-muted);
+  --color-excent_navbar_divider: var(--excent-navbar-divider);
+  --color-excent_navbar_button_secondary: var(--excent-navbar-button-secondary);
+  --color-excent_navbar_button_secondary_text: var(--excent-navbar-button-secondary-text);
+}
+@utility opacity-ic_actions { opacity: 0.7 }
+@utility z-100 { z-index: 100 }
+@utility filter-active_icon {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(97%) saturate(7492%) hue-rotate(210deg) brightness(102%) contrast(101%);
+}

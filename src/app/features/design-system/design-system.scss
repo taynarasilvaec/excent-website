@@ -1,0 +1,123 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--excent-background);
+}
+
+.ds {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px var(--excent-gutter) 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  color: var(--excent-text-on-dark-primary);
+}
+
+.ds__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.ds__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ds__muted {
+  color: var(--excent-text-on-dark-muted);
+}
+
+.ds__section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 32px;
+  border-top: 1px solid var(--excent-hairline);
+}
+.ds__section-title {
+  color: var(--excent-text-on-dark-primary);
+}
+
+/* Color swatches */
+.ds__swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.ds__swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ds__swatch-chip {
+  width: 100%;
+  height: 56px;
+  border-radius: 10px;
+  border: 1px solid var(--excent-hairline);
+}
+.ds__swatch-label {
+  font-size: 13px;
+  color: var(--excent-text-on-dark-soft);
+}
+.ds__swatch-code,
+code.ds__swatch-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--excent-text-on-dark-muted);
+}
+
+/* Token list */
+.ds__token-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ds__token-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Button rows */
+.ds__row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.ds__row-label {
+  width: 80px;
+  font-size: 12px;
+  color: var(--excent-text-on-dark-faint);
+}
+
+/* Typography */
+.ds__text-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ds__text-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Cards */
+.ds__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.ds__card {
+  min-height: 120px;
+}
+
+.ds__accordion {
+  max-width: 720px;
+}

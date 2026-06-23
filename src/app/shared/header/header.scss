@@ -1,0 +1,21 @@
+.navbar-language-wrapper {
+  position: relative;
+}
+
+.navbar-language-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+}
+
+.navbar-apps-wrapper {
+  position: relative;
+}
+
+.navbar-apps-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+}

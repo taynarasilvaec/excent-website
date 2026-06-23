@@ -1,0 +1,133 @@
+<section id="live-account-highlights" data-cy="live-account-highlights" class="live-account-highlights">
+  <div id="live-account-highlights-platform" data-cy="live-account-highlights-platform" class="live-account-highlights__platform">
+    <div id="live-account-highlights-platform-header" data-cy="live-account-highlights-platform-header" class="live-account-highlights__platform-header">
+      <h2 id="live-account-highlights-platform-title" data-cy="live-account-highlights-platform-title" class="live-account-highlights__platform-title">
+        {{ 'live-account.highlights.title' | translate }}
+      </h2>
+      <p id="live-account-highlights-platform-description" data-cy="live-account-highlights-platform-description" class="live-account-highlights__platform-description">
+        {{ 'live-account.highlights.description' | translate }}
+      </p>
+    </div>
+
+    <div id="live-account-highlights-platform-bottom" data-cy="live-account-highlights-platform-bottom" class="live-account-highlights__platform-bottom">
+      <div id="live-account-highlights-platform-action" data-cy="live-account-highlights-platform-action" class="live-account-highlights__platform-action">
+        <excent-button
+          id="live-account-highlights-create-account-btn"
+          data-cy="live-account-highlights-create-account-btn"
+          class="live-account-highlights__create-btn"
+          color="white"
+          radius="sm"
+          size="lg"
+          width="auto"
+          (click)="onCreateAccount()">
+          {{ 'live-account.highlights.create-account' | translate }}
+        </excent-button>
+      </div>
+
+      <div id="live-account-highlights-platform-images" data-cy="live-account-highlights-platform-images" class="live-account-highlights__platform-images">
+        <img alt="MacBook" class="live-account-highlights__platform-macbook" src="/assets/images/macbook.png" />
+        <img alt="iPhone" class="live-account-highlights__platform-iphone" src="/assets/images/iphone-black.png" />
+      </div>
+    </div>
+
+    <div id="live-account-highlights-platform-features" data-cy="live-account-highlights-platform-features" class="live-account-highlights__platform-features">
+      <excent-glow bottom="-20px" left="10%" width="55%" height="70%" origin="50% 100%" blur="72px" />
+      <span class="live-account-highlights__feature-separator" aria-hidden="true"></span>
+      <div id="live-account-highlights-feature-1" data-cy="live-account-highlights-feature-1" class="live-account-highlights__feature">
+        <h3 class="live-account-highlights__feature-title">{{ 'live-account.highlights.feature-1.title' | translate }}</h3>
+        <p class="live-account-highlights__feature-description">{{ 'live-account.highlights.feature-1.description' | translate }}</p>
+      </div>
+      <span class="live-account-highlights__feature-separator" aria-hidden="true"></span>
+      <div id="live-account-highlights-feature-2" data-cy="live-account-highlights-feature-2" class="live-account-highlights__feature">
+        <h3 class="live-account-highlights__feature-title">{{ 'live-account.highlights.feature-2.title' | translate }}</h3>
+        <p class="live-account-highlights__feature-description">{{ 'live-account.highlights.feature-2.description' | translate }}</p>
+      </div>
+      <span class="live-account-highlights__feature-separator" aria-hidden="true"></span>
+      <div id="live-account-highlights-feature-3" data-cy="live-account-highlights-feature-3" class="live-account-highlights__feature">
+        <h3 class="live-account-highlights__feature-title">{{ 'live-account.highlights.feature-3.title' | translate }}</h3>
+        <p class="live-account-highlights__feature-description">{{ 'live-account.highlights.feature-3.description' | translate }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="live-account-highlights-registration" data-cy="live-account-highlights-registration" class="live-account-highlights__registration">
+    <div id="live-account-highlights-steps" data-cy="live-account-highlights-steps" class="live-account-highlights__steps">
+      @for (step of steps; track step.id) {
+        <button
+          type="button"
+          [id]="'live-account-highlights-step-' + step.id"
+          [attr.data-cy]="'live-account-highlights-step-' + step.id"
+          class="live-account-highlights__step"
+          [class.live-account-highlights__step--active]="activeStep() === step.id"
+          [class.live-account-highlights__step--passed]="step.id < activeStep()"
+          [attr.aria-expanded]="activeStep() === step.id"
+          (click)="onStepClick(step.id)">
+          <div class="live-account-highlights__step-number">{{ step.id }}</div>
+          <div class="live-account-highlights__step-content">
+            @if (activeStep() === step.id) {
+              @if (step.labelKey) {
+                <p class="live-account-highlights__step-label">
+                  {{ step.labelKey | translate }}
+                </p>
+              }
+              <h3 class="live-account-highlights__step-title">
+                {{ step.titleKey | translate }}
+              </h3>
+              <p class="live-account-highlights__step-description">
+                {{ step.descriptionKey | translate }}
+              </p>
+            } @else {
+              <h3 class="live-account-highlights__step-title">
+                {{ (step.labelKey || step.titleKey) | translate }}
+              </h3>
+            }
+          </div>
+        </button>
+      }
+
+      <div id="live-account-highlights-registration-actions" data-cy="live-account-highlights-registration-actions" class="live-account-highlights__registration-actions">
+        <div id="live-account-highlights-download-app-wrapper" data-cy="live-account-highlights-download-app-wrapper" class="flex tablet:hidden">
+          <excent-button
+            id="live-account-highlights-download-app-btn"
+            data-cy="live-account-highlights-download-app-btn"
+            class="live-account-highlights__download-btn"
+            color="white"
+            radius="sm"
+            size="md"
+            width="auto"
+            (click)="onDownloadApp()">
+            {{ 'live-account.highlights.registration.download-app' | translate }}
+          </excent-button>
+        </div>
+        <div id="live-account-highlights-sign-up-wrapper" data-cy="live-account-highlights-sign-up-wrapper" class="hidden tablet:flex">
+          <excent-button
+            id="live-account-highlights-sign-up-btn"
+            data-cy="live-account-highlights-sign-up-btn"
+            class="live-account-highlights__download-btn"
+            color="white"
+            radius="sm"
+            size="md"
+            width="auto"
+            (click)="onSignUp()">
+            {{ 'live-account.highlights.registration.sign-up' | translate }}
+          </excent-button>
+        </div>
+        <excent-button
+          id="live-account-highlights-demo-account-btn"
+          data-cy="live-account-highlights-demo-account-btn"
+          color="white"
+          radius="sm"
+          size="md"
+          width="auto"
+          (click)="onCreateDemoAccount()">
+          {{ 'live-account.highlights.registration.create-demo-account' | translate }}
+        </excent-button>
+      </div>
+    </div>
+
+    <div id="live-account-highlights-phone" data-cy="live-account-highlights-phone" class="live-account-highlights__phone">
+      <img alt="" class="live-account-highlights__phone-screen" src="/assets/images/sign-in.png" />
+      <img alt="" class="live-account-highlights__phone-frame" src="/assets/images/contorno-phone.png" />
+    </div>
+  </div>
+</section>

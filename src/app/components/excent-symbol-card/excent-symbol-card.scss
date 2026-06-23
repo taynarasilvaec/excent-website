@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.excent-symbol-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 0.8px solid rgba(255, 255, 255, 0.06);
+}
+
+.excent-symbol-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.excent-symbol-card__spark {
+  flex: 0 0 84px;
+  width: 84px;
+  height: 28px;
+}
+
+.excent-symbol-card__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+  min-width: 64px;
+}
+
+.excent-symbol-card__change {
+  font-weight: 500;
+}
+
+.excent-symbol-card__change--up   { color: #22c55e; }
+.excent-symbol-card__change--down { color: #ef4444; }
+
+.excent-symbol-card--compact {
+  padding: 10px 14px;
+}
+
+.excent-symbol-card--detailed {
+  padding: 14px 18px;
+  gap: 18px;
+}

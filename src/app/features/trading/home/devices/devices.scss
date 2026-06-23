@@ -1,0 +1,146 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.home-devices {
+  display: flex;
+  width: 100%;
+}
+
+.home-devices__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // Necesario para que el ::before del background image sea posicionado
+  // relativo al card y el overflow:hidden mascare el slide top->bottom.
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  // Background image en ::before para animarlo aparte del contenido. Uso
+  // clip-path en vez de transform para que la imagen NO se mueva — se queda
+  // fija y un borde recto horizontal va descubriendo de arriba hacia abajo,
+  // como cortina de cine. Da una sensacion mucho mas crisp/cuadrada que
+  // un translate (que se ve "difuminado" porque el contenido se desplaza).
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(179deg, rgba(0, 0, 0, 0.60) 0.65%, rgba(0, 0, 0, 0) 31.15%),
+      url('/assets/images/mobile-platform.png') lightgray center / cover no-repeat;
+    // Estado inicial: 100% del bottom recortado = nada visible. Cuando se
+    // agrega .is-background-revealed pasa a 0 = todo visible. El borde de
+    // recorte se mueve top->bottom como una cortina bajando.
+    clip-path: inset(0 0 100% 0);
+    // Duracion sincronizada con BACKGROUND_DURATION_MS en devices.ts.
+    transition: clip-path 2s cubic-bezier(0.22, 0.61, 0.36, 1);
+    z-index: 0;
+    pointer-events: none;
+
+    @media (min-width: 600px) {
+      background:
+        linear-gradient(179deg, rgba(0, 0, 0, 0.60) 0.65%, rgba(0, 0, 0, 0) 31.15%),
+        url('/assets/images/platform-devices.png') 78% center / cover no-repeat;
+    }
+
+    @media (min-width: 1024px) {
+      background:
+        url('/assets/images/platform-devices.png') center / cover no-repeat;
+    }
+  }
+
+  &.is-background-revealed::before {
+    clip-path: inset(0 0 0 0);
+  }
+
+  // Contenido por encima del background (::before tiene z-index 0).
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.home-devices__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-devices__bottom {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+// El titulo se divide en dos lineas para que la cascada mobile pueda
+// animarlas de forma independiente (linea 1 -> linea 2 -> descripcion).
+// Cada slide-effect mascara su linea con overflow:hidden; line-height >= 1.2
+// para que la "y", "p", "g" no se recorten durante el slide.
+.home-devices__title {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-devices__title-line-slide {
+  align-self: stretch;
+}
+
+.home-devices__title-line {
+  align-self: stretch;
+
+  ::ng-deep .excent-text {
+    color: #fff;
+    text-align: center;
+    font-family: 'Helvetica Neue';
+    font-size: 33px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: normal;
+  }
+
+  @media (min-width: 1024px) {
+    ::ng-deep .excent-text {
+      font-size: 40px;
+      line-height: 1.2;
+      text-transform: capitalize;
+      text-align: left;
+    }
+  }
+}
+
+.home-devices__description-slide {
+  align-self: stretch;
+  display: flex !important;
+  justify-content: center;
+
+  @media (min-width: 1024px) {
+    justify-content: flex-start;
+  }
+}
+
+.home-devices__description {
+  ::ng-deep .excent-text {
+    color: #fff;
+    text-align: center;
+    font-family: 'Helvetica Neue';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+  }
+
+  @media (min-width: 1024px) {
+    ::ng-deep .excent-text {
+      color: rgba(255, 255, 255, 0.80);
+      font-size: 13.897px;
+      line-height: normal;
+      text-align: left;
+    }
+  }
+}
+
+.home-devices__actions {
+  display: flex;
+}

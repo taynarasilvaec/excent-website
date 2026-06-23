@@ -1,0 +1,45 @@
+<section id="live-account-market" data-cy="live-account-market" class="live-account-market">
+  <div id="live-account-market-content" data-cy="live-account-market-content" class="live-account-market__content">
+    <div id="live-account-market-pill" data-cy="live-account-market-pill" class="live-account-market__pill">
+      <span id="live-account-market-pill-dot" data-cy="live-account-market-pill-dot" class="live-account-market__pill-dot" aria-hidden="true"></span>
+      <span id="live-account-market-pill-label" data-cy="live-account-market-pill-label" class="live-account-market__pill-label">
+        {{ 'live-account.market.live-market-access' | translate }}
+      </span>
+    </div>
+
+    <h1 id="live-account-market-title" data-cy="live-account-market-title" class="live-account-market__title">
+      {{ 'live-account.market.title-line-1' | translate }}<br />
+      {{ 'live-account.market.title-line-2' | translate }}
+    </h1>
+
+    <p id="live-account-market-description" data-cy="live-account-market-description" class="live-account-market__description">
+      {{ 'live-account.market.description' | translate }}
+    </p>
+
+    <div id="live-account-market-actions" data-cy="live-account-market-actions" class="live-account-market__actions">
+      <excent-button
+        id="live-account-market-create-account-btn"
+        data-cy="live-account-market-create-account-btn"
+        class="live-account-market__create-btn"
+        color="white"
+        radius="sm"
+        size="lg"
+        width="auto"
+        (click)="onCreateAccount()">
+        {{ 'live-account.market.create-account' | translate }}
+        <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+      </excent-button>
+
+      <excent-button
+        id="live-account-market-demo-account-btn"
+        data-cy="live-account-market-demo-account-btn"
+        color="outline-white"
+        radius="sm"
+        size="lg"
+        width="auto"
+        (click)="onDemoAccount()">
+        {{ 'live-account.market.demo-account' | translate }}
+      </excent-button>
+    </div>
+  </div>
+</section>

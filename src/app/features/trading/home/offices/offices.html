@@ -1,0 +1,202 @@
+<section id="offices-section" data-cy="offices-section" class="home-offices">
+  <excent-card
+    id="offices-card"
+    data-cy="offices-card"
+    class="home-offices__card"
+    color="blue"
+    background="none">
+    <slide-effect
+      id="offices-title-slide"
+      data-cy="offices-title-slide"
+      class="home-offices__title-slide"
+      from="up"
+      [block]="true"
+      [fade]="false"
+      [play]="playTitle()"
+      [duration]="titleDurationMs">
+      <excent-text
+        id="offices-title"
+        data-cy="offices-title"
+        variant="title"
+        class="home-offices__title tablet:w-148 tablet:max-w-full">
+        {{ 'home.offices.title-line-1' | translate }}<br />
+        {{ 'home.offices.title-line-2' | translate }}
+      </excent-text>
+    </slide-effect>
+
+    <slide-effect
+      id="offices-image-slide"
+      data-cy="offices-image-slide"
+      class="home-offices__image-slide w-full max-h-80 tablet:max-h-112 desktop:max-h-[528px]"
+      from="down"
+      [block]="true"
+      [fade]="false"
+      [play]="playImage()"
+      [duration]="imageDurationMs">
+      <div id="offices-image" data-cy="offices-image" class="home-offices__image">
+        @for (layer of imageLayers(); track layer.tick) {
+          <img
+            [id]="'offices-image-photo-' + layer.key"
+            [attr.data-cy]="'offices-image-photo-' + layer.key"
+            class="home-offices__image-photo"
+            [class.is-wipe-ltr]="layer.direction === 'ltr'"
+            [class.is-wipe-rtl]="layer.direction === 'rtl'"
+            alt=""
+            [src]="offices[layer.key].image" />
+        }
+
+        <div
+          id="offices-image-overlay"
+          data-cy="offices-image-overlay"
+          class="home-offices__image-overlay"
+          aria-hidden="true">
+        </div>
+
+        <div
+          id="offices-image-content"
+          data-cy="offices-image-content"
+          class="home-offices__image-content">
+          <slide-effect
+            id="offices-quote-slide"
+            data-cy="offices-quote-slide"
+            class="home-offices__quote-slide"
+            from="down"
+            [block]="true"
+            [fade]="false"
+            [play]="playQuote()"
+            [duration]="quoteDurationMs">
+            <p id="offices-quote" data-cy="offices-quote" class="home-offices__quote">
+              &ldquo;{{ 'home.offices.quote' | translate }}&rdquo;
+            </p>
+          </slide-effect>
+
+          <div
+            id="offices-ceo-row"
+            data-cy="offices-ceo-row"
+            class="home-offices__ceo-row"
+            [class.is-revealed]="playCeo()">
+            @for (a of [active()]; track activeKey()) {
+              <div id="offices-ceo" data-cy="offices-ceo" class="home-offices__ceo">
+                <img
+                  id="offices-ceo-photo"
+                  data-cy="offices-ceo-photo"
+                  class="home-offices__ceo-photo"
+                  alt=""
+                  [src]="a.photo" />
+                <div
+                  id="offices-ceo-info"
+                  data-cy="offices-ceo-info"
+                  class="home-offices__ceo-info">
+                  <p
+                    id="offices-ceo-name"
+                    data-cy="offices-ceo-name"
+                    class="home-offices__ceo-name">
+                    {{ a.ceoName }}
+                  </p>
+                  <p
+                    id="offices-ceo-position"
+                    data-cy="offices-ceo-position"
+                    class="home-offices__ceo-position">
+                    {{ 'home.offices.ceo-position' | translate }}
+                  </p>
+                </div>
+              </div>
+            }
+
+            <div
+              id="offices-wings"
+              data-cy="offices-wings"
+              class="home-offices__wings w-[40.118px] h-[30.848px] tablet:w-[151px] tablet:h-[24.668px]"
+              aria-hidden="true">
+            </div>
+          </div>
+        </div>
+      </div>
+    </slide-effect>
+
+    <div id="offices-bottom" data-cy="offices-bottom" class="home-offices__bottom">
+      <div
+        id="offices-bar"
+        data-cy="offices-bar"
+        class="home-offices__bar"
+        [style.--bar-duration]="barDurationMs + 'ms'">
+        <span
+          id="offices-bar-left"
+          data-cy="offices-bar-left"
+          class="home-offices__bar-segment home-offices__bar-segment--left"
+          [class.is-active]="activeKey() === 'mexico'"
+          [class.is-revealed]="playBar()">
+        </span>
+        <span
+          id="offices-bar-right"
+          data-cy="offices-bar-right"
+          class="home-offices__bar-segment home-offices__bar-segment--right"
+          [class.is-active]="activeKey() === 'brazil'"
+          [class.is-revealed]="playBar()">
+        </span>
+      </div>
+
+      <div id="offices-infos" data-cy="offices-infos" class="home-offices__infos">
+        @for (key of officeKeys; track key) {
+          <div
+            [id]="'offices-info-' + key"
+            [attr.data-cy]="'offices-info-' + key"
+            class="home-offices__info"
+            role="button"
+            tabindex="0"
+            [attr.aria-pressed]="activeKey() === key"
+            [class.is-active]="activeKey() === key"
+            (mouseenter)="hover(key)"
+            (mouseleave)="hover(null)"
+            (click)="select(key)"
+            (keydown.enter)="select(key)"
+            (keydown.space)="select(key); $event.preventDefault()">
+            <slide-effect
+              [id]="'offices-name-slide-' + key"
+              [attr.data-cy]="'offices-name-slide-' + key"
+              class="home-offices__name-slide"
+              from="down"
+              [block]="true"
+              [fade]="false"
+              [play]="playNames()"
+              [duration]="namesDurationMs">
+              <p
+                [id]="'offices-name-' + key"
+                [attr.data-cy]="'offices-name-' + key"
+                class="home-offices__office-name">
+                {{ offices[key].labelKey | translate }}
+              </p>
+            </slide-effect>
+
+            <p
+              [id]="'offices-description-' + key"
+              [attr.data-cy]="'offices-description-' + key"
+              class="home-offices__description"
+              [class.is-revealed]="playDescription()">
+              {{ offices[key].descriptionKey | translate }}
+            </p>
+
+            <slide-effect
+              [id]="'offices-link-slide-' + key"
+              [attr.data-cy]="'offices-link-slide-' + key"
+              class="home-offices__link-slide"
+              from="left"
+              [fade]="false"
+              [play]="playLink()"
+              [duration]="linkDurationMs">
+              <a
+                [id]="'offices-link-' + key"
+                [attr.data-cy]="'offices-link-' + key"
+                class="home-offices__link"
+                href="#"
+                (click)="$event.stopPropagation()">
+                {{ 'home.offices.get-to-know' | translate }}
+                <img alt="" width="16" height="16" src="/assets/icons/arrow-blue-right.svg" />
+              </a>
+            </slide-effect>
+          </div>
+        }
+      </div>
+    </div>
+  </excent-card>
+</section>

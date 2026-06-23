@@ -1,0 +1,151 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+// Mobile-first: stacked, sin width fijo, padding chico.
+// Figma desktop specs: width 1400, padding 160px 64px 100px, gap 8px en el
+// section + 40px entre items del content. El radial gradient cae detras
+// del contenido en la parte superior del componente.
+.live-account-market {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 0 24px 60px 90px;
+  border-radius: 0 0 24px 24px;
+  background-color: var(--excent-background);
+  background-image:
+    linear-gradient(
+      0deg,
+      rgba(0, 58, 120, 0.48) 0%,
+      rgba(0, 58, 120, 0.24) 11%,
+      rgba(0, 58, 120, 0) 25%
+    );
+
+  @media (min-width: 1024px) {
+    padding: 0 48px 80px 90px;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 0 64px 100px 90px;
+    gap: 8px;
+  }
+}
+
+.live-account-market__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  max-width: 1272px; // 1400 - 64*2 (padding)
+
+  @media (min-width: 1024px) {
+    gap: 32px;
+  }
+
+  @media (min-width: 1440px) {
+    gap: 40px;
+  }
+}
+
+.live-account-market__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 0.5px solid rgba(210, 210, 210, 0.30);
+  background: radial-gradient(
+    231% 135.8% at 0.9% 2.98%,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.live-account-market__pill-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+  flex-shrink: 0;
+}
+
+.live-account-market__pill-label {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.live-account-market__title {
+  margin: 0;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-variant-numeric: slashed-zero;
+  font-feature-settings: 'cv01' on, 'cv02' on, 'cv03' on, 'cv04' on, 'cv07' on, 'cv10' on, 'cv11' on;
+
+  @media (min-width: 1024px) {
+    font-size: 44px;
+  }
+
+  @media (min-width: 1440px) {
+    font-size: 56px;
+  }
+}
+
+.live-account-market__description {
+  margin: -4px 0 0;
+  max-width: 100%;
+  color: rgba(255, 255, 255, 0.70);
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+
+  @media (min-width: 1024px) {
+    margin-top: -12px;
+    font-size: 15px;
+    max-width: 520px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-top: -20px;
+    font-size: 16px;
+    width: 600px;
+    max-width: 100%;
+  }
+}
+
+.live-account-market__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+// Boton blanco con width fijo en desktop segun Figma; en mobile crece para
+// dejar respiracion. Override del background con el #FDFBFA del Figma.
+.live-account-market__create-btn {
+  ::ng-deep .excent-btn {
+    background: #FDFBFA;
+  }
+
+  @media (min-width: 1440px) {
+    ::ng-deep .excent-btn {
+      width: 198px;
+    }
+  }
+}

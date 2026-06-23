@@ -1,0 +1,420 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.home-offices {
+  display: flex;
+  width: 100%;
+  padding: 0;
+}
+
+.home-offices__card {
+  width: 100%;
+
+  ::ng-deep .excent-card {
+    background: #011F48;
+    padding: 40px 24px;
+    border-radius: 6px;
+    min-height: 577px;
+    height: auto;
+
+    @media (min-width: 1024px) {
+      padding: 60px 35px;
+      border-radius: 16px;
+      min-height: 0;
+    }
+
+    @media (min-width: 1440px) {
+      padding: 60px 90px 120px;
+      border-radius: 22px;
+    }
+  }
+
+  ::ng-deep .excent-card__content {
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+
+    @media (min-width: 1024px) {
+      gap: 40px;
+    }
+
+    @media (min-width: 1440px) {
+      gap: 100px;
+    }
+  }
+}
+
+/* LIGHT MODE — section title + office name/description sit on the page bg,
+   so flip them to near-black. Office photos stay dark (imagery). */
+:host-context(html:not(.dark)) {
+  .home-offices__title ::ng-deep .excent-text { color: #111827; }
+  .home-offices__office-name {
+    color: #111827;
+    @media (min-width: 1024px) { color: #111827; }
+  }
+  .home-offices__description { color: rgba(17, 24, 39, 0.75); }
+  .home-offices__quote { color: #111827; }
+  .home-offices__bar-segment { background: rgba(17, 24, 39, 0.15); }
+  // active segment stays #006DFF.
+}
+
+.home-offices__title-slide {
+  align-self: center;
+}
+
+.home-offices__title {
+  ::ng-deep .excent-text {
+    color: #fff;
+    text-align: center;
+    font-family: 'Helvetica Neue';
+    font-size: 33px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+
+  @media (min-width: 1024px) {
+    ::ng-deep .excent-text {
+      font-size: 40px;
+      text-transform: capitalize;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    ::ng-deep .excent-text {
+      font-size: 48px;
+    }
+  }
+}
+
+.home-offices__image-slide {
+  align-self: stretch;
+}
+
+.home-offices__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4096 / 2620;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  @media (min-width: 1024px) {
+    aspect-ratio: auto;
+    height: 448px;
+  }
+
+  @media (min-width: 1440px) {
+    height: 528px;
+  }
+}
+
+// Hay 1 o 2 capas a la vez. La capa anterior queda visible al 100% mientras
+// la nueva entra encima con un wipe-in horizontal. La direccion depende del
+// sentido del cambio: ltr cuando el usuario va de mexico -> brasil (cubre
+// de izquierda a derecha), rtl en sentido inverso.
+.home-offices__image-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.home-offices__image-photo.is-wipe-ltr {
+  animation: home-offices-wipe-ltr 400ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.home-offices__image-photo.is-wipe-rtl {
+  animation: home-offices-wipe-rtl 400ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes home-offices-wipe-ltr {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes home-offices-wipe-rtl {
+  from { clip-path: inset(0 0 0 100%); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+.home-offices__image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 9, 26, 0) 0%, #15181E 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.home-offices__image-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 24px;
+  padding: 15px 10px;
+
+  @media (min-width: 1024px) {
+    padding: 48px;
+  }
+}
+
+.home-offices__quote-slide {
+  align-self: stretch;
+}
+
+.home-offices__quote {
+  margin: 0;
+  align-self: stretch;
+  color: #F5F5F5;
+  font-family: 'Helvetica Neue';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+
+  @media (min-width: 1024px) {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 40px;
+    width: 602px;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1440px) {
+    width: 596px;
+  }
+}
+
+.home-offices__ceo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  opacity: 0;
+  transition: opacity 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  &.is-revealed {
+    opacity: 1;
+  }
+}
+
+.home-offices__ceo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-offices__ceo-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+
+  @media (min-width: 1024px) {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.home-offices__ceo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.home-offices__ceo-name {
+  margin: 0;
+  color: #F5F5F5;
+  font-family: 'Helvetica Neue';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+
+  @media (min-width: 1024px) {
+    font-weight: 600;
+    line-height: 24px;
+  }
+}
+
+.home-offices__ceo-position {
+  margin: 0;
+  color: #A4A7AE;
+  font-family: 'Helvetica Neue';
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+
+  @media (min-width: 1024px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.home-offices__wings {
+  flex-shrink: 0;
+  background-image: url('/assets/icons/excent-wings.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @media (min-width: 1024px) {
+    background-image: url('/assets/images/logo-excent.svg');
+  }
+}
+
+.home-offices__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 24px;
+}
+
+// Linea horizontal sobre los nombres. Se compone de dos segmentos (uno
+// para mexico, otro para brasil) que arrancan en scaleX(0) anclados en
+// el centro y crecen hacia afuera al recibir .is-revealed — efecto de
+// dos lineas que crecen desde el centro y se conectan en los bordes.
+.home-offices__bar {
+  --bar-duration: 700ms;
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 1px;
+  overflow: hidden;
+}
+
+.home-offices__bar-segment {
+  flex: 1;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scaleX(0);
+  transition:
+    transform var(--bar-duration) cubic-bezier(0.22, 0.61, 0.36, 1),
+    background 0.3s ease;
+
+  &--left {
+    transform-origin: right;
+  }
+
+  &--right {
+    transform-origin: left;
+  }
+
+  &.is-revealed {
+    transform: scaleX(1);
+  }
+
+  &.is-active {
+    background: #006DFF;
+  }
+}
+
+.home-offices__infos {
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+  gap: 16px;
+
+  @media (min-width: 1024px) {
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+  }
+}
+
+.home-offices__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  gap: 12px;
+  cursor: pointer;
+  text-align: left;
+
+  &:focus-visible {
+    outline: 2px solid var(--excent-link-blue);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  // Mobile: ambos nombres siempre visibles (necesario para que la barra
+  // partida en dos haga sentido visual). La descripcion y el link solo
+  // aparecen en el bloque activo para evitar competir por espacio.
+  @media (max-width: 1023px) {
+    &:not(.is-active) {
+      .home-offices__description,
+      .home-offices__link-slide {
+        display: none;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    transition: opacity 0.2s ease;
+
+    &:not(.is-active) {
+      opacity: 0.45;
+    }
+  }
+}
+
+.home-offices__name-slide {
+  align-self: stretch;
+}
+
+.home-offices__office-name {
+  margin: 0;
+  color: #fff;
+  font-family: 'Helvetica Neue';
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  align-self: stretch;
+
+  @media (min-width: 1024px) {
+    color: #F5F5F5;
+    font-size: 23px;
+  }
+}
+
+.home-offices__description {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.80);
+  font-family: 'Helvetica Neue';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  opacity: 0;
+  transition: opacity 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  &.is-revealed {
+    opacity: 1;
+  }
+}
+
+.home-offices__link-slide {
+  align-self: flex-start;
+}
+
+.home-offices__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #006DFF;
+  text-decoration: none;
+  font-family: 'Helvetica Neue';
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  transition: opacity 0.15s ease;
+
+  &:hover { opacity: 0.85; }
+}

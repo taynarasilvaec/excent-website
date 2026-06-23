@@ -1,0 +1,174 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.credibility-chart {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 12px;
+  position: relative;
+  color: #fff;
+}
+
+.credibility-chart__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.credibility-chart__title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.credibility-chart__symbol-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+}
+
+.credibility-chart__symbol-name {
+  font-family: 'Helvetica Neue';
+  font-size: 33px;
+  font-weight: 400;
+  line-height: normal;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.credibility-chart__price-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.credibility-chart__price {
+  font-family: 'Helvetica Neue';
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+}
+
+.credibility-chart__price-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Helvetica Neue';
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--excent-positive);
+  line-height: 1;
+}
+
+.credibility-chart__price-change-icon {
+  display: block;
+  width: 8px;
+  height: 8px;
+  padding-bottom: 0.5px;
+  flex-shrink: 0;
+}
+
+.credibility-chart__market-status {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff;
+  color: #0f172a;
+  font-family: 'Helvetica Neue';
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.credibility-chart__market-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--excent-positive);
+}
+
+.credibility-chart__canvas {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 220px;
+}
+
+@media (min-width: 1024px) {
+  .credibility-chart__price {
+    font-size: 22px;
+  }
+
+  .credibility-chart__price-change {
+    font-size: 13px;
+  }
+
+  .credibility-chart__canvas {
+    min-height: 280px;
+  }
+}
+
+// Animacion con duracion fija (no scroll-linked) disparada por el
+// IntersectionObserver de la directiva del componente: cuando el chart entra
+// al viewport, se agrega .is-in-view al host y arranca el dibujado + fade-in.
+// Esto evita que el chart quede a medias por la posicion del scroll.
+.credibility-chart__canvas {
+  clip-path: inset(0 100% 0 0);
+}
+
+.credibility-chart__header,
+.credibility-chart__market-status {
+  opacity: 0;
+}
+
+:host(.is-in-view) .credibility-chart__canvas {
+  animation: credibility-chart-draw 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+:host(.is-in-view) .credibility-chart__header,
+:host(.is-in-view) .credibility-chart__market-status {
+  animation: credibility-chart-fade-in 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 1.1s both;
+}
+
+@keyframes credibility-chart-draw {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes credibility-chart-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Light mode: chart header text -> near-black; price-change green deepened.
+   The blue area line on the canvas stays (blue reads fine on light). */
+:host-context(html:not(.dark)) {
+  .credibility-chart { color: #111827; }
+  .credibility-chart__symbol-name { color: #111827; }
+  .credibility-chart__price { color: #111827; }
+  .credibility-chart__price-change { color: var(--excent-positive); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .credibility-chart__canvas { clip-path: none; }
+  .credibility-chart__header,
+  .credibility-chart__market-status { opacity: 1; }
+  :host(.is-in-view) .credibility-chart__canvas,
+  :host(.is-in-view) .credibility-chart__header,
+  :host(.is-in-view) .credibility-chart__market-status { animation: none; }
+}

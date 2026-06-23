@@ -1,0 +1,101 @@
+<div id="ds" data-cy="ds" class="ds">
+  <header id="ds-header" data-cy="ds-header" class="ds__header">
+    <div class="ds__header-text">
+      <excent-text variant="title" as="h1">Excent Design System</excent-text>
+      <excent-text variant="body" class="ds__muted">
+        Living reference of the reusable components and tokens. Toggle the theme to preview both modes.
+      </excent-text>
+    </div>
+    <excent-button
+      id="ds-theme-toggle"
+      data-cy="ds-theme-toggle"
+      color="outline"
+      radius="sm"
+      width="auto"
+      (click)="toggleTheme()">
+      {{ isDark() ? 'Switch to light' : 'Switch to dark' }}
+    </excent-button>
+  </header>
+
+  <!-- ============ Color tokens ============ -->
+  <section id="ds-colors" data-cy="ds-colors" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Color Tokens</excent-text>
+    <div class="ds__swatches">
+      @for (t of colorTokens; track t.name) {
+        <div class="ds__swatch">
+          <span class="ds__swatch-chip" [style.background]="'var(' + t.name + ')'"></span>
+          <span class="ds__swatch-label">{{ t.label }}</span>
+          <code class="ds__swatch-code">{{ t.name }}</code>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ============ Spacing tokens ============ -->
+  <section id="ds-spacing" data-cy="ds-spacing" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Spacing Tokens</excent-text>
+    <div class="ds__token-list">
+      @for (t of spacingTokens; track t.name) {
+        <div class="ds__token-row">
+          <code class="ds__swatch-code">{{ t.name }}</code>
+          <span class="ds__muted">{{ t.label }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ============ Buttons ============ -->
+  <section id="ds-buttons" data-cy="ds-buttons" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Buttons</excent-text>
+    @for (size of buttonSizes; track size) {
+      <div class="ds__row">
+        <span class="ds__row-label">size={{ size }}</span>
+        @for (color of buttonColors; track color) {
+          <excent-button [color]="color" [size]="size" radius="sm" width="auto">
+            {{ color }}
+          </excent-button>
+        }
+      </div>
+    }
+  </section>
+
+  <!-- ============ Typography ============ -->
+  <section id="ds-text" data-cy="ds-text" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Typography</excent-text>
+    <div class="ds__text-list">
+      @for (v of textVariants; track v) {
+        <div class="ds__text-row">
+          <code class="ds__swatch-code">{{ v }}</code>
+          <excent-text [variant]="v">The quick brown fox jumps over the lazy dog</excent-text>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ============ Cards ============ -->
+  <section id="ds-cards" data-cy="ds-cards" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Cards</excent-text>
+    <div class="ds__cards">
+      @for (c of cardColors; track c) {
+        <excent-card [color]="c" padding="20px" radius="14px" class="ds__card">
+          <excent-text variant="body">{{ c }}</excent-text>
+        </excent-card>
+      }
+    </div>
+  </section>
+
+  <!-- ============ Accordion ============ -->
+  <section id="ds-accordion" data-cy="ds-accordion" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Accordion</excent-text>
+    <excent-accordion [initialActiveId]="1" class="ds__accordion">
+      <excent-accordion-item
+        [itemId]="1"
+        question="What is the Excent design system?"
+        answer="A shared set of tokens and components (button, card, text, accordion, menus) used across the site." />
+      <excent-accordion-item
+        [itemId]="2"
+        question="How do I use a token?"
+        answer="Reference the CSS variable, e.g. color: var(--excent-positive). Never hardcode values." />
+    </excent-accordion>
+  </section>
+</div>

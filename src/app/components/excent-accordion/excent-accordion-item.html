@@ -1,0 +1,24 @@
+<div
+  id="excent-accordion-item"
+  data-cy="excent-accordion-item"
+  class="excent-accordion-item"
+  [class.excent-accordion-item--open]="isOpen()">
+  <button
+    type="button"
+    id="excent-accordion-item-trigger"
+    data-cy="excent-accordion-item-trigger"
+    class="excent-accordion-item__trigger"
+    [attr.aria-expanded]="isOpen()"
+    (click)="onToggle()">
+    <span class="excent-accordion-item__question">{{ question() }}</span>
+    <img alt="" width="10" height="10" [src]="isOpen() ? '/assets/icons/arrow-top.svg' : '/assets/icons/arrow-down.svg'" class="excent-accordion-item__chevron" />
+  </button>
+  @if (isOpen()) {
+    <p
+      id="excent-accordion-item-answer"
+      data-cy="excent-accordion-item-answer"
+      class="excent-accordion-item__answer">
+      {{ answer() }}
+    </p>
+  }
+</div>

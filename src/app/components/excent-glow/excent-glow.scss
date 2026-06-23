@@ -1,0 +1,22 @@
+:host {
+  position: absolute;
+  top: var(--glow-top, auto);
+  right: var(--glow-right, auto);
+  bottom: var(--glow-bottom, auto);
+  left: var(--glow-left, auto);
+  width: var(--glow-width, 100%);
+  height: var(--glow-height, 100%);
+  background: radial-gradient(
+    var(--glow-shape, ellipse) 100% 100% at var(--glow-origin, 0% 0%),
+    var(--excent-security-card-glow-1) 0%,
+    var(--excent-security-card-glow-2) 0%,
+    var(--excent-security-card-glow-3) 0%,
+    var(--excent-security-card-glow-4) 0%,
+    var(--excent-security-card-glow-5) 0%,
+    transparent var(--glow-transparent, 76%)
+  );
+  filter: blur(var(--glow-blur, 100px));
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}

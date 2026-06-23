@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ng-serve",
+      "runtimeExecutable": "/bin/zsh",
+      "runtimeArgs": ["-c", "export PATH=/opt/homebrew/bin:$PATH; exec npm start"],
+      "port": 4200
+    },
+    {
+      "name": "excent-whoop",
+      "runtimeExecutable": "/bin/zsh",
+      "runtimeArgs": ["-c", "export PATH=/opt/homebrew/bin:$PATH; exec npm --prefix ../excent-whoop start -- --port 4205"],
+      "port": 4205
+    }
+  ]
+}

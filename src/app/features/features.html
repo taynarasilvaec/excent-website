@@ -1,0 +1,19 @@
+@if (isTrading()) {
+  <div id="app-glows-1" data-cy="app-glows-1" class="app-glows" aria-hidden="true">
+    <excent-glow top="400px" right="-400px" width="690px" height="300px" origin="30% 50%" blur="700px" />
+  </div>
+  <div id="app-glows-2" data-cy="app-glows-2" class="app-glows" aria-hidden="true">
+    <excent-glow top="1700px" right="-400px" width="690px" height="300px" origin="30% 50%" blur="700px" />
+  </div>
+  <div id="app-glows-3" data-cy="app-glows-3" class="app-glows" aria-hidden="true">
+    <excent-glow top="2300px" left="-400px" width="690px" height="700px" origin="30% 50%" blur="400px" />
+  </div>
+}
+
+<app-header id="app-header-wrapper" data-cy="app-header-wrapper" />
+
+<main id="main-content" data-cy="main-content" class="page-shell">
+  <router-outlet />
+</main>
+
+<app-footer id="app-footer-wrapper" data-cy="app-footer-wrapper" />

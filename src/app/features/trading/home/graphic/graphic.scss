@@ -1,0 +1,227 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.home-graphic__title {
+  ::ng-deep .excent-text {
+    color: #fff;
+    font-family: 'Helvetica Neue';
+    font-size: 33px;
+    font-weight: 400;
+    // line-height ~1.3 da espacio para descendentes (la "y" de "By", etc.)
+    // — sin esto el overflow:hidden del slide-effect recorta las letras.
+    line-height: 1.3;
+    letter-spacing: normal;
+  }
+}
+
+.home-graphic__description {
+  width: 317px;
+  max-width: 100%;
+  // Estado inicial oculto: arranca el fade time-based cuando el TS prende
+  // .is-visible (que sucede TITLE_SLIDE_DURATION_MS despues del slide del
+  // titulo). Asi la descripcion aparece DESPUES de que el titulo este en
+  // su lugar, no al mismo tiempo.
+  opacity: 0;
+  transition: opacity 1.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  // Desktop/tablet: fade mas rapido para que la seccion arme rapido.
+  @media (min-width: 1024px) {
+    transition: opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  ::ng-deep .excent-text {
+    color: rgba(255, 255, 255, 0.80);
+    font-family: 'Helvetica Neue';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+  }
+}
+
+.home-graphic__mockup {
+  position: relative;
+  width: 344.63px;
+  height: 684.204px;
+  flex-shrink: 0;
+  border-radius: 55px;
+  border: 0.593px solid rgba(0, 70, 166, 0.71);
+  background: linear-gradient(270deg, #0D0718 0%, rgba(15, 8, 27, 0) 47.85%, #0B0614 100%);
+  box-shadow:
+    0 -11.856px 41.495px 0 rgba(0, 70, 166, 0.25),
+    0 -11.263px 41.495px 0 rgba(0, 70, 166, 0.40);
+  // Mismo signal .is-visible que la descripcion, pero con transition-delay
+  // para crear el stagger: descripcion fade primero, mockup despues. Fade
+  // lento (2.4s) para que el usuario alcance a ver la imagen aparecer.
+  //
+  // En mobile (<1024px) ademas del fade, hace slide vertical de arriba
+  // hacia abajo (translateY -40px -> 0). En desktop solo fade.
+  opacity: 0;
+  transition: opacity 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) 350ms;
+
+  @media (max-width: 1023px) {
+    transform: translateY(-40px);
+    transition:
+      opacity 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) 350ms,
+      transform 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) 350ms;
+  }
+
+  // Desktop/tablet: fade mas rapido (solo opacity, sin slide).
+  @media (min-width: 1024px) {
+    transition: opacity 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) 250ms;
+  }
+
+  &.is-visible {
+    opacity: 1;
+
+    @media (max-width: 1023px) {
+      transform: translateY(0);
+    }
+  }
+}
+
+.home-graphic__shadow,
+.home-graphic__phone-bg,
+.home-graphic__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.home-graphic__shadow {
+  width: 287.038px;
+  height: 485.025px;
+  z-index: 1;
+}
+
+.home-graphic__phone-bg {
+  width: 344.63px;
+  height: 684.204px;
+  z-index: 2;
+}
+
+.home-graphic__image {
+  width: 318.94px;
+  height: 663.764px;
+  z-index: 3;
+  border-radius: 44px;
+}
+
+@media (min-width: 1024px) {
+  .home-graphic {
+    background:
+      radial-gradient(
+        ellipse 35% 22% at 50% 22%,
+        rgba(0, 70, 166, 0.55) 0%,
+        rgba(0, 70, 166, 0.22) 80%,
+        rgba(0, 70, 166, 0) 150%
+      ),
+      radial-gradient(
+        ellipse 50% 38% at 50% 22%,
+        rgba(0, 70, 166, 0.30) 0%,
+        rgba(0, 70, 166, 0.10) 50%,
+        rgba(0, 70, 166, 0) 100%
+      );
+  }
+
+  .home-graphic__title {
+    br { display: none; }
+
+    ::ng-deep .excent-text {
+      font-size: 48px;
+      // Mismo motivo que en mobile: 1.2 deja espacio para descendentes y
+      // ascendentes que el mask del slide-effect podria recortar.
+      line-height: 1.2;
+      text-transform: capitalize;
+      white-space: nowrap;
+    }
+  }
+
+  .home-graphic__description {
+    width: auto;
+    max-width: 592px;
+
+    ::ng-deep .excent-text {
+      font-size: 16px;
+      line-height: 100%;
+    }
+  }
+
+  .home-graphic__mockup {
+    width: 100%;
+    max-width: 934px;
+    height: auto;
+    padding: 9px;
+    border-radius: 18.772px;
+    box-shadow:
+      0 -11.856px 41.495px 0 rgba(0, 70, 166, 0.25),
+      0 -11.263px 41.495px 0 rgba(0, 70, 166, 0.40);
+  }
+
+  .home-graphic__shadow,
+  .home-graphic__phone-bg {
+    display: none;
+  }
+
+  .home-graphic__image {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 916 / 494;
+    border-radius: 8px;
+    border: none;
+  }
+}
+
+@media (min-width: 1440px) {
+  .home-graphic__mockup {
+    max-width: 1214px;
+    padding: 12px;
+    border-radius: 27.031px;
+    box-shadow:
+      0 -17.072px 59.754px 0 rgba(0, 70, 166, 0.25),
+      0 -16.219px 59.754px 0 rgba(0, 70, 166, 0.40);
+  }
+
+  .home-graphic__image {
+    border-radius: 16px;
+  }
+}
+
+/* ============================================================
+   LIGHT MODE — soften the blue glow (~20% of its strength) and flip the
+   heading/description to near-black. The product mockup stays dark (imagery).
+   ============================================================ */
+:host-context(html:not(.dark)) {
+  .home-graphic__title ::ng-deep .excent-text { color: #111827; }
+  .home-graphic__description ::ng-deep .excent-text { color: rgba(17, 24, 39, 0.75); }
+
+  @media (min-width: 1024px) {
+    .home-graphic {
+      background:
+        radial-gradient(
+          ellipse 35% 22% at 50% 22%,
+          rgba(0, 70, 166, 0.20) 0%,
+          rgba(0, 70, 166, 0.08) 80%,
+          rgba(0, 70, 166, 0) 150%
+        ),
+        radial-gradient(
+          ellipse 50% 38% at 50% 22%,
+          rgba(0, 70, 166, 0.11) 0%,
+          rgba(0, 70, 166, 0.04) 50%,
+          rgba(0, 70, 166, 0) 100%
+        );
+    }
+  }
+}

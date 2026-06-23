@@ -1,0 +1,182 @@
+:host {
+  display: block;
+  width: 100%;
+  overflow-x: clip;
+}
+
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  padding: 32px 16px 64px;
+  height: 100vh;
+
+  /* Full-bleed: the page shell is full-width with no gutter, so the hero simply
+     fills it (100% × 100vh). Starts at the very top under the floating navbar. */
+  width: 100%;
+
+  /* The hero is a full-screen dark "stage" for the intro video in BOTH themes
+     (the video fills it; this is the fallback before/without the video). */
+  background: #05070D;
+
+  /* Hero always sits over the dark intro video — keep its text white in BOTH
+     themes (don't let light-mode tokens turn it navy over a dark backdrop). */
+  --excent-text-on-dark-primary: #ffffff;
+  --excent-text-on-dark-soft: rgba(255, 255, 255, 0.85);
+  --excent-text-on-dark-secondary: rgba(255, 255, 255, 0.80);
+  --excent-text-on-dark-muted: rgba(255, 255, 255, 0.70);
+  --excent-text-on-dark-dim: rgba(255, 255, 255, 0.60);
+  --excent-text-on-dark-faint: rgba(255, 255, 255, 0.50);
+
+  @media (min-width: 1024px) {
+    padding: 80px 35px;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 80px 90px;
+  }
+}
+
+/* ---- Intro video ---- */
+.home-hero__video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+
+  &--done {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.home-hero__video-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(2, 8, 23, 0.35) 0%, rgba(2, 8, 23, 0.15) 45%, var(--excent-background) 100%);
+  opacity: 1;
+  transition: opacity 0.6s ease;
+
+  &--done {
+    opacity: 0;
+  }
+}
+
+/* ---- Body (text + actions), revealed once the intro finishes ---- */
+.home-hero__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 19px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  &.is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (min-width: 1024px) {
+    align-items: flex-start;
+    gap: 36px;
+  }
+}
+
+.home-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 19px;
+  max-width: 720px;
+  width: 100%;
+  text-align: center;
+
+  @media (min-width: 1024px) {
+    align-items: flex-start;
+    text-align: left;
+    gap: 24px;
+    max-width: 600px;
+  }
+}
+
+#hero-title {
+  text-wrap: balance;
+}
+
+.home-hero__description {
+  max-width: 480px;
+
+  @media (min-width: 1024px) {
+    max-width: 400px;
+  }
+}
+
+.home-hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+  }
+}
+
+.home-hero__badges-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  @media (min-width: 1024px) {
+    gap: 32px;
+  }
+}
+
+.home-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.15s ease;
+
+  &:hover { opacity: 0.85; }
+
+  @media (min-width: 1024px) {
+    gap: 8px;
+  }
+}
+
+.home-hero__badge-icon {
+  width: 24px;
+  height: 24px;
+
+  @media (min-width: 1024px) {
+    width: 32px;
+    height: 32px;
+  }
+}

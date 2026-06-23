@@ -1,0 +1,20 @@
+<button
+  id="excent-button"
+  data-cy="excent-button"
+  [class]="'excent-btn excent-btn--' + color() + ' excent-btn--radius-' + radius() + ' excent-btn--size-' + size()"
+  [type]="type()"
+  [disabled]="disabled()"
+  [attr.aria-label]="ariaLabel()"
+>
+  <span id="excent-button-icon-left" data-cy="excent-button-icon-left" class="excent-btn__icon excent-btn__icon--left">
+    <ng-content select="[btn-icon-left]" />
+  </span>
+
+  <span id="excent-button-label" data-cy="excent-button-label" class="excent-btn__label">
+    <ng-content />
+  </span>
+
+  <span id="excent-button-icon-right" data-cy="excent-button-icon-right" class="excent-btn__icon excent-btn__icon--right">
+    <ng-content select="[btn-icon-right]" />
+  </span>
+</button>

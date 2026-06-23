@@ -1,0 +1,259 @@
+<header id="navbar" data-cy="navbar">
+  <div
+    id="navbar-card"
+    data-cy="navbar-card"
+    class="navbar-card text-white"
+    [class.navbar-card--open]="isOpen()">
+    <div id="navbar-top-row" data-cy="navbar-top-row" class="flex items-center justify-between gap-4 p-3.5 tablet:gap-7.5 tablet:p-7.5 tablet:h-20">
+
+      <div id="navbar-left-zone" data-cy="navbar-left-zone" class="hidden tablet:flex items-center flex-1">
+        @if (expandable()) {
+          @if (!isOpen()) {
+            <button
+              id="navbar-open-menu"
+              data-cy="navbar-open-menu"
+              type="button"
+              class="navbar-icon-btn"
+              [attr.aria-label]="'navbar.open-menu' | translate"
+              (click)="toggleOpen()">
+              <img alt="" width="27" height="27" [src]="resolvedIcons().menu" />
+            </button>
+            @if (searchable()) {
+              <button
+                id="navbar-open-search"
+                data-cy="navbar-open-search"
+                type="button"
+                class="navbar-icon-btn"
+                [attr.aria-label]="'navbar.search' | translate"
+                (click)="toggleOpen()">
+                <img alt="" width="22" height="22" [src]="resolvedIcons().search" />
+              </button>
+            }
+          } @else {
+            <button
+              id="navbar-close-menu"
+              data-cy="navbar-close-menu"
+              type="button"
+              class="navbar-icon-btn"
+              [attr.aria-label]="'navbar.close-menu' | translate"
+              (click)="toggleOpen()">
+              <img alt="" width="22" height="22" [src]="resolvedIcons().close" />
+            </button>
+            @if (searchable()) {
+              <div id="navbar-search" data-cy="navbar-search" class="navbar-search group flex items-center gap-3 flex-1 max-w-62 min-w-0">
+                <img alt="" width="22" height="22" class="opacity-60 group-focus-within:opacity-100 transition-opacity shrink-0" [src]="resolvedIcons().search" />
+                <input
+                  id="navbar-search-input"
+                  data-cy="navbar-search-input"
+                  type="text"
+                  class="bg-transparent outline-none flex-1 min-w-0 text-sm border-b border-white/30 focus:border-white py-1 placeholder:text-white/50"
+                  [attr.placeholder]="'navbar.search-placeholder' | translate"
+                  [value]="searchValue()"
+                  (input)="onSearchInput($event)" />
+              </div>
+            }
+          }
+        }
+      </div>
+
+      @if (logo(); as logoData) {
+        <a
+          id="navbar-logo"
+          data-cy="navbar-logo"
+          class="flex items-center shrink-0"
+          aria-label="Excent Capital"
+          [routerLink]="resolveLink('')"
+          [class.mr-auto]="logoPosition() === 'left' || logoPosition() === 'center'"
+          [class.tablet:mr-0]="logoPosition() === 'center'"
+          [class.tablet:mx-auto]="logoPosition() === 'center'"
+          [attr.aria-label]="logoData.alt"
+          (click)="closeMenu()">
+          @if (!logoFailed()) {
+            <img
+              alt=""
+              [alt]="logoData.alt ?? ''"
+              [class]="logoData.class ?? 'h-7 tablet:h-8 desktop:h-9 w-auto'"
+              [src]="logoData.src"
+              (error)="onLogoError()" />
+          } @else {
+            <ng-content select="[navbar-logo-fallback]" />
+          }
+        </a>
+      }
+
+      <div id="navbar-right-zone" data-cy="navbar-right-zone" class="flex items-center gap-2.5 tablet:gap-3 tablet:flex-1 tablet:justify-end">
+        <ng-content select="[navbar-actions]" />
+        <ng-content select="[navbar-icon-buttons]" />
+
+        @if (expandable()) {
+          <div id="navbar-mobile-toggle" data-cy="navbar-mobile-toggle" class="tablet:hidden">
+            <button
+              id="navbar-mobile-toggle-btn"
+              data-cy="navbar-mobile-toggle-btn"
+              type="button"
+              class="navbar-icon-btn"
+              [attr.aria-label]="(isOpen() ? 'navbar.close-menu' : 'navbar.open-menu') | translate"
+              [attr.aria-expanded]="isOpen()"
+              (click)="toggleOpen()">
+              @if (isOpen()) {
+                <img alt="" width="22" height="22" [src]="resolvedIcons().close" />
+              } @else {
+                <img alt="" width="24" height="24" [src]="resolvedIcons().menuMobile" />
+              }
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div
+      id="navbar-expanded"
+      data-cy="navbar-expanded"
+      class="navbar-expanded px-4 pt-4 pb-4 tablet:px-7.5 tablet:pt-7.5 tablet:pb-7.5"
+      [class.navbar-expanded--open]="isOpen()"
+      [class.navbar-expanded--drilled]="!!activeItem()"
+      [attr.aria-hidden]="!isOpen()">
+      <slide-effect
+        id="navbar-expanded-slide"
+        data-cy="navbar-expanded-slide"
+        from="down"
+        [block]="true"
+        [fade]="false"
+        [delay]="80"
+        [duration]="450"
+        [distance]="48"
+        [play]="isOpen()">
+        <div id="navbar-expanded-content" data-cy="navbar-expanded-content" class="flex flex-col gap-6">
+        @if (searchable()) {
+          <div id="navbar-search-mobile" data-cy="navbar-search-mobile" class="tablet:hidden flex items-center gap-3 border-b border-white/20 pb-2">
+            <img alt="" width="18" height="18" class="opacity-60 shrink-0" [src]="resolvedIcons().search" />
+            <input
+              id="navbar-search-input-mobile"
+              data-cy="navbar-search-input-mobile"
+              type="text"
+              class="bg-transparent outline-none flex-1 min-w-0 text-base placeholder:text-white/50"
+              [attr.placeholder]="'navbar.search-placeholder' | translate"
+              [value]="searchValue()"
+              (input)="onSearchInput($event)" />
+          </div>
+        }
+
+        @if (activeItem(); as drilled) {
+          <button
+            id="navbar-drill-back"
+            data-cy="navbar-drill-back"
+            type="button"
+            class="navbar-drill-back tablet:hidden flex items-center gap-2 self-start"
+            (click)="closeDrill()">
+            <img alt="" width="15" height="15" [src]="resolvedIcons().arrowLeft" />
+            <span>{{ drilled.label | translate }}</span>
+          </button>
+        }
+
+        @if (items().length > 0) {
+          <nav id="navbar-menu" data-cy="navbar-menu" class="navbar-menu flex flex-col tablet:flex-row tablet:items-center gap-5 tablet:gap-8">
+            @for (item of items(); track item.label; let i = $index) {
+              @if (item.external && item.link) {
+                <a
+                  class="navbar-menu-item flex items-center gap-1"
+                  target="_blank"
+                  rel="noopener"
+                  [id]="'navbar-menu-item-' + i"
+                  [attr.data-cy]="'navbar-menu-item-' + i"
+                  [class.navbar-menu-item--current]="isItemCurrent(item)"
+                  [href]="item.link"
+                  (click)="closeMenu()">
+                  {{ item.label | translate }}
+                  <img alt="" width="11" height="11" [src]="resolvedIcons().externalArrow" />
+                </a>
+              } @else if (item.mega) {
+                <button
+                  type="button"
+                  class="navbar-menu-item text-left"
+                  [id]="'navbar-menu-item-' + i"
+                  [attr.data-cy]="'navbar-menu-item-' + i"
+                  [class.navbar-menu-item--active]="activeItem() === item"
+                  [class.navbar-menu-item--current]="isItemCurrent(item)"
+                  (click)="onItemClick(item)">
+                  {{ item.label | translate }}
+                </button>
+              } @else {
+                <a
+                  class="navbar-menu-item"
+                  [id]="'navbar-menu-item-' + i"
+                  [attr.data-cy]="'navbar-menu-item-' + i"
+                  [class.navbar-menu-item--current]="isItemCurrent(item)"
+                  [routerLink]="resolveLink(item.link)"
+                  (click)="closeMenu()">
+                  {{ item.label | translate }}
+                </a>
+              }
+            }
+          </nav>
+        }
+
+        @if (activeMega(); as mega) {
+          @if (mega.sections.length > 0 || mega.promo) {
+            <div id="navbar-mega" data-cy="navbar-mega" class="navbar-mega flex flex-col tablet:grid tablet:grid-cols-3 gap-4">
+              @for (section of mega.sections; track section.title; let s = $index) {
+                <div
+                  class="navbar-mega-card"
+                  [id]="'navbar-mega-section-' + s"
+                  [attr.data-cy]="'navbar-mega-section-' + s">
+                  <h3 class="navbar-mega-kicker">{{ section.title | translate }}</h3>
+                  <ul class="flex flex-col gap-3">
+                    @for (sub of section.items; track sub.label; let li = $index) {
+                      <li>
+                        @if (sub.external) {
+                          <a
+                            class="navbar-mega-link inline-flex items-center gap-1"
+                            target="_blank"
+                            rel="noopener"
+                            [id]="'navbar-mega-link-' + s + '-' + li"
+                            [attr.data-cy]="'navbar-mega-link-' + s + '-' + li"
+                            [href]="sub.link">
+                            {{ sub.label | translate }}
+                            <img alt="" width="11" height="11" [src]="resolvedIcons().externalArrow" />
+                          </a>
+                        } @else {
+                          <a
+                            class="navbar-mega-link"
+                            [id]="'navbar-mega-link-' + s + '-' + li"
+                            [attr.data-cy]="'navbar-mega-link-' + s + '-' + li"
+                            [routerLink]="resolveLink(sub.link)"
+                            (click)="closeMenu()">
+                            {{ sub.label | translate }}
+                          </a>
+                        }
+                      </li>
+                    }
+                  </ul>
+                </div>
+              }
+
+              @if (mega.promo; as promo) {
+                <a
+                  id="navbar-mega-promo"
+                  data-cy="navbar-mega-promo"
+                  class="navbar-mega-card navbar-mega-promo block"
+                  [href]="promo.link">
+                  @if (promo.kicker) {
+                    <p class="navbar-mega-kicker">{{ promo.kicker | translate }}</p>
+                  }
+                  <div class="navbar-mega-promo__media">
+                    <img class="navbar-mega-promo__img" [src]="promo.image" [alt]="(promo.title | translate)" />
+                    <span class="navbar-mega-promo__title">{{ promo.title | translate }}</span>
+                    <span class="navbar-mega-promo__play" aria-hidden="true"></span>
+                  </div>
+                </a>
+              }
+            </div>
+          }
+        }
+
+        <ng-content select="[navbar-mobile-actions]" />
+        </div>
+      </slide-effect>
+    </div>
+  </div>
+</header>

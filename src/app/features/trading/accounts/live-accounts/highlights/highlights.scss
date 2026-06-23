@@ -1,0 +1,347 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.live-account-highlights {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 80px 110px;
+  gap: 100px;
+}
+
+.live-account-highlights__platform {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 0;
+}
+
+.live-account-highlights__platform-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 520px;
+}
+
+.live-account-highlights__platform-title {
+  margin: 0;
+  color: var(--excent-text-on-dark-primary);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.live-account-highlights__platform-description {
+  margin: 0;
+  color: var(--excent-text-on-dark-muted);
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.2px;
+}
+
+.live-account-highlights__platform-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  align-self: stretch;
+}
+
+.live-account-highlights__platform-action {
+  display: flex;
+  align-items: flex-end;
+}
+
+.live-account-highlights__platform-images {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0;
+  flex: 1 1 auto;
+  margin-right: -80px;
+}
+
+.live-account-highlights__platform-macbook {
+  width: auto;
+  height: 480px;
+  display: block;
+  flex-shrink: 0;
+  margin-top: -200px;
+  margin-bottom: -20px;
+}
+
+.live-account-highlights__platform-iphone {
+  width: auto;
+  height: 380px;
+  display: block;
+  flex-shrink: 0;
+  margin-left: -275px;
+  margin-bottom: -20px;
+}
+
+.live-account-highlights__create-btn {
+  align-self: flex-start;
+  margin-bottom: 80px;
+}
+
+.live-account-highlights__platform-features {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: calc(100% + 220px);
+  margin-left: -110px;
+  margin-right: -110px;
+  padding: 49px 74px 48px 74px;
+  border-radius: 20px;
+  background: var(--excent-security-card-bg);
+  border: 1px solid var(--excent-security-card-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  isolation: isolate;
+
+  > *:not(excent-glow) {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.live-account-highlights__feature-separator {
+  width: 1px;
+  height: 79px;
+  background: rgba(255, 255, 255, 0.20);
+  flex-shrink: 0;
+}
+
+.live-account-highlights__feature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 0 0;
+}
+
+.live-account-highlights__feature-title {
+  margin: 0;
+  color: var(--excent-text-on-dark-primary);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.live-account-highlights__feature-description {
+  margin: 0;
+  color: var(--excent-text-on-dark-muted);
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.2px;
+}
+
+.live-account-highlights__registration {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 127px;
+  width: 100%;
+}
+
+.live-account-highlights__steps {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 45px;
+  flex: 1 0 0;
+}
+
+.live-account-highlights__step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  transition: opacity 0.2s ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--excent-link-blue);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+
+  &:nth-last-of-type(n+2)::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    bottom: -45px;
+    left: 12px;
+    width: 1px;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.20);
+    transition: background 0.2s ease;
+    pointer-events: none;
+  }
+}
+
+.live-account-highlights__step--passed:nth-last-of-type(n+2)::after {
+  background: rgba(255, 255, 255, 1);
+}
+
+.live-account-highlights__step--active:nth-last-of-type(n+2)::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.20) 100%);
+}
+
+.live-account-highlights__step-number {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--excent-text-on-dark-faint);
+  color: var(--excent-text-on-dark-faint);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.live-account-highlights__step--active .live-account-highlights__step-number,
+.live-account-highlights__step--passed .live-account-highlights__step-number {
+  border-color: var(--excent-text-on-dark-primary);
+  color: var(--excent-text-on-dark-primary);
+}
+
+.live-account-highlights__step-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+.live-account-highlights__step-label {
+  margin: 0;
+  color: var(--excent-text-on-dark-primary);
+  leading-trim: both;
+  text-edge: cap;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  animation: highlights-step-fade-in 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.live-account-highlights__step-title {
+  margin: 0;
+  color: var(--excent-text-on-dark-primary);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 43px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  transition: color 0.8s cubic-bezier(0.4, 0, 0.2, 1), font-size 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.live-account-highlights__step--active .live-account-highlights__step-title {
+  animation: highlights-step-fade-in 0.75s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+  opacity: 0;
+}
+
+.live-account-highlights__step:not(.live-account-highlights__step--active) .live-account-highlights__step-title {
+  leading-trim: both;
+  text-edge: cap;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.live-account-highlights__step:not(.live-account-highlights__step--active):not(.live-account-highlights__step--passed) .live-account-highlights__step-title {
+  opacity: 0.4;
+  background: radial-gradient(725.69% 192.64% at 50% -126.47%, #75AFFF 0%, #FFF 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.live-account-highlights__step-description {
+  margin: 0;
+  max-width: 480px;
+  color: var(--excent-text-on-dark-muted);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  animation: highlights-step-fade-in 0.75s cubic-bezier(0.4, 0, 0.2, 1) 0.15s forwards;
+  opacity: 0;
+}
+
+@keyframes highlights-step-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.live-account-highlights__registration-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.live-account-highlights__download-btn {
+  ::ng-deep .excent-btn {
+    background: var(--excent-text-on-dark-primary);
+  }
+}
+
+.live-account-highlights__phone {
+  position: relative;
+  width: 340px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-mask-image: linear-gradient(180deg, black 0%, black 40%, transparent 90%);
+  mask-image: linear-gradient(180deg, black 0%, black 40%, transparent 90%);
+}
+
+.live-account-highlights__phone-screen,
+.live-account-highlights__phone-frame {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.live-account-highlights__phone-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}

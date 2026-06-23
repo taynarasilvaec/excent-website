@@ -1,0 +1,75 @@
+<div
+  id="excent-symbol-card"
+  data-cy="excent-symbol-card"
+  class="excent-symbol-card"
+  [class.excent-symbol-card--compact]="variant() === 'compact'"
+  [class.excent-symbol-card--detailed]="variant() === 'detailed'"
+>
+  <excent-static-icon
+    id="excent-symbol-card-icon"
+    data-cy="excent-symbol-card-icon"
+    [name]="data().iconName ?? ''"
+    [src]="data().iconSrc"
+    [type]="data().iconType ?? 'symbol'"
+    [shape]="data().iconShape ?? 'round'"
+    [size]="iconSize()" />
+
+  <div id="excent-symbol-card-info" data-cy="excent-symbol-card-info" class="excent-symbol-card__info">
+    <excent-text variant="body" color="primary" class="excent-symbol-card__symbol">
+      {{ data().symbol }}
+    </excent-text>
+    @if (variant() === 'detailed' && data().category) {
+      <excent-text variant="footer-text" color="muted" class="excent-symbol-card__category">
+        {{ data().category! | translate }}
+      </excent-text>
+    }
+  </div>
+
+  <svg
+    id="excent-symbol-card-spark"
+    data-cy="excent-symbol-card-spark"
+    class="excent-symbol-card__spark"
+    [attr.viewBox]="'0 0 ' + sparklineWidth + ' ' + sparklineHeight"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true">
+    <defs>
+      <linearGradient id="spark-area-up" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#23FF71" stop-opacity="0.18" />
+        <stop offset="100%" stop-color="#23FF71" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="spark-area-down" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#ef4444" stop-opacity="0.25" />
+        <stop offset="100%" stop-color="#ef4444" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <path
+      [attr.d]="sparklineAreaPath()"
+      [attr.fill]="trend() === 'down' ? 'url(#spark-area-down)' : 'url(#spark-area-up)'" />
+    <path
+      stroke-width="1.5"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      [attr.d]="sparklinePath()"
+      [attr.stroke]="trend() === 'down' ? '#ef4444' : trend() === 'up' ? '#23FF71' : '#94a3b8'" />
+  </svg>
+
+  <div id="excent-symbol-card-meta" data-cy="excent-symbol-card-meta" class="excent-symbol-card__meta">
+    @if (variant() === 'compact' && data().value) {
+      <excent-text variant="body" color="primary" class="excent-symbol-card__value">
+        {{ data().value }}
+      </excent-text>
+    }
+    @if (data().change) {
+      <excent-text
+        variant="footer-text"
+        as="span"
+        class="excent-symbol-card__change"
+        [class.excent-symbol-card__change--up]="trend() === 'up'"
+        [class.excent-symbol-card__change--down]="trend() === 'down'">
+        {{ data().change }}
+      </excent-text>
+    }
+  </div>
+</div>

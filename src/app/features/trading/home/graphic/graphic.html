@@ -1,0 +1,67 @@
+<section
+  id="graphic-section"
+  data-cy="graphic-section"
+  class="home-graphic w-full flex flex-col items-center pt-3 pb-6 px-6 gap-9 tablet:py-15 tablet:px-8.75 tablet:gap-10 desktop:py-15 desktop:px-27.5 desktop:gap-25">
+  <div
+    id="graphic-intro"
+    data-cy="graphic-intro"
+    class="home-graphic__intro flex flex-col items-center text-center self-stretch gap-2.5 tablet:gap-5">
+    <slide-effect
+      id="graphic-title-slide"
+      data-cy="graphic-title-slide"
+      class="home-graphic__title-slide"
+      from="up"
+      [block]="true"
+      [fade]="false"
+      [play]="playTitleSlide()"
+      [duration]="1100">
+      <excent-text
+        id="graphic-title"
+        data-cy="graphic-title"
+        variant="title"
+        class="home-graphic__title">
+        {{ 'home.graphic.title-line-1' | translate }}<br />
+        {{ 'home.graphic.title-line-2' | translate }}
+      </excent-text>
+    </slide-effect>
+
+    <excent-text
+      id="graphic-description"
+      data-cy="graphic-description"
+      variant="body"
+      class="home-graphic__description"
+      [class.is-visible]="playContent()">
+      {{ 'home.graphic.description' | translate }}
+    </excent-text>
+  </div>
+
+  <div
+    id="graphic-mockup"
+    data-cy="graphic-mockup"
+    class="home-graphic__mockup"
+    [class.is-visible]="playContent()">
+    <img
+      id="graphic-shadow"
+      data-cy="graphic-shadow"
+      class="home-graphic__shadow"
+      alt=""
+      aria-hidden="true"
+      src="/assets/images/shadow-imgs.svg" />
+    <img
+      id="graphic-phone-bg"
+      data-cy="graphic-phone-bg"
+      class="home-graphic__phone-bg"
+      alt=""
+      aria-hidden="true"
+      src="/assets/images/phone-bg.svg" />
+    <picture>
+      <source media="(min-width: 1024px)" srcset="/assets/images/trd-graphic.svg" />
+      <img
+        id="graphic-image"
+        data-cy="graphic-image"
+        class="home-graphic__image"
+        alt=""
+        src="/assets/images/mobile-graphic.svg" />
+    </picture>
+  </div>
+</section>

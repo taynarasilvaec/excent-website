@@ -1,0 +1,25 @@
+<div id="apps-menu" data-cy="apps-menu" class="apps-menu">
+  <p id="apps-menu-heading" data-cy="apps-menu-heading" class="apps-menu__heading">
+    {{ heading() }}
+  </p>
+
+  <div id="apps-menu-grid" data-cy="apps-menu-grid" class="apps-menu__grid">
+    @for (app of apps(); track app.id) {
+      <a
+        [id]="'apps-menu-item-' + app.id"
+        [attr.data-cy]="'apps-menu-item-' + app.id"
+        class="apps-menu__item"
+        target="_blank"
+        rel="noopener noreferrer"
+        [href]="app.url"
+        [attr.aria-label]="app.label"
+        (click)="onSelect(app)">
+        <span class="apps-menu__icon">
+          <img alt="" width="22" height="22" [src]="app.icon" />
+        </span>
+        <span class="apps-menu__label">{{ app.label }}</span>
+        <span class="apps-menu__desc">{{ app.description }}</span>
+      </a>
+    }
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<section id="live-account-faq" data-cy="live-account-faq" class="live-account-faq">
+  <h2 id="live-account-faq-title" data-cy="live-account-faq-title" class="live-account-faq__title">
+    {{ 'live-account.faq.title' | translate }}
+  </h2>
+
+  <excent-accordion id="live-account-faq-accordion" data-cy="live-account-faq-accordion" [initialActiveId]="1">
+    @for (faq of faqs; track faq.id) {
+      <excent-accordion-item
+        [itemId]="faq.id"
+        [question]="faq.questionKey | translate"
+        [answer]="faq.answerKey | translate" />
+    }
+  </excent-accordion>
+
+  <div id="live-account-faq-cta-card" data-cy="live-account-faq-cta-card" class="live-account-faq__cta-card">
+    <excent-glow position="bottom-left" bottom="-80px" left="-180px" width="110%" height="130%" transparentAt="60%" />
+    <excent-glow position="bottom-right" bottom="-80px" right="-300px" width="80%" height="70%" transparentAt="80%" />
+
+    <div id="live-account-faq-support" data-cy="live-account-faq-support" class="live-account-faq__support">
+      <excent-button
+        id="live-account-faq-contact-support-btn"
+        data-cy="live-account-faq-contact-support-btn"
+        color="outline-white"
+        radius="sm"
+        size="md"
+        width="auto"
+        (click)="onContactSupport()">
+        {{ 'live-account.faq.contact-support' | translate }}
+      </excent-button>
+      <excent-button
+        id="live-account-faq-help-center-btn"
+        data-cy="live-account-faq-help-center-btn"
+        color="white"
+        radius="sm"
+        size="md"
+        width="auto"
+        (click)="onHelpCenter()">
+        {{ 'live-account.faq.help-center' | translate }}
+        <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+      </excent-button>
+    </div>
+
+    <div id="live-account-faq-cta" data-cy="live-account-faq-cta" class="live-account-faq__cta">
+      <h2 id="live-account-faq-cta-title" data-cy="live-account-faq-cta-title" class="live-account-faq__cta-title">
+        {{ 'live-account.faq.cta-title' | translate }}
+      </h2>
+
+      <excent-button
+        id="live-account-faq-create-account-btn"
+        data-cy="live-account-faq-create-account-btn"
+        color="white"
+        radius="sm"
+        size="lg"
+        width="auto"
+        (click)="onCreateAccount()">
+        {{ 'live-account.faq.create-account' | translate }}
+        <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+      </excent-button>
+    </div>
+  </div>
+</section>

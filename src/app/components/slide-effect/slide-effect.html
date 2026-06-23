@@ -1,0 +1,16 @@
+<span
+  id="slide-effect-inner"
+  data-cy="slide-effect-inner"
+  class="slide-effect__inner"
+  [class.reveal]="play()"
+  [class.reveal--from-up]="effectiveFrom() === 'up' && !wipeZoomMobile()"
+  [class.reveal--from-down]="effectiveFrom() === 'down' && !wipeZoomMobile()"
+  [class.reveal--from-left]="effectiveFrom() === 'left' && !wipeZoomMobile()"
+  [class.reveal--from-right]="effectiveFrom() === 'right' && !wipeZoomMobile()"
+  [class.reveal--wipe-zoom-mobile]="_isWipeZoomMobileActive()"
+  [class.reveal--no-fade]="!fade()"
+  [style.--reveal-delay]="delay() + 'ms'"
+  [style.--reveal-duration]="duration() + 'ms'"
+  [style.--reveal-distance]="distanceCss()">
+  <ng-content />
+</span>

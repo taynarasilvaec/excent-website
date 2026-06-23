@@ -1,0 +1,48 @@
+// Wrapper estatico con overflow:hidden. El contenido interno desliza dentro
+// y todo lo que sale del bounding box del host queda recortado, lo que oculta
+// el contenido al inicio de la animacion (cuando esta fuera de su posicion).
+:host {
+  display: inline-flex;
+  overflow: hidden;
+}
+
+:host(.slide-effect--block) {
+  display: block;
+}
+
+.slide-effect__inner {
+  display: inline-flex;
+}
+
+:host(.slide-effect--block) .slide-effect__inner {
+  display: block;
+}
+
+// Estado inicial antes de que `play` sea true: contenido invisible para
+// evitar el "flash" del estado previo a la animacion. Cuando `play` se
+// activa se agrega .reveal y la animacion toma el control (fill-mode both
+// aplica el from-state antes del primer frame visible).
+.slide-effect__inner:not(.reveal) {
+  opacity: 0;
+}
+
+// Modo wipe-zoom-mobile: el slide direccional se reemplaza por un zoom-out
+// (la imagen interna inicia mas grande y se retrae a su tamano natural).
+// Necesita overflow visible para que el contenido escalado pueda exceder
+// el slot del host y "tapar" la card por un momento. El contenido es
+// visible desde el inicio (no se oculta), porque la entrada se percibe
+// como una imagen grande que se reduce.
+:host(.slide-effect--wipe-zoom-mobile) {
+  overflow: visible;
+}
+
+:host(.slide-effect--wipe-zoom-mobile) .slide-effect__inner {
+  transform-origin: top center;
+  transform: scale(1.6);
+}
+
+:host(.slide-effect--wipe-zoom-mobile) .slide-effect__inner:not(.reveal) {
+  // Override del :not(.reveal) global: el contenido inicia visible (con
+  // scale 1.6) para mostrar el efecto "tapa la card".
+  opacity: 1;
+}

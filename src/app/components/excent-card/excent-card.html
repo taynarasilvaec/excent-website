@@ -1,0 +1,14 @@
+<div
+  id="excent-card"
+  data-cy="excent-card"
+  [class]="cls()"
+  [style]="hostStyle()"
+>
+  @if (showGrid()) {
+    <div id="excent-card-grid" data-cy="excent-card-grid" class="excent-card__grid"></div>
+  }
+
+  <div id="excent-card-content" data-cy="excent-card-content" class="excent-card__content">
+    <ng-content />
+  </div>
+</div>
