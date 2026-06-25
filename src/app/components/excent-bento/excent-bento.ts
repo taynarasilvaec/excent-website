@@ -47,13 +47,7 @@ export class ExcentBento {
 
   readonly cardAction = output<BentoItem>()
 
-  // Shared decorative pattern — same dot/square scatter on every card.
-  protected readonly dots = [
-    { x: 37, y: 44 },
-    { x: 63, y: 31 },
-    { x: 69, y: 56 },
-    { x: 18, y: 50 },
-  ]
+  // Shared decorative pattern — same square scatter on every card.
   protected readonly squares = [
     { x: 69, y: 38 },
     { x: 13, y: 58 },

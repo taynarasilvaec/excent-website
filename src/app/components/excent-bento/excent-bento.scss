@@ -63,15 +63,6 @@
   -webkit-mask-image: radial-gradient(ellipse 92% 82% at 55% 28%, #000 8%, transparent 80%);
   mask-image: radial-gradient(ellipse 92% 82% at 55% 28%, #000 8%, transparent 80%);
 }
-.excent-bento__dot {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(11, 202, 202, 0.9);
-  box-shadow: 0 0 6px rgba(11, 202, 202, 0.8);
-}
 .excent-bento__square {
   position: absolute;
   width: 48px;

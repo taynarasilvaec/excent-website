@@ -199,45 +199,6 @@
   }
 }
 
-/* Decorative "segregation" visual on the tall card */
-.dw-security__visual {
-  margin-top: auto;
-  display: flex;
-  align-items: flex-end;
-  gap: 20px;
-  padding-top: 32px;
-}
-.dw-security__stack {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
-.dw-security__stack-label {
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--excent-text-on-dark-dim);
-  margin-bottom: 4px;
-}
-.dw-security__bar {
-  height: 12px;
-  border-radius: 6px;
-  background: linear-gradient(90deg, rgba(8, 110, 249, 0.55), rgba(8, 110, 249, 0.12));
-
-  &:nth-child(3) { width: 85%; }
-  &:nth-child(4) { width: 60%; }
-}
-.dw-security__stack--muted .dw-security__bar {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03));
-}
-.dw-security__divider {
-  width: 1px;
-  align-self: stretch;
-  background: linear-gradient(180deg, transparent, rgba(58, 160, 255, 0.5), transparent);
-}
-:host-context(html:not(.dark)) .dw-security__stack--muted .dw-security__bar {
-  background: linear-gradient(90deg, rgba(17, 24, 39, 0.12), rgba(17, 24, 39, 0.03));
-}
 
 /* ============ Deposit / Withdrawal methods ============ */
 .dw-methods {

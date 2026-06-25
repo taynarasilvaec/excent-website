@@ -17,7 +17,6 @@
         <div id="mam-hero-actions" data-cy="mam-hero-actions" class="mam-hero__actions">
           <excent-button id="mam-hero-apply-btn" data-cy="mam-hero-apply-btn" color="white" radius="sm" size="lg" width="auto" (click)="onApply()">
             Apply For MAM Account
-            <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
           </excent-button>
           <excent-button id="mam-hero-talk-btn" data-cy="mam-hero-talk-btn" color="outline-white" radius="sm" size="lg" width="auto" (click)="onTalkToTeam()">
             Talk To Our Team
@@ -107,7 +106,6 @@
         <excent-text appReveal variant="title" as="h2" class="mam-section__title mam-fees__title">Set Your Own Performance Fee</excent-text>
         <excent-button appReveal [delay]="120" id="mam-fees-apply-btn" data-cy="mam-fees-apply-btn" color="white" radius="sm" size="md" width="auto" (click)="onApply()">
           Apply for MAM account
-          <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
         </excent-button>
       </header>
 
@@ -125,34 +123,43 @@
     </section>
   </div>
 
-  <!-- ============ How Your Profit Is Measured (blue band) ============ -->
-  <section id="mam-profit" data-cy="mam-profit" class="mam-profit">
-    <div appReveal class="mam-profit__inner">
-      <excent-text variant="title" as="h2" color="inherit" class="mam-profit__title">How Your Profit Is Measured</excent-text>
-      <excent-text variant="body" color="inherit" class="mam-profit__desc">The High-Water Mark ensures your performance fees are tied to genuine results. Fees are only charged when you deliver new profit highs. This protects your clients and strengthens the trust that grows your business.</excent-text>
-    </div>
-  </section>
-
   <div class="mam__container section-contained">
-    <!-- ============ Final CTA ============ -->
+    <!-- ============ Your Master Account Fully Equipped (Figma 631-5354) ============ -->
     <section id="mam-cta" data-cy="mam-cta" class="mam-section mam-cta">
-      <!-- PLACEHOLDER heading in Figma ("Tempus leo eu aenean") — draft copy, confirm -->
-      <excent-text appReveal variant="title" as="h2" class="mam-section__title">Start Managing Capital With Excent</excent-text>
-      <excent-text appReveal [delay]="100" variant="body" class="mam-section__muted mam-cta__sub">Apply for a MAM account and run your entire client structure from a single Master account.</excent-text>
+      <excent-text appReveal variant="title" as="h2" class="mam-section__title mam-cta__title">Your Master Account Fully Equipped</excent-text>
+      <excent-text appReveal [delay]="100" variant="body" class="mam-section__muted mam-cta__sub">
+        Performance tracking, follower visibility, and account growth. All without the operational weight of managing it manually.
+      </excent-text>
       <div appReveal [delay]="200" class="mam-cta__actions">
-        <excent-button id="mam-cta-apply-btn" data-cy="mam-cta-apply-btn" color="white" radius="sm" size="lg" width="auto" (click)="onApply()">
-          Apply For MAM Account
+        <excent-button id="mam-cta-apply-btn" data-cy="mam-cta-apply-btn" color="white" radius="sm" size="lg" width="auto" (click)="onApplyMaster()">
+          Apply for Master Status
           <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
         </excent-button>
-        <excent-button id="mam-cta-talk-btn" data-cy="mam-cta-talk-btn" color="outline" radius="sm" size="lg" width="auto" (click)="onTalkToTeam()">
+        <excent-button id="mam-cta-talk-btn" data-cy="mam-cta-talk-btn" color="outline-white" radius="sm" size="lg" width="auto" (click)="onTalkToTeam()">
           Talk To Our Team
         </excent-button>
       </div>
-    </section>
-
-    <!-- ============ FAQ (shared <excent-faq> — same as live-account) ============ -->
-    <section id="mam-faq" data-cy="mam-faq" class="mam-section mam-faq">
-      <excent-faq appReveal id="mam-faq-block" data-cy="mam-faq-block" title="FAQ" [items]="faqs" [initialActiveId]="1" />
+      <div appReveal [delay]="300" class="mam-cta__tags" aria-hidden="true">
+        <div class="mam-cta__track">
+          @for (t of equippedTags; track t) {
+            <span class="mam-cta__tag">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              {{ t }}
+            </span>
+          }
+          @for (t of equippedTags; track $index) {
+            <span class="mam-cta__tag">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              {{ t }}
+            </span>
+          }
+        </div>
+      </div>
     </section>
   </div>
+
+  <!-- ============ FAQ (full-width, same margin pattern as live-account) ============ -->
+  <section id="mam-faq" data-cy="mam-faq" class="mam-faq">
+    <excent-faq appReveal id="mam-faq-block" data-cy="mam-faq-block" title="FAQ" [items]="faqs" [initialActiveId]="1" />
+  </section>
 </div>

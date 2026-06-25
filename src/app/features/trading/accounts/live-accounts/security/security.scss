@@ -20,6 +20,9 @@
   width: 100%;
   align-self: stretch;
   padding: 0 110px;
+
+  @media (max-width: 1439px) { padding: 0 40px; }
+  @media (max-width: 1023px) { padding: 0 20px; gap: 28px; }
 }
 
 /* "Why Trade With Us?" now uses the shared <excent-pill>. */
@@ -33,6 +36,9 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  @media (max-width: 1439px) { font-size: 44px; }
+  @media (max-width: 1023px) { font-size: 32px; }
 }
 
 .live-account-security__features {
@@ -40,6 +46,11 @@
   align-items: flex-start;
   gap: 80px;
   align-self: stretch;
+
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    gap: 32px;
+  }
 }
 
 .live-account-security__feature {

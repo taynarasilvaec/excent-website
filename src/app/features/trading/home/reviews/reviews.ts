@@ -83,7 +83,7 @@ export class HomeReviews implements OnInit, AfterViewInit {
       name: 'Callum Clark',
       rating: 4,
       content:
-        'I switched here after trying two other brokers. Deposits and withdrawals arrived on time with no hidden fees. I trade forex, indices, and some U.S. stocks.',
+        'I switched here after trying two other brokers. Deposits and withdrawals arrived on time with no hidden fees. I trade FX, indices, and some U.S. stocks.',
       date: 'Jan 6, 2025',
       verifyUrl: '#',
     },
