@@ -221,10 +221,10 @@ body {
 }
 
 /* First-hero standard for INNER pages (not the home hero, which is full-bleed
-   100vh). 80vh tall with top padding so content clears the floating fixed navbar
-   and the menu never sits on top of it initially. */
+   100vh). Full viewport height with top padding so content clears the floating
+   fixed navbar and the menu never sits on top of it initially. */
 .section-hero {
-  min-height: 80vh;
+  min-height: 100vh;
   padding-top: 120px;
 
   @media (min-width: 1024px) { padding-top: 180px; }
