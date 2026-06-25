@@ -170,4 +170,14 @@
   .live-account-security__feature-icon { filter: var(--excent-navbar-icon-filter, none); }
 }
 
-/* Bento cards now live in the shared <excent-bento> component. */
+/* Bento cards now live in the shared <excent-bento> component.
+   The bento section is CONTAINED: capped at 1400px, centered, with the standard
+   lateral gutter — so the grid sits inside the page frame instead of bleeding to
+   the viewport edges. */
+.live-account-security excent-bento {
+  display: block;
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: var(--excent-gutter);
+}
