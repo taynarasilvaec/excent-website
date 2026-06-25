@@ -3,22 +3,26 @@
   width: 100%;
 }
 
+/* Root is a stack of section containers with a uniform 20px gap between them
+   (.page-sections). The gap is the distance BETWEEN containers, independent of
+   each section's internal padding. */
 .dw {
-  display: block;
   width: 100%;
 }
 
 .dw__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--excent-section-gap);
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
 
+/* Section vertical padding removed: the inter-section spacing now comes from the
+   20px gap, not from each section's own top/bottom padding. */
 .dw-section {
-  padding: 64px 0;
-
-  @media (min-width: 1024px) {
-    padding: 96px 0;
-  }
+  padding: 0;
 }
 .dw-section__title {
   margin: 0 0 40px;
@@ -26,10 +30,20 @@
 }
 
 /* ============ Hero ============ */
+/* Hero is a CONTAINED block: the .dw-hero-wrap provides the lateral gutter, the
+   hero itself caps at 1400px, centers, and rounds its corners so the bg sits
+   inside the page frame instead of bleeding to the viewport edges. */
+.dw-hero-wrap {
+  width: 100%;
+}
 .dw-hero {
   position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
   padding-inline: 20px;
   padding-bottom: 64px;
+  border-radius: 24px;
   overflow: hidden;
   background:
     radial-gradient(62% 58% at 50% 100%, rgba(32, 103, 190, 0.5) 0%, rgba(2, 58, 134, 0.32) 22%, rgba(1, 29, 67, 0.14) 40%, rgba(0, 0, 0, 0) 62%),
