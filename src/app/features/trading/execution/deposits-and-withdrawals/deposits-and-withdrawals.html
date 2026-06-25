@@ -1,3 +1,236 @@
-<section id="deposits-and-withdrawals-section" data-cy="deposits-and-withdrawals-section">
-  <h1>DepositsAndWithdrawals</h1>
-</section>
+<div id="dw" data-cy="dw" class="dw">
+
+  <!-- ============ Hero ============ -->
+  <section id="dw-hero" data-cy="dw-hero" class="dw-hero section-hero">
+    <div class="dw-hero__glow" aria-hidden="true"></div>
+
+    <div appReveal [fade]="true" class="dw-hero__inner">
+      <nav id="dw-hero-breadcrumb" data-cy="dw-hero-breadcrumb" class="dw-hero__breadcrumb" aria-label="Breadcrumb">
+        <a class="dw-hero__crumb" href="/">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2.5 7 8 2.5 13.5 7M4 6v7h8V6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          Home
+        </a>
+        <span class="dw-hero__crumb-sep" aria-hidden="true">›</span>
+        <span class="dw-hero__crumb dw-hero__crumb--current">Deposits and Withdrawals</span>
+      </nav>
+
+      <excent-text id="dw-hero-title" data-cy="dw-hero-title" variant="display" as="h1" color="inherit" class="dw-hero__title">
+        Your Money.<br />Always Accessible
+      </excent-text>
+
+      <excent-text id="dw-hero-sub" data-cy="dw-hero-sub" variant="body" color="inherit" class="dw-hero__sub">
+        Fund your account and withdraw your profits with speed, security, and complete transparency.
+      </excent-text>
+
+      <div id="dw-hero-actions" data-cy="dw-hero-actions" class="dw-hero__actions">
+        <excent-button id="dw-hero-deposit-btn" data-cy="dw-hero-deposit-btn" color="white" radius="sm" size="lg" width="auto" (click)="onDeposit()">
+          Deposit Now
+          <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+        <excent-button id="dw-hero-demo-btn" data-cy="dw-hero-demo-btn" color="outline-white" radius="sm" size="lg" width="auto" (click)="onDemoAccount()">
+          Try Demo Account
+        </excent-button>
+      </div>
+
+      <div id="dw-hero-trust" data-cy="dw-hero-trust" class="dw-hero__trust">
+        <span class="dw-hero__avatars" aria-hidden="true">
+          <span class="dw-hero__avatar"></span>
+          <span class="dw-hero__avatar"></span>
+          <span class="dw-hero__avatar"></span>
+        </span>
+        <span class="dw-hero__trust-label">Trusted by 2k+</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="dw__container section-contained">
+
+    <!-- ============ Security At Every Step ============ -->
+    <section id="dw-security" data-cy="dw-security" class="dw-section dw-security">
+      <excent-text appReveal variant="title" as="h2" class="dw-section__title dw-security__title">Security At Every Step</excent-text>
+
+      <div class="dw-security__grid">
+        <!-- Tall card: Segregated Accounts -->
+        <article appReveal id="dw-security-card-0" data-cy="dw-security-card-0" class="dw-card dw-security__feature dw-security__feature--tall">
+          <excent-glow position="bottom-left" bottom="-30px" left="-40px" width="150%" height="90%" transparentAt="70%" />
+          <span class="dw-card__icon"><img alt="" width="24" height="24" [src]="securityCards[0].icon" /></span>
+          <div class="dw-card__body">
+            <excent-text variant="subtitle" as="h3" class="dw-card__title">{{ securityCards[0].title }}</excent-text>
+            <excent-text variant="body" class="dw-card__desc">{{ securityCards[0].description }}</excent-text>
+          </div>
+          <!-- Decorative segregation visual: two separated fund stacks -->
+          <div class="dw-security__visual" aria-hidden="true">
+            <div class="dw-security__stack">
+              <span class="dw-security__stack-label">Client Funds</span>
+              <span class="dw-security__bar"></span>
+              <span class="dw-security__bar"></span>
+              <span class="dw-security__bar"></span>
+            </div>
+            <span class="dw-security__divider"></span>
+            <div class="dw-security__stack dw-security__stack--muted">
+              <span class="dw-security__stack-label">Operational Funds</span>
+              <span class="dw-security__bar"></span>
+              <span class="dw-security__bar"></span>
+              <span class="dw-security__bar"></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Right column: two stacked cards -->
+        @for (c of securityCards.slice(1); track c.title; let i = $index) {
+          <article appReveal [delay]="120 + i * 100" [id]="'dw-security-card-' + (i + 1)" [attr.data-cy]="'dw-security-card-' + (i + 1)" class="dw-card dw-security__feature">
+            <excent-glow position="bottom-left" bottom="-30px" left="-40px" width="160%" height="120%" transparentAt="72%" />
+            <span class="dw-card__icon"><img alt="" width="24" height="24" [src]="c.icon" /></span>
+            <div class="dw-card__body">
+              <excent-text variant="subtitle" as="h3" class="dw-card__title">{{ c.title }}</excent-text>
+              <excent-text variant="body" class="dw-card__desc">{{ c.description }}</excent-text>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- ============ Deposit Methods ============ -->
+    <section id="dw-deposit" data-cy="dw-deposit" class="dw-section dw-methods">
+      <div appReveal class="dw-methods__intro">
+        <excent-text variant="title" as="h2" class="dw-section__title dw-methods__title">Deposit Methods</excent-text>
+        <p class="dw-methods__hint">
+          Not sure how to make a deposit? <a class="dw-methods__link">Understand the process.</a>
+        </p>
+        <excent-button id="dw-deposit-support-btn" data-cy="dw-deposit-support-btn" color="outline-white" radius="sm" size="md" width="auto" (click)="onTalkSupport()">
+          Talk With Customer Support
+          <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+      </div>
+      <app-methods-table appReveal [delay]="120" [from]="'right'" class="dw-methods__table" [rows]="methodRows" />
+    </section>
+
+    <!-- ============ Log In To Your Client Area ============ -->
+    <section id="dw-client" data-cy="dw-client" class="dw-section dw-client">
+      <div appReveal class="dw-client__left">
+        <excent-pill variant="soft" color="blue" size="md" class="dw-client__kicker">Deposit in Minutes</excent-pill>
+        <excent-text variant="title" as="h2" class="dw-section__title dw-client__title">Log In To Your Client Area</excent-text>
+
+        <ol class="dw-client__steps">
+          @for (s of steps; track $index) {
+            <li>
+              <button
+                type="button"
+                [id]="'dw-client-step-' + $index"
+                [attr.data-cy]="'dw-client-step-' + $index"
+                class="dw-client__step"
+                [class.dw-client__step--active]="activeStep() === $index"
+                [attr.aria-pressed]="activeStep() === $index"
+                (click)="setStep($index)">
+                <span class="dw-client__step-num">{{ $index + 1 }}</span>
+                @if (s && activeStep() === $index) { <span class="dw-client__step-label">{{ s }}</span> }
+              </button>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <div appReveal [delay]="120" [from]="'right'" class="dw-client__visual">
+        <span class="dw-client__visual-glow" aria-hidden="true"></span>
+        <img class="dw-client__phone" alt="Excent Capital client area" [src]="clientPhone" />
+      </div>
+    </section>
+
+    <!-- ============ Trade in the World's Most Trusted Currency ============ -->
+    <section id="dw-currency" data-cy="dw-currency" class="dw-section dw-currency">
+      <div class="dw-currency__visual" aria-hidden="true">
+        <svg class="dw-currency__graph" viewBox="0 0 900 320" preserveAspectRatio="none" fill="none">
+          <path class="dw-currency__graph-line" d="M0 250 L70 210 L130 235 L200 150 L260 185 L330 120 L400 165 L470 90 L540 140 L610 70 L690 120 L760 40 L830 95 L900 20" />
+        </svg>
+        <img class="dw-currency__coin" alt="" [src]="usdCoin" />
+      </div>
+
+      <div appReveal [from]="'right'" class="dw-currency__content">
+        <excent-text variant="title" as="h2" class="dw-section__title dw-currency__title">Trade in the World's<br />Most Trusted Currency</excent-text>
+        <excent-text variant="body" class="dw-currency__desc">
+          All Excent Capital trading accounts are funded in US dollars, the world's most liquid and widely accepted reserve currency.
+        </excent-text>
+        <excent-button id="dw-currency-trade-btn" data-cy="dw-currency-trade-btn" color="white" radius="sm" size="lg" width="auto" (click)="onTradeNow()">
+          Trade Now
+          <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+        </excent-button>
+      </div>
+    </section>
+
+    <!-- ============ Payment Methods ============ -->
+    <section id="dw-payment" data-cy="dw-payment" class="dw-section dw-payment">
+      <excent-text appReveal variant="title" as="h2" class="dw-section__title">Payment Methods</excent-text>
+      <div class="dw-payment__grid">
+        @for (m of paymentMethods; track m.title; let i = $index) {
+          <article
+            appReveal [delay]="i * 80"
+            [id]="'dw-payment-' + i"
+            [attr.data-cy]="'dw-payment-' + i"
+            class="dw-payment__card"
+            [class.dw-payment__card--wide]="m.wide">
+            <span class="dw-payment__icon"><img alt="" width="28" height="28" [src]="m.icon" /></span>
+            <h3 class="dw-payment__title">{{ m.title }}</h3>
+            <p class="dw-payment__time">{{ m.time }}</p>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- ============ Withdrawals Methods ============ -->
+    <section id="dw-withdrawal" data-cy="dw-withdrawal" class="dw-section dw-methods">
+      <div appReveal class="dw-methods__intro">
+        <excent-text variant="title" as="h2" class="dw-section__title dw-methods__title">Withdrawals Methods</excent-text>
+        <p class="dw-methods__hint">
+          Need assistance with a withdrawal? <a class="dw-methods__link">Understand the process.</a>
+        </p>
+      </div>
+      <app-methods-table appReveal [delay]="120" [from]="'right'" class="dw-methods__table" [rows]="methodRows" />
+    </section>
+
+    <!-- ============ Move Funds Between Your Accounts Instantly ============ -->
+    <section id="dw-wallet" data-cy="dw-wallet" class="dw-section dw-wallet">
+      <div appReveal class="dw-wallet__card">
+        <span class="dw-wallet__pattern" aria-hidden="true"></span>
+        <div class="dw-wallet__text">
+          <excent-pill variant="soft" color="blue" size="md" class="dw-wallet__kicker">Excent Wallet</excent-pill>
+          <excent-text variant="title" as="h2" class="dw-wallet__title">Move Funds Between<br />Your Accounts Instantly</excent-text>
+          <excent-text variant="body" class="dw-wallet__desc">
+            Transfer capital between your live, MAM, or strategy-linked accounts in seconds, all directly from your Client Area.
+          </excent-text>
+        </div>
+        <div class="dw-wallet__actions">
+          <excent-button id="dw-wallet-transfer-btn" data-cy="dw-wallet-transfer-btn" color="white" radius="sm" size="md" width="auto" (click)="onLearnTransfer()">
+            Learn How to Transfer
+            <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+          </excent-button>
+          <excent-button id="dw-wallet-help-btn" data-cy="dw-wallet-help-btn" color="outline-white" radius="sm" size="md" width="auto" (click)="onHelpCentre()">
+            Help Centre
+          </excent-button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Ready to fund your account? ============ -->
+    <section id="dw-ready" data-cy="dw-ready" class="dw-section dw-ready">
+      <div appReveal class="dw-ready__card">
+        <div class="dw-ready__text">
+          <excent-text variant="title" as="h2" class="dw-ready__title">Ready to fund your account?</excent-text>
+          <excent-text variant="body" class="dw-ready__sub">Deposit securely using your preferred payment method.</excent-text>
+        </div>
+        <img class="dw-ready__logos" alt="Pix, Mastercard, SPEI, SWIFT" [src]="paymentLogos" />
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="dw-faq" data-cy="dw-faq" class="dw-section dw-faq">
+      <excent-faq appReveal id="dw-faq-block" data-cy="dw-faq-block" title="FAQ" [items]="faqs" [initialActiveId]="1" />
+      <excent-button appReveal [delay]="100" id="dw-faq-help-btn" data-cy="dw-faq-help-btn" class="dw-faq__help" color="outline-white" radius="sm" size="md" width="auto" (click)="onHelpCentre()">
+        Help Centre
+        <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+      </excent-button>
+    </section>
+
+  </div>
+</div>

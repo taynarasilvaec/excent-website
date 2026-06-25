@@ -1,0 +1,20 @@
+<section id="not-found" data-cy="not-found" class="not-found section-hero">
+  <div class="not-found__glow" aria-hidden="true"></div>
+  <span class="not-found__pattern" aria-hidden="true"></span>
+
+  <div class="not-found__inner">
+    <excent-pill variant="outline" color="blue" size="md" [uppercase]="true" class="not-found__eyebrow">Error 404</excent-pill>
+    <excent-text id="not-found-title" data-cy="not-found-title" variant="display" as="h1" color="inherit" class="not-found__title">
+      Looks Like This Page Has No Power
+    </excent-text>
+    <excent-text id="not-found-sub" data-cy="not-found-sub" variant="body" color="inherit" class="not-found__sub">
+      The page you're looking for may have been moved, deleted, or is temporarily unavailable.
+    </excent-text>
+    <div class="not-found__actions">
+      <excent-button id="not-found-home-btn" data-cy="not-found-home-btn" color="white" radius="sm" size="lg" width="auto" (click)="onHome()">
+        Back to Home
+        <img btn-icon-right alt="" width="18" height="18" src="/assets/icons/arrow-right-up.svg" />
+      </excent-button>
+    </div>
+  </div>
+</section>

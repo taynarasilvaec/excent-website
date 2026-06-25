@@ -8,12 +8,12 @@
   width: 100%;
 }
 
-/* Wide "fill" margin (1400) — the bento and full sections fill this width.
-   Text-heavy pages use the narrower 1200 container; this page uses the wide one. */
+/* Wide "fill" container (1400) centred on the page. The lateral gutter is NOT
+   hardcoded here — it comes from the shared `.section-contained` rule, so MAM
+   breathes exactly like every other page. */
 .mam__container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 /* ---- Section scaffolding ---- */
@@ -136,46 +136,60 @@
 }
 
 /* ============ Hero ============ */
+/* Hero is a dark navy stage in both themes (per Figma 711-508). The whole left
+   composition (phone + pills + blue gradient + mountain) is a baked background
+   image; only the copy + CTAs sit on top, aligned to the right. */
 .mam-hero {
   position: relative;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 140px 20px 96px;
+  // height + top padding come from the .section-hero standard (80vh / 180px).
+  padding-inline: 20px;
+  padding-bottom: 64px;
   overflow: hidden;
+  background: #02060f;
 
-  @media (min-width: 1024px) { min-height: 720px; }
+  @media (min-width: 1024px) {
+    padding-bottom: 96px;
+  }
 }
 .mam-hero__bg {
-  /* The Figma export includes the dark frame around a blue panel; scale + offset
-     (per the design: w 138.43%, left -19.12%, top -33.18%) to crop to full-bleed blue. */
-  position: absolute;
-  width: 138.43%;
-  max-width: none; /* defeat any global img { max-width: 100% } */
-  height: 166.34%;
-  left: -19.12%;
-  top: -33.18%;
-  object-fit: cover;
-  z-index: 0;
-}
-.mam-hero__overlay {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  background:
-    radial-gradient(60% 55% at 50% 100%, rgba(8, 110, 249, 0.28) 0%, rgba(8, 110, 249, 0) 70%),
-    linear-gradient(180deg, rgba(3, 10, 26, 0.55) 0%, rgba(3, 10, 26, 0.35) 50%, rgba(3, 10, 26, 0.8) 100%);
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 70% center;
+
+  @media (min-width: 1024px) { object-position: center; }
 }
-.mam-hero__content {
+
+.mam-hero__inner {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+
+  @media (min-width: 1024px) {
+    justify-content: flex-end;
+  }
+}
+
+/* ---- Copy + CTAs (right-aligned on desktop) ---- */
+.mam-hero__content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  max-width: 760px;
+  align-items: flex-start;
+  gap: 28px;
+
+  @media (min-width: 1024px) {
+    align-items: flex-end;
+    text-align: right;
+    max-width: 600px;
+  }
 }
 .mam-hero__title {
   margin: 0;
@@ -196,76 +210,16 @@
 .mam-hero__actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 12px;
   margin-top: 8px;
+
+  @media (min-width: 1024px) { justify-content: flex-end; }
 }
 
 /* ============ Bento ============ */
-.mam-bento {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-
-  @media (min-width: 1024px) {
-    grid-template-columns: 444fr 944fr;
-    gap: 20px;
-  }
-}
-.mam-bento__left {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-.mam-bento__feature {
-  min-height: 240px;
-
-  @media (min-width: 1024px) { flex: 1; }
-}
-.mam-bento__lead {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: flex-start;
-}
-.mam-bento__right {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-
-  @media (min-width: 640px) {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-.mam-bento__cell { min-height: 300px; }
-.mam-bento__wide {
-  min-height: 300px;
-  justify-content: space-between;
-
-  @media (min-width: 640px) { grid-column: 1 / -1; }
-}
-.mam-bento__wide-text {
-  margin-top: auto;
-  padding-top: 80px;
-  max-width: 880px;
-}
-.mam-bento__stat {
-  margin-top: auto;
-  padding-top: 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.mam-bento__stat-value {
-  font-size: 56px;
-  font-weight: 400;
-  line-height: 1;
-  color: var(--excent-text-on-dark-primary);
-}
-.mam-bento__stat-label {
-  font-size: 16px;
-  color: var(--excent-text-on-dark-muted);
-}
+/* Uses the shared <excent-bento> grid — the section is just a full-width wrapper.
+   appReveal wraps it in a plain div; let it stretch. */
+.mam-bento > div { width: 100%; }
 
 /* ============ Open Your Account (interactive stepper) ============ */
 .mam-open {
@@ -500,9 +454,8 @@
   margin-top: 10px;
 }
 
-/* ============ FAQ ============ */
+/* ============ FAQ (shared <excent-faq>) ============ */
 .mam-faq {
   max-width: 920px;
   margin: 0 auto;
 }
-.mam-faq__title { margin-bottom: 28px; }

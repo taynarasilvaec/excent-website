@@ -1,10 +1,8 @@
 <section id="live-account-security" data-cy="live-account-security" class="live-account-security">
   <div id="live-account-security-intro" data-cy="live-account-security-intro" class="live-account-security__intro">
-    <div id="live-account-security-pill" data-cy="live-account-security-pill" class="live-account-security__pill">
-      <span id="live-account-security-pill-label" data-cy="live-account-security-pill-label" class="live-account-security__pill-label">
-        {{ 'live-account.security.why-trade' | translate }}
-      </span>
-    </div>
+    <excent-pill id="live-account-security-pill" data-cy="live-account-security-pill" variant="soft" color="neutral" size="md">
+      {{ 'live-account.security.why-trade' | translate }}
+    </excent-pill>
 
     <h2 id="live-account-security-title" data-cy="live-account-security-title" class="live-account-security__title">
       {{ 'live-account.security.title-line-1' | translate }}<br />
@@ -59,74 +57,5 @@
     </div>
   </div>
 
-  <div id="live-account-security-cards" data-cy="live-account-security-cards" class="live-account-security__cards">
-    <div id="live-account-security-col-1" data-cy="live-account-security-col-1" class="live-account-security__col">
-      <div id="live-account-security-card-assets" data-cy="live-account-security-card-assets" class="live-account-security__card live-account-security__card--assets">
-        <excent-glow top="-30px" left="-50px" width="165%" height="120%" />
-        <div class="live-account-security__card-content">
-          <img alt="" width="24" height="24" src="/assets/icons/coins.svg" class="live-account-security__card-icon" />
-          <h3 id="live-account-security-card-assets-title" data-cy="live-account-security-card-assets-title" class="live-account-security__card-title">
-            {{ 'live-account.security.cards.assets.title' | translate }}
-          </h3>
-        </div>
-        <p id="live-account-security-card-assets-description" data-cy="live-account-security-card-assets-description" class="live-account-security__card-description">
-          {{ 'live-account.security.cards.assets.description' | translate }}
-        </p>
-      </div>
-
-      <div id="live-account-security-card-leverage" data-cy="live-account-security-card-leverage" class="live-account-security__card live-account-security__card--leverage">
-        <excent-glow top="-30px" left="-50px" width="205%" height="310%" />
-        <div class="live-account-security__card-content">
-          <img alt="" width="24" height="24" src="/assets/icons/arrow-up.svg" class="live-account-security__card-icon" />
-          <h3 id="live-account-security-card-leverage-title" data-cy="live-account-security-card-leverage-title" class="live-account-security__card-title">
-            {{ 'live-account.security.cards.leverage.title' | translate }}
-          </h3>
-        </div>
-      </div>
-    </div>
-
-    <div id="live-account-security-col-2" data-cy="live-account-security-col-2" class="live-account-security__col">
-      <div id="live-account-security-card-custody" data-cy="live-account-security-card-custody" class="live-account-security__card live-account-security__card--custody">
-        <excent-glow top="-30px" left="-50px" width="205%" height="310%" />
-        <img alt="" width="24" height="24" src="/assets/icons/coins.svg" class="live-account-security__card-icon" />
-        <h3 id="live-account-security-card-custody-title" data-cy="live-account-security-card-custody-title" class="live-account-security__card-title">
-          {{ 'live-account.security.cards.custody.title' | translate }}
-        </h3>
-      </div>
-
-      <div id="live-account-security-card-deposit" data-cy="live-account-security-card-deposit" class="live-account-security__card live-account-security__card--deposit">
-        <excent-glow top="-50px" left="-50px" width="225%" height="120%" />
-        <div class="live-account-security__card-content">
-          <img alt="" width="24" height="24" src="/assets/icons/coins.svg" class="live-account-security__card-icon" />
-          <h3 id="live-account-security-card-deposit-title" data-cy="live-account-security-card-deposit-title" class="live-account-security__card-title">
-            {{ 'live-account.security.cards.deposit.title' | translate }}
-          </h3>
-        </div>
-        <p id="live-account-security-card-deposit-description" data-cy="live-account-security-card-deposit-description" class="live-account-security__card-description">
-          {{ 'live-account.security.cards.deposit.description' | translate }}
-        </p>
-      </div>
-    </div>
-
-    <div id="live-account-security-col-3" data-cy="live-account-security-col-3" class="live-account-security__col">
-      <div id="live-account-security-card-spreads" data-cy="live-account-security-card-spreads" class="live-account-security__card live-account-security__card--spreads">
-        <excent-glow top="-30px" left="-50px" width="215%" height="60%" />
-        <div class="live-account-security__card-content">
-          <img alt="" width="24" height="24" src="/assets/icons/coins.svg" class="live-account-security__card-icon" />
-          <h3 id="live-account-security-card-spreads-title" data-cy="live-account-security-card-spreads-title" class="live-account-security__card-title">
-            {{ 'live-account.security.cards.spreads.title' | translate }}
-          </h3>
-        </div>
-        <div class="live-account-security__card-content">
-          <p id="live-account-security-card-spreads-description" data-cy="live-account-security-card-spreads-description" class="live-account-security__card-description">
-            {{ 'live-account.security.cards.spreads.description' | translate }}
-          </p>
-          <a id="live-account-security-card-spreads-link" data-cy="live-account-security-card-spreads-link" class="live-account-security__card-link">
-            {{ 'live-account.security.cards.spreads.link' | translate }}
-            <img alt="" width="18" height="18" src="/assets/icons/arrow-right.svg" class="live-account-security__card-link-icon" />
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <excent-bento id="live-account-security-cards" data-cy="live-account-security-cards" name="live-account-security" [cols]="3" [items]="cards" />
 </section>

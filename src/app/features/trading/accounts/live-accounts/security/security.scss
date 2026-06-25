@@ -22,28 +22,7 @@
   padding: 0 110px;
 }
 
-.live-account-security__pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 0.5px solid var(--excent-pill-border);
-  background: radial-gradient(
-    231% 135.8% at 0.9% 2.98%,
-    var(--excent-pill-gradient-start) 0%,
-    var(--excent-pill-gradient-end) 100%
-  );
-}
-
-.live-account-security__pill-label {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--excent-pill-label);
-  line-height: 1;
-  white-space: nowrap;
-}
+/* "Why Trade With Us?" now uses the shared <excent-pill>. */
 
 .live-account-security__title {
   margin: 0;
@@ -160,138 +139,24 @@
   cursor: pointer;
 }
 
-.live-account-security__cards {
-  display: flex;
-  height: 661.5px;
-  align-items: center;
-  gap: 15.822px;
-  align-self: stretch;
-}
+/* LIGHT MODE — these features sit on the light page background, where the
+   on-dark "dim/faint" greys and the white icon glyphs are barely legible.
+   Strengthen the title/description and recolor the icons to a dark glyph. */
+:host-context(html:not(.dark)) {
+  .live-account-security__feature-title { color: var(--excent-text-on-dark-secondary); }
+  .live-account-security__feature-description { color: rgba(17, 24, 39, 0.70); }
 
-.live-account-security__col {
-  display: flex;
-  flex-direction: column;
-  gap: 15.822px;
-  flex: 1 0 0;
-  align-self: stretch;
-}
-
-.live-account-security__card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: 24px;
-  background-color: var(--excent-security-card-bg);
-  background-image:
-    linear-gradient(180deg, transparent 0%, var(--excent-security-card-bg) 50%),
-    linear-gradient(0deg, var(--excent-security-card-grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--excent-security-card-grid-line) 1px, transparent 1px);
-  background-size: 100% 100%, 60px 60px, 60px 60px;
-  border: 1px solid var(--excent-security-card-border);
-  overflow: hidden;
-  isolation: isolate;
-
-  > *:not(excent-glow) {
-    position: relative;
-    z-index: 1;
+  .live-account-security__feature:hover {
+    .live-account-security__feature-title { color: var(--excent-text-on-dark-primary); }
+    .live-account-security__feature-description { color: var(--excent-text-on-dark-primary); }
   }
+
+  .live-account-security__feature-icon-wrapper {
+    background: rgba(17, 24, 39, 0.05);
+    box-shadow: none;
+    border: 1px solid rgba(17, 24, 39, 0.08);
+  }
+  .live-account-security__feature-icon { filter: var(--excent-navbar-icon-filter, none); }
 }
 
-.live-account-security__card--assets {
-  height: 661.5px;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 15.822px;
-  align-self: stretch;
-  padding: 42.192px;
-}
-
-.live-account-security__card--leverage {
-  padding: 42.192px;
-  align-items: flex-start;
-  gap: 10.548px;
-  align-self: stretch;
-  flex-shrink: 0;
-}
-
-.live-account-security__card--custody {
-  padding: 42.192px;
-  align-items: flex-start;
-  gap: 10.548px;
-  align-self: stretch;
-}
-
-.live-account-security__card--deposit {
-  padding: 42.192px;
-  align-items: flex-start;
-  gap: 10.548px;
-  flex: 1 0 0;
-  align-self: stretch;
-  justify-content: space-between;
-}
-
-.live-account-security__card--spreads {
-  padding: 42.192px;
-  align-items: flex-start;
-  gap: 42.192px;
-  flex: 1 0 0;
-  align-self: stretch;
-  justify-content: space-between;
-}
-
-.live-account-security__card-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10.548px;
-  align-self: stretch;
-}
-
-.live-account-security__card-icon {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-
-.live-account-security__card-title {
-  margin: 0;
-  color: var(--excent-text-on-dark-primary);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 31.644px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%;
-}
-
-.live-account-security__card-description {
-  margin: 0;
-  color: var(--excent-text-on-dark-muted);
-  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: -0.264px;
-}
-
-.live-account-security__card-link {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  align-self: stretch;
-  color: var(--excent-link-blue);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  cursor: pointer;
-}
-
-.live-account-security__card-link-icon {
-  width: 18px;
-  height: 18px;
-  aspect-ratio: 1 / 1;
-  filter: brightness(0) saturate(100%) invert(34%) sepia(91%) saturate(3050%) hue-rotate(208deg) brightness(99%) contrast(97%);
-}
+/* Bento cards now live in the shared <excent-bento> component. */

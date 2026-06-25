@@ -1,0 +1,157 @@
+<excent-card
+  id="pulse-card"
+  data-cy="pulse-card"
+  color="blue"
+  radius="24px"
+  padding="28px"
+  background="grid"
+  class="pulse">
+  <header class="pulse__head">
+    <div class="pulse__head-left">
+      <excent-text variant="title" as="h2" class="pulse__title">Live Market Pulse</excent-text>
+      <excent-text variant="body" class="pulse__sub">Top Performers In Real Time</excent-text>
+    </div>
+
+    <span class="pulse__clock">
+      <span class="pulse__dot" aria-hidden="true"></span>
+      Markets Open <strong class="pulse__clock-time">{{ clock() }}</strong>
+      <span class="pulse__clock-utc">UTC</span>
+    </span>
+  </header>
+
+  <div class="pulse__body">
+    <!-- ===== Featured asset + chart ===== -->
+    <div class="pulse__featured">
+      <div class="pulse__featured-head">
+        <div class="pulse__asset">
+          <excent-static-icon type="symbol" [name]="featured().iconName" shape="square" [size]="44" [radius]="12" />
+          <div class="pulse__asset-text">
+            <span class="pulse__asset-name">{{ featured().name }}</span>
+            <span class="pulse__asset-cat">{{ featured().ticker }} · {{ featured().category }}</span>
+          </div>
+        </div>
+
+        <div class="pulse__price-block">
+          <div class="pulse__price">{{ featured().price }}</div>
+          <div class="pulse__change" [class.is-down]="!featured().up">{{ featured().change }}</div>
+        </div>
+      </div>
+
+      <div class="pulse__chart-bar">
+        <div class="pulse__ranges" role="group" aria-label="Time range">
+          @for (r of ranges; track r) {
+            <button
+              type="button"
+              class="pulse__range"
+              [class.is-active]="r === range()"
+              (click)="setRange(r)">
+              {{ r }}
+            </button>
+          }
+          <button type="button" class="pulse__range pulse__range--icon" aria-label="Calendar">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.3" />
+              <path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="pulse__chart-actions">
+          <button type="button" class="pulse__compare">
+            Compare
+            <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M3 4.5 6 7.5 9 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <div class="pulse__type" role="group" aria-label="Chart type">
+            <button
+              id="pulse-type-area"
+              data-cy="pulse-type-area"
+              type="button"
+              class="pulse__type-btn"
+              [class.is-active]="chartType() === 'area'"
+              (click)="setType('area')"
+              aria-label="Area chart">
+              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M2 12 6 8l3 2 5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button
+              id="pulse-type-candle"
+              data-cy="pulse-type-candle"
+              type="button"
+              class="pulse__type-btn"
+              [class.is-active]="chartType() === 'candle'"
+              (click)="setType('candle')"
+              aria-label="Candle chart">
+              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M5 3v3M5 12v3M13 5v2M13 12v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+                <rect x="3.5" y="6" width="3" height="6" rx="1" stroke="currentColor" stroke-width="1.3" />
+                <rect x="11.5" y="7" width="3" height="5" rx="1" stroke="currentColor" stroke-width="1.3" />
+              </svg>
+            </button>
+          </div>
+          <button type="button" class="pulse__expand" aria-label="Fullscreen">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="pulse__ohlc">
+        @for (o of ohlc(); track o.label) {
+          <span class="pulse__ohlc-item">{{ o.label }}: <strong>${{ o.value }}</strong></span>
+        }
+      </div>
+
+      <div class="pulse__chart">
+        <app-pulse-chart
+          [ticker]="featured().ticker"
+          [basePrice]="featured().basePrice"
+          [chartType]="chartType()" />
+      </div>
+    </div>
+
+    <!-- ===== Top performers ===== -->
+    <div class="pulse__performers">
+      <div class="pulse__performers-head">
+        <span class="pulse__performers-title">Top Performers</span>
+        <span class="pulse__performers-label">24H Change</span>
+      </div>
+
+      <ul class="pulse__list">
+        @for (a of assets; track a.id) {
+          <li>
+            <button
+              type="button"
+              [id]="'pulse-row-' + a.id"
+              [attr.data-cy]="'pulse-row-' + a.id"
+              class="pulse__row"
+              [class.is-active]="a.id === selectedId()"
+              (click)="select(a.id)">
+              <excent-static-icon type="symbol" [name]="a.iconName" shape="square" [size]="38" [radius]="10" />
+              <span class="pulse__row-info">
+                <span class="pulse__row-name">{{ a.name }}</span>
+                <span class="pulse__row-ticker">{{ a.ticker }}</span>
+              </span>
+              <svg
+                class="pulse__spark"
+                [class.is-down]="!a.up"
+                viewBox="0 0 70 20"
+                preserveAspectRatio="none"
+                aria-hidden="true">
+                <polygon [attr.points]="a.spark + ' 70,20 0,20'" fill="currentColor" fill-opacity="0.14" stroke="none" />
+                <polyline [attr.points]="a.spark" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="pulse__row-meta">
+                <span class="pulse__row-price">{{ a.price }}</span>
+                <span class="pulse__row-change" [class.is-down]="!a.up">{{ a.change }}</span>
+              </span>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</excent-card>

@@ -1,0 +1,64 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* Dark navy stage in both themes — on-brand error page. */
+.not-found {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-inline: 24px;
+  padding-bottom: 96px;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 55% at 50% 30%, rgba(32, 103, 190, 0.45) 0%, rgba(2, 58, 134, 0.28) 24%, rgba(1, 29, 67, 0.12) 42%, rgba(0, 0, 0, 0) 64%),
+    linear-gradient(180deg, #02060f 0%, #03081a 55%, #02060f 100%);
+}
+.not-found__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(40% 40% at 50% 18%, rgba(8, 110, 249, 0.22) 0%, rgba(8, 110, 249, 0) 70%);
+}
+.not-found__pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(120, 170, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 170, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 0%, transparent 75%);
+}
+
+.not-found__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 620px;
+}
+.not-found__title {
+  margin: 0;
+  color: #fff;
+}
+.not-found__sub {
+  margin: 0;
+  max-width: 460px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}

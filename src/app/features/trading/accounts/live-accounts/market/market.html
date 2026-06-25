@@ -1,11 +1,8 @@
-<section id="live-account-market" data-cy="live-account-market" class="live-account-market">
+<section id="live-account-market" data-cy="live-account-market" class="live-account-market section-hero">
   <div id="live-account-market-content" data-cy="live-account-market-content" class="live-account-market__content">
-    <div id="live-account-market-pill" data-cy="live-account-market-pill" class="live-account-market__pill">
-      <span id="live-account-market-pill-dot" data-cy="live-account-market-pill-dot" class="live-account-market__pill-dot" aria-hidden="true"></span>
-      <span id="live-account-market-pill-label" data-cy="live-account-market-pill-label" class="live-account-market__pill-label">
-        {{ 'live-account.market.live-market-access' | translate }}
-      </span>
-    </div>
+    <excent-pill id="live-account-market-pill" data-cy="live-account-market-pill" color="neutral" size="md" [dot]="true">
+      {{ 'live-account.market.live-market-access' | translate }}
+    </excent-pill>
 
     <h1 id="live-account-market-title" data-cy="live-account-market-title" class="live-account-market__title">
       {{ 'live-account.market.title-line-1' | translate }}<br />
@@ -41,5 +38,29 @@
         {{ 'live-account.market.demo-account' | translate }}
       </excent-button>
     </div>
+  </div>
+
+  <!-- Right: live "Top Movers" feed — values update and cards re-rank by movement (decorative) -->
+  <div id="live-account-market-tickers" data-cy="live-account-market-tickers" class="live-account-market__tickers" aria-hidden="true">
+    @for (t of tickers(); track t.id) {
+      <article class="live-account-market__ticker" [style.transform]="cardTransform(t.id)">
+        <div class="live-account-market__ticker-info">
+          <div class="live-account-market__ticker-head">
+            <excent-static-icon type="symbol" [name]="t.iconName" shape="square" [size]="25" [radius]="6" />
+            <span class="live-account-market__ticker-name">{{ t.name }}</span>
+          </div>
+          <div class="live-account-market__ticker-quote">
+            <span class="live-account-market__ticker-price">${{ formatPrice(t) }}</span>
+            <span class="live-account-market__ticker-change" [class.is-down]="t.pct < 0">
+              <svg class="live-account-market__ticker-arrow" viewBox="0 0 10 8" fill="none" aria-hidden="true">
+                <path d="M5 0 9.33 7.5H0.67L5 0Z" fill="currentColor" />
+              </svg>
+              {{ pctLabel(t) }}
+            </span>
+          </div>
+        </div>
+        <live-spark class="live-account-market__ticker-spark" [up]="t.pct >= 0" />
+      </article>
+    }
   </div>
 </section>

@@ -129,6 +129,7 @@
 /* LIGHT MODE — flip text to near-black, hairlines/avatars to dark tints,
    soften the subscribe glow and lighten the input. Post images stay as-is. */
 :host-context(html:not(.dark)) {
+  .home-blog-posts__title { color: #111827; }
   .home-blog-posts__featured-title { color: #111827; }
   .home-blog-posts__featured-description { color: rgba(17, 24, 39, 0.75); }
   .home-blog-posts__featured-date { color: rgba(17, 24, 39, 0.60); }
@@ -165,6 +166,7 @@
   font-size: 22px;
   font-weight: 500;
   line-height: 1.25;
+  white-space: pre-line; // honor the \n break after the colon (mock data)
   opacity: 0;
   transition: opacity 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
 

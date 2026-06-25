@@ -1,0 +1,22 @@
+<svg
+  class="live-spark"
+  [class.is-down]="!up()"
+  viewBox="0 0 100 48"
+  preserveAspectRatio="none"
+  aria-hidden="true">
+  <defs>
+    <linearGradient [attr.id]="gradId" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="currentColor" stop-opacity="0.30" />
+      <stop offset="100%" stop-color="#0a2138" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <polygon #area [attr.fill]="'url(#' + gradId + ')'" stroke="none" />
+  <polyline
+    #line
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1"
+    vector-effect="non-scaling-stroke"
+    stroke-linecap="round"
+    stroke-linejoin="round" />
+</svg>

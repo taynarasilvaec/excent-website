@@ -300,6 +300,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/partners/partners').then(m => m.Partners),
       },
+      // 404 — unknown path under a valid language renders the error page in-layout.
+      {
+        path: '**',
+        loadComponent: () =>
+          import('./features/not-found/not-found').then(m => m.NotFound),
+        data: { title: 'browser-title.not-found' },
+      },
     ],
   },
   {

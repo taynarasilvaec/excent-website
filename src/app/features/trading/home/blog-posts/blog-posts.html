@@ -18,42 +18,21 @@
       data-cy="blog-posts-featured"
       color="transparent"
       radius="20px"
-      padding="12px 12px 24px 12px"
-      class="home-blog-posts__featured block w-full min-h-127.25 mx-auto rounded-[20px] tablet:max-w-[378.523px]"
+      padding="18px"
+      class="home-blog-posts__featured block w-full min-h-127.25 rounded-[20px]"
       [class.is-revealed]="playCard()">
       <div
-        class="home-blog-posts__featured-content flex flex-col items-center gap-5 w-full h-full"
+        class="home-blog-posts__featured-content flex flex-col items-start gap-4 w-full h-full"
         [class.is-revealed]="playContent()">
-        <slide-effect
-          class="home-blog-posts__featured-image-slide self-stretch"
-          from="down"
-          [wipeZoomMobile]="true"
-          [block]="true"
-          [fade]="false"
-          [play]="playContent()"
-          [duration]="1000">
-          <a
-            class="home-blog-posts__featured-image-link relative block w-full min-w-88.5 min-h-68 rounded-[14px] overflow-hidden flex-1"
-            [href]="featured().url">
-            @if (featured().isLatest) {
-              <span class="home-blog-posts__badge absolute top-3 left-3 z-10 inline-flex items-center justify-center gap-0.5 px-2 py-0.5 rounded-full bg-[#086EF9] text-[#E2E2E2] text-[11px] font-normal leading-[normal] text-center">
-                {{ 'home.blog-posts.latest-badge' | translate }}
-              </span>
-            }
-            <img
-              class="home-blog-posts__featured-image w-full h-full object-cover"
-              alt=""
-              [src]="featured().image" />
-          </a>
-        </slide-effect>
+        @if (featured().isLatest) {
+          <span class="home-blog-posts__badge inline-flex items-center justify-center gap-0.5 px-2 py-0.5 rounded-full bg-[#086EF9] text-[#E2E2E2] text-[11px] font-normal leading-[normal] text-center">
+            {{ 'home.blog-posts.latest-badge' | translate }}
+          </span>
+        }
 
         <h3 class="home-blog-posts__featured-title self-stretch m-0">
           {{ featured().title }}
         </h3>
-
-        <p class="home-blog-posts__featured-description self-stretch m-0">
-          {{ featured().description }}
-        </p>
 
         <div class="home-blog-posts__featured-meta self-stretch flex items-center gap-2">
           <img
@@ -64,6 +43,28 @@
           <span class="home-blog-posts__meta-dot" aria-hidden="true">·</span>
           <span class="home-blog-posts__featured-date">{{ featured().date }}</span>
         </div>
+
+        <p class="home-blog-posts__featured-description self-stretch m-0">
+          {{ featured().description }}
+        </p>
+
+        <slide-effect
+          class="home-blog-posts__featured-image-slide self-stretch mt-auto"
+          from="down"
+          [wipeZoomMobile]="true"
+          [block]="true"
+          [fade]="false"
+          [play]="playContent()"
+          [duration]="1000">
+          <a
+            class="home-blog-posts__featured-image-link relative block w-full min-h-68 rounded-[14px] overflow-hidden"
+            [href]="featured().url">
+            <img
+              class="home-blog-posts__featured-image w-full h-full object-cover"
+              alt=""
+              [src]="featured().image" />
+          </a>
+        </slide-effect>
       </div>
     </excent-card>
   </div>

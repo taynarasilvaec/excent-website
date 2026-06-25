@@ -59,7 +59,11 @@ div.excent-text { display: block; }
   text-transform: uppercase;
 }
 
-.excent-text--primary   { color: #ffffff; }
-.excent-text--secondary { color: rgba(255, 255, 255, 0.80); }
-.excent-text--muted     { color: rgba(255, 255, 255, 0.55); }
+/* Colors are token-driven (theme-aware) — the SINGLE source of truth. In dark
+   the tokens are white scales; in light they flip to near-black automatically.
+   Contexts over dark imagery (hero, product cards) locally re-pin the tokens to
+   white, so excent-text stays correct everywhere with no per-section overrides. */
+.excent-text--primary   { color: var(--excent-text-on-dark-primary); }
+.excent-text--secondary { color: var(--excent-text-on-dark-secondary); }
+.excent-text--muted     { color: var(--excent-text-on-dark-muted); }
 .excent-text--inherit   { color: inherit; }

@@ -13,19 +13,19 @@ export const NAVBAR_ITEMS: NavItem[] = [
     mega: {
       sections: [
         {
-          title: 'navbar.trading-submenu.accounts',
+          title: 'Accounts',
           items: [
-            { label: 'navbar.trading-submenu.live-account', link: 'trading/accounts/live-account' },
-            { label: 'navbar.trading-submenu.demo-account', link: 'trading/accounts/demo-account' },
-            { label: 'navbar.trading-submenu.mam-account', link: 'trading/accounts/mam-ecosystem' },
+            { label: 'Live Account', link: 'trading/accounts/live-account' },
+            { label: 'Demo Account', link: 'trading/accounts/demo-account' },
+            { label: 'MAM Account', link: 'trading/accounts/mam-ecosystem' },
           ]
         },
         {
-          title: 'navbar.trading-submenu.execution',
+          title: 'Execution',
           items: [
-            { label: 'navbar.trading-submenu.platform', link: 'trading/execution/platform' },
-            { label: 'navbar.trading-submenu.deposits-and-withdrawals', link: 'trading/execution/deposits-and-withdrawals' },
-            { label: 'navbar.trading-submenu.instant-execution', link: 'trading/execution/instant-execution' },
+            { label: 'Platform', link: 'trading/execution/platform' },
+            { label: 'Deposits & Withdrawals', link: 'trading/execution/deposits-and-withdrawals' },
+            { label: 'Instant Execution', link: 'trading/execution/instant-execution' },
           ]
         }
       ],
@@ -43,22 +43,75 @@ export const NAVBAR_ITEMS: NavItem[] = [
     label: 'navbar.markets',
     link: 'markets',
     mega: {
-      sections: []
-    }
+      sections: [
+        {
+          title: 'Asset Classes',
+          items: [
+            { label: 'Asset Classes', link: 'markets/asset-classes' },
+            { label: 'Asset Groups', link: 'markets/asset-groups' },
+          ],
+        },
+        {
+          title: 'Trading Conditions',
+          items: [
+            { label: 'Spread', link: 'markets/conditions/spread' },
+            { label: 'Leverage & Margin', link: 'markets/conditions/leverage-and-margin' },
+            { label: 'Swap', link: 'markets/conditions/swap' },
+          ],
+        },
+      ],
+    },
   },
   {
     label: 'navbar.resources',
     link: 'resources',
     mega: {
-      sections: []
-    }
+      sections: [
+        {
+          title: 'Tools',
+          items: [
+            { label: 'Economic Calendar', link: 'resources/tools/economic-calendar' },
+            { label: 'Corporate Calendar', link: 'resources/tools/corporate-calendar' },
+            { label: 'Analysis IQ', link: 'resources/tools/analysis-iq' },
+            { label: 'News IQ', link: 'resources/tools/news-iq' },
+            { label: 'Calculators', link: 'resources/tools/calculators' },
+          ],
+        },
+        {
+          title: 'Excent Academy',
+          items: [
+            { label: 'Market Blog', link: 'resources/excent-academy/market-blog' },
+            { label: 'Webinars', link: 'resources/excent-academy/webinars' },
+            { label: 'Glossary', link: 'resources/excent-academy/glossary' },
+            { label: 'Knowledge Base', link: 'resources/knowledge-base' },
+          ],
+        },
+      ],
+    },
   },
   {
     label: 'navbar.company',
     link: 'company',
     mega: {
-      sections: []
-    }
+      sections: [
+        {
+          title: 'About Us',
+          items: [
+            { label: 'About Us', link: 'company/about-us' },
+            { label: 'Regulations', link: 'company/about-us/regulations' },
+            { label: 'Legal Area', link: 'company/about-us/legal-area' },
+          ],
+        },
+        {
+          title: 'Help',
+          items: [
+            { label: 'Help Center', link: 'company/help-center' },
+            { label: 'Support', link: 'company/help/support' },
+            { label: 'FAQ', link: 'company/help/faq' },
+          ],
+        },
+      ],
+    },
   },
   {
     label: 'navbar.partners',

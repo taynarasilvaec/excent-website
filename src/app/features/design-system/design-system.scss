@@ -97,15 +97,31 @@ code.ds__swatch-code {
 }
 
 /* Typography */
+.ds__rule {
+  max-width: 760px;
+  font-size: 13px;
+  line-height: 1.5;
+}
 .ds__text-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 24px;
 }
 .ds__text-row {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+}
+.ds__type-spec {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ds__subhead {
+  margin-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 /* Cards */
@@ -120,4 +136,19 @@ code.ds__swatch-code {
 
 .ds__accordion {
   max-width: 720px;
+}
+
+.ds__pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.ds__pills-label {
+  width: 72px;
+  flex-shrink: 0;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--excent-text-on-dark-dim);
 }

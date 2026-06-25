@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core'
-import { ExcentAccordion } from '../../../../components/excent-accordion/excent-accordion'
-import { ExcentAccordionItem } from '../../../../components/excent-accordion/excent-accordion-item'
+import { BentoItem, ExcentBento } from '../../../../components/excent-bento/excent-bento'
 import { ExcentButton } from '../../../../components/excent-button/excent-button'
+import { ExcentFaq, FaqEntry } from '../../../../components/excent-faq/excent-faq'
 import { ExcentText } from '../../../../components/excent-text/excent-text'
 import { RevealDirective } from '../../../../shared/directives/reveal.directive'
 import { SsoRedirectService } from '../../../../shared/services/sso-redirect.service'
+import { env } from '../../../../../environment/environment'
 
 interface Persona {
   title: string
@@ -23,23 +24,17 @@ interface FeeItem {
   description: string
 }
 
-interface Faq {
-  id: number
-  question: string
-  answer: string
-}
-
 @Component({
   selector: 'app-mam-ecosystem',
   standalone: true,
-  imports: [ExcentText, ExcentButton, ExcentAccordion, ExcentAccordionItem, RevealDirective],
+  imports: [ExcentText, ExcentButton, ExcentBento, ExcentFaq, RevealDirective],
   templateUrl: './mam-ecosystem.html',
   styleUrl: './mam-ecosystem.scss',
 })
 export class MamEcosystem {
   private readonly _sso = inject(SsoRedirectService)
 
-  protected readonly heroImage = '/assets/images/mam-hero.png'
+  protected readonly heroBackground = '/assets/images/mam-account-hero-background.png'
 
   // Interactive flow — clicking a step animates its title/description + visual.
   protected readonly activeStep = signal(0)
@@ -68,6 +63,15 @@ export class MamEcosystem {
       description:
         'Performance fees of up to 50% on net new profit. The High-Water Mark rule ensures you earn on real progress, rewarding consistency while building long-term investor confidence.',
     },
+  ]
+
+  // Shared <excent-bento> — same card shell everywhere, only the grid arrangement
+  // (cols + spans) changes. Copy follows the MAM "Highlights" docx (Figma 714-959).
+  protected readonly bentoCards: BentoItem[] = [
+    { mediaPanel: true, title: 'Built for professionals, backed by regulation.', button: 'Get Started', rowSpan: 2 },
+    { icon: '/assets/icons/balance.svg', title: 'Manage More,', titleDim: 'Operate Less' },
+    { icon: '/assets/icons/security.svg', stat: '24/7', statLabel: 'Dedicated Support' },
+    { icon: '/assets/icons/terminal.svg', title: 'Trades executed once.', titleDim: 'Reflected everywhere.', colSpan: 2 },
   ]
 
   protected readonly personas: Persona[] = [
@@ -109,8 +113,8 @@ export class MamEcosystem {
     },
   ]
 
-  // Q1 answer is from the Figma; Q2–Q5 answers are draft (grounded in the page) — confirm with compliance.
-  protected readonly faqs: Faq[] = [
+  // Copy aligned to "MAM Ecosystem — Copywriting.docx".
+  protected readonly faqs: FaqEntry[] = [
     {
       id: 1,
       question: 'Who can apply for a MAM account?',
@@ -121,25 +125,26 @@ export class MamEcosystem {
       id: 2,
       question: 'How are trades allocated across sub-accounts?',
       answer:
-        'A trade placed on your Master account is mirrored to every connected sub-account in real time, using flexible allocation methods so each account is sized to its own equity.',
+        'When you execute a trade on your Master account, the platform automatically distributes it across all linked sub-accounts in proportion to each client\'s capital.',
     },
     {
       id: 3,
       question: 'Is there a minimum number of sub-accounts required?',
       answer:
-        'Specific requirements are confirmed during the application process. Reach out to our team and we will walk you through what fits your structure.',
+        'No. You can start with a single sub-account and scale your structure as your client base grows.',
     },
     {
       id: 4,
       question: 'How and when are performance fees paid?',
       answer:
-        'Performance fees are calculated and settled on a monthly cycle, charged only on new profit above your High-Water Mark.',
+        'Performance fees are calculated monthly and paid directly to your Master account, based on the High-Water Mark rule.',
+      link: { label: 'Learn More', href: env.KNOWLEDGE },
     },
     {
       id: 5,
       question: 'Is the MAM account available to managers in all regions?',
       answer:
-        'The MAM account is available to managers across most regions. Eligibility depends on local regulations and the jurisdiction of the entity providing the service.',
+        'Excent Capital operates across multiple jurisdictions. Eligibility may vary depending on your country of residence and regulatory requirements.',
     },
   ]
 

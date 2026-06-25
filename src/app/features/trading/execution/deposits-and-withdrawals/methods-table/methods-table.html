@@ -1,0 +1,17 @@
+<div class="methods-table">
+  <span class="methods-table__pattern" aria-hidden="true"></span>
+
+  <div class="methods-table__head">
+    <span class="methods-table__th">Method</span>
+    <span class="methods-table__th">Processing Time</span>
+  </div>
+
+  <ul class="methods-table__rows">
+    @for (r of rows(); track r.method) {
+      <li class="methods-table__row">
+        <span class="methods-table__method">{{ r.method }}</span>
+        <span class="methods-table__time">{{ r.time }}</span>
+      </li>
+    }
+  </ul>
+</div>

@@ -20,5 +20,16 @@
       class="excent-accordion-item__answer">
       {{ answer() }}
     </p>
+    @if (linkLabel()) {
+      <a
+        id="excent-accordion-item-link"
+        data-cy="excent-accordion-item-link"
+        class="excent-accordion-item__link"
+        [href]="linkHref() || '#'"
+        target="_blank"
+        rel="noopener">
+        {{ linkLabel() }}
+      </a>
+    }
   }
 </div>

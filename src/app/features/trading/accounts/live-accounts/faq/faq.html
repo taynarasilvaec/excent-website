@@ -1,16 +1,5 @@
 <section id="live-account-faq" data-cy="live-account-faq" class="live-account-faq">
-  <h2 id="live-account-faq-title" data-cy="live-account-faq-title" class="live-account-faq__title">
-    {{ 'live-account.faq.title' | translate }}
-  </h2>
-
-  <excent-accordion id="live-account-faq-accordion" data-cy="live-account-faq-accordion" [initialActiveId]="1">
-    @for (faq of faqs; track faq.id) {
-      <excent-accordion-item
-        [itemId]="faq.id"
-        [question]="faq.questionKey | translate"
-        [answer]="faq.answerKey | translate" />
-    }
-  </excent-accordion>
+  <excent-faq id="live-account-faq-block" data-cy="live-account-faq-block" title="live-account.faq.title" [items]="faqs" [initialActiveId]="1" />
 
   <div id="live-account-faq-cta-card" data-cy="live-account-faq-cta-card" class="live-account-faq__cta-card">
     <excent-glow position="bottom-left" bottom="-80px" left="-180px" width="110%" height="130%" transparentAt="60%" />

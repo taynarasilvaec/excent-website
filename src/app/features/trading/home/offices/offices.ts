@@ -45,7 +45,7 @@ export class HomeOffices implements AfterViewInit {
   protected readonly officeKeys: readonly OfficeKey[] = ['mexico', 'brazil']
   protected readonly offices: Record<OfficeKey, OfficeData> = {
     mexico: {
-      ceoName: 'Wilfredo Rodriguez',
+      ceoName: 'Rodolpho Brito',
       photo: '/assets/images/rodolpho.svg',
       image: '/assets/images/office-mexico.jpg',
       labelKey: 'home.offices.mexico-office',

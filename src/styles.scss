@@ -80,8 +80,8 @@ body {
   --excent-text-on-dark-soft: rgba(17, 24, 39, 0.85);
   --excent-text-on-dark-secondary: rgba(17, 24, 39, 0.78);
   --excent-text-on-dark-muted: rgba(17, 24, 39, 0.62);
-  --excent-text-on-dark-dim: rgba(17, 24, 39, 0.50);
-  --excent-text-on-dark-faint: rgba(17, 24, 39, 0.40);
+  --excent-text-on-dark-dim: rgba(17, 24, 39, 0.62);
+  --excent-text-on-dark-faint: rgba(17, 24, 39, 0.55);
 
   /* Link accent (no gradients in light) */
   --excent-link-blue: #086EF9;
@@ -218,6 +218,16 @@ body {
 }
 .full-bleed__inner {
   padding-inline: var(--excent-fullbleed-pad);
+}
+
+/* First-hero standard for INNER pages (not the home hero, which is full-bleed
+   100vh). 80vh tall with top padding so content clears the floating fixed navbar
+   and the menu never sits on top of it initially. */
+.section-hero {
+  min-height: 80vh;
+  padding-top: 120px;
+
+  @media (min-width: 1024px) { padding-top: 180px; }
 }
 
 /* === Mobile: scroll funciona pero la barra es invisible ==================
