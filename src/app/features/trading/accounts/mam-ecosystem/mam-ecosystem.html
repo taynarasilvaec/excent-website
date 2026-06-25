@@ -1,66 +1,39 @@
 <div id="mam" data-cy="mam" class="mam">
 
   <!-- ============ Hero ============ -->
-  <section id="mam-hero" data-cy="mam-hero" class="mam-hero">
-    <img class="mam-hero__bg" alt="" [src]="heroImage" />
-    <div class="mam-hero__overlay"></div>
+  <section id="mam-hero" data-cy="mam-hero" class="mam-hero section-hero">
+    <img class="mam-hero__bg" alt="" [src]="heroBackground" />
 
-    <div appReveal [fade]="true" id="mam-hero-content" data-cy="mam-hero-content" class="mam-hero__content">
-      <excent-text id="mam-hero-title" data-cy="mam-hero-title" variant="display" as="h1" color="inherit" class="mam-hero__title">
-        Trade Once
-        <span class="mam-hero__title-accent">Mirror Everywhere</span>
-      </excent-text>
-      <excent-text id="mam-hero-sub" data-cy="mam-hero-sub" variant="body" color="inherit" class="mam-hero__sub">
-        Execute a trade once and replicate it instantly across your entire client structure.
-      </excent-text>
-      <div id="mam-hero-actions" data-cy="mam-hero-actions" class="mam-hero__actions">
-        <excent-button id="mam-hero-apply-btn" data-cy="mam-hero-apply-btn" color="white" radius="sm" size="lg" width="auto" (click)="onApply()">
-          Apply For MAM Account
-          <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
-        </excent-button>
-        <excent-button id="mam-hero-talk-btn" data-cy="mam-hero-talk-btn" color="outline-white" radius="sm" size="lg" width="auto" (click)="onTalkToTeam()">
-          Talk To Our Team
-          <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
-        </excent-button>
-      </div>
-    </div>
-  </section>
-
-  <div class="mam__container">
-
-    <!-- ============ Bento ============ -->
-    <section id="mam-bento" data-cy="mam-bento" class="mam-section mam-bento">
-      <div appReveal class="mam-bento__left">
-        <div class="mam-card mam-card--bright mam-bento__feature">
-          <span class="mam-icon"><img alt="" src="/assets/icons/terminal.svg" /></span>
-        </div>
-        <div class="mam-bento__lead">
-          <!-- PLACEHOLDER copy (Figma) — confirmar texto final -->
-          <excent-text variant="subtitle" as="p" class="mam-section__muted">Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus.</excent-text>
-          <excent-button id="mam-bento-get-started" data-cy="mam-bento-get-started" color="white" radius="sm" size="md" width="auto" (click)="onApply()">
-            Get Started
+    <div class="mam-hero__inner">
+      <!-- Right: title + subtitle + CTAs (the phone composition is baked into the bg) -->
+      <div appReveal [fade]="true" id="mam-hero-content" data-cy="mam-hero-content" class="mam-hero__content">
+        <excent-text id="mam-hero-title" data-cy="mam-hero-title" variant="display" as="h1" color="inherit" class="mam-hero__title">
+          Trade Once
+          <span class="mam-hero__title-accent">Mirror Everywhere</span>
+        </excent-text>
+        <excent-text id="mam-hero-sub" data-cy="mam-hero-sub" variant="body" color="inherit" class="mam-hero__sub">
+          Execute a trade once and replicate it instantly across your entire client structure.
+        </excent-text>
+        <div id="mam-hero-actions" data-cy="mam-hero-actions" class="mam-hero__actions">
+          <excent-button id="mam-hero-apply-btn" data-cy="mam-hero-apply-btn" color="white" radius="sm" size="lg" width="auto" (click)="onApply()">
+            Apply For MAM Account
+            <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
+          </excent-button>
+          <excent-button id="mam-hero-talk-btn" data-cy="mam-hero-talk-btn" color="outline-white" radius="sm" size="lg" width="auto" (click)="onTalkToTeam()">
+            Talk To Our Team
             <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
           </excent-button>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div appReveal [delay]="120" class="mam-bento__right">
-        <article class="mam-card mam-card--bright mam-bento__cell">
-          <span class="mam-icon"><img alt="" src="/assets/icons/balance.svg" /></span>
-          <excent-text variant="subtitle" as="h3" class="mam-card__title">Manage More, Operate Less</excent-text>
-        </article>
-        <article class="mam-card mam-card--grid mam-bento__cell">
-          <span class="mam-icon"><img alt="" src="/assets/icons/security.svg" /></span>
-          <div class="mam-bento__stat">
-            <span class="mam-bento__stat-value">24/7</span>
-            <span class="mam-bento__stat-label">Dedicated support</span>
-          </div>
-        </article>
-        <article class="mam-card mam-card--grid mam-bento__wide">
-          <span class="mam-icon"><img alt="" src="/assets/icons/coins.svg" /></span>
-          <!-- PLACEHOLDER copy (Figma) — confirmar texto final -->
-          <excent-text variant="subtitle" as="p" class="mam-bento__wide-text">Tempus leo eu aenean sed diam urna tempor sulvinar vivamus fringilla lacus nec metus bibendum egestas.</excent-text>
-        </article>
+  <div class="mam__container section-contained">
+
+    <!-- ============ Bento (shared <excent-bento> grid — only the order differs) ============ -->
+    <section id="mam-bento" data-cy="mam-bento" class="mam-section mam-bento">
+      <div appReveal>
+        <excent-bento id="mam-bento-grid" data-cy="mam-bento-grid" name="mam-bento" [cols]="3" [items]="bentoCards" (cardAction)="onApply()" />
       </div>
     </section>
 
@@ -160,7 +133,7 @@
     </div>
   </section>
 
-  <div class="mam__container">
+  <div class="mam__container section-contained">
     <!-- ============ Final CTA ============ -->
     <section id="mam-cta" data-cy="mam-cta" class="mam-section mam-cta">
       <!-- PLACEHOLDER heading in Figma ("Tempus leo eu aenean") — draft copy, confirm -->
@@ -177,14 +150,9 @@
       </div>
     </section>
 
-    <!-- ============ FAQ ============ -->
+    <!-- ============ FAQ (shared <excent-faq> — same as live-account) ============ -->
     <section id="mam-faq" data-cy="mam-faq" class="mam-section mam-faq">
-      <excent-text appReveal variant="title" as="h2" class="mam-section__title mam-faq__title">FAQ</excent-text>
-      <excent-accordion id="mam-faq-accordion" data-cy="mam-faq-accordion" [initialActiveId]="1">
-        @for (faq of faqs; track faq.id) {
-          <excent-accordion-item [itemId]="faq.id" [question]="faq.question" [answer]="faq.answer" />
-        }
-      </excent-accordion>
+      <excent-faq appReveal id="mam-faq-block" data-cy="mam-faq-block" title="FAQ" [items]="faqs" [initialActiveId]="1" />
     </section>
   </div>
 </div>

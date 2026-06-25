@@ -1,0 +1,114 @@
+:host { display: inline-flex; }
+
+.excent-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.excent-pill__label { display: inline-block; }
+.excent-pill__dot {
+  display: inline-block;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ===== Sizes ===== */
+.excent-pill--sm {
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+
+  .excent-pill__dot { width: 6px; height: 6px; }
+}
+.excent-pill--md {
+  gap: 8px;
+  padding: 6px 14px;
+  font-size: 13px;
+
+  .excent-pill__dot { width: 8px; height: 8px; }
+}
+.excent-pill--lg {
+  gap: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+
+  .excent-pill__dot { width: 10px; height: 10px; }
+}
+
+.excent-pill--upper {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+/* ===== Soft (translucent) ===== */
+.excent-pill--soft.excent-pill--neutral {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--excent-hairline, rgba(255, 255, 255, 0.1));
+  color: var(--excent-text-on-dark-soft);
+}
+.excent-pill--soft.excent-pill--blue {
+  background: rgba(8, 110, 249, 0.12);
+  border-color: rgba(8, 110, 249, 0.30);
+  color: #6fb0ff;
+}
+.excent-pill--soft.excent-pill--green {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.30);
+  color: #4ade80;
+}
+
+/* ===== Outline ===== */
+.excent-pill--outline.excent-pill--neutral {
+  background: transparent;
+  border-color: var(--excent-hairline, rgba(255, 255, 255, 0.18));
+  color: var(--excent-text-on-dark-soft);
+}
+.excent-pill--outline.excent-pill--blue {
+  background: rgba(8, 110, 249, 0.08);
+  border-color: rgba(8, 110, 249, 0.45);
+  color: #6fb0ff;
+}
+.excent-pill--outline.excent-pill--green {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.45);
+  color: #4ade80;
+}
+
+/* ===== Solid ===== */
+.excent-pill--solid.excent-pill--blue {
+  background: var(--excent-link-blue, #086ef9);
+  border-color: transparent;
+  color: #ffffff;
+}
+.excent-pill--solid.excent-pill--green {
+  background: #22c55e;
+  border-color: transparent;
+  color: #052e16;
+}
+.excent-pill--solid.excent-pill--neutral {
+  background: #ffffff;
+  border-color: transparent;
+  color: #0a1830;
+}
+
+/* ===== Status dot (defaults to green) — color follows the pill where it makes
+   sense, otherwise a live-green indicator with glow. ===== */
+.excent-pill__dot {
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+}
+.excent-pill--blue .excent-pill__dot {
+  background: #53a3ff;
+  box-shadow: 0 0 8px rgba(83, 163, 255, 0.8);
+}
+.excent-pill--solid .excent-pill__dot {
+  background: currentColor;
+  box-shadow: none;
+}

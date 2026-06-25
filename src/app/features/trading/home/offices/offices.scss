@@ -55,7 +55,8 @@
     @media (min-width: 1024px) { color: #111827; }
   }
   .home-offices__description { color: rgba(17, 24, 39, 0.75); }
-  .home-offices__quote { color: #111827; }
+  // .home-offices__quote sits over the dark office photo -> stays white (base
+  // color) in both themes; do NOT flip it to navy here.
   .home-offices__bar-segment { background: rgba(17, 24, 39, 0.15); }
   // active segment stays #006DFF.
 }

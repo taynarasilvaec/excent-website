@@ -59,14 +59,33 @@
     }
   </section>
 
-  <!-- ============ Typography ============ -->
+  <!-- ============ Headings & Type Scale ============ -->
   <section id="ds-text" data-cy="ds-text" class="ds__section">
-    <excent-text variant="subtitle" as="h2" class="ds__section-title">Typography</excent-text>
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Headings &amp; Type Scale</excent-text>
+    <p class="ds__rule ds__muted">
+      Rule: always use <code class="ds__swatch-code">&lt;excent-text variant="…"&gt;</code> — never hardcode
+      font-size, weight or color on a page. This scale is the single source of truth: change a variant here
+      and every page updates. Colors are theme-aware tokens (flip automatically light/dark).
+    </p>
     <div class="ds__text-list">
-      @for (v of textVariants; track v) {
+      @for (h of headings; track h.variant) {
         <div class="ds__text-row">
-          <code class="ds__swatch-code">{{ v }}</code>
-          <excent-text [variant]="v">The quick brown fox jumps over the lazy dog</excent-text>
+          <div class="ds__type-spec">
+            <code class="ds__swatch-code">{{ h.variant }}</code>
+            <span class="ds__muted">{{ h.tag }} · {{ h.size }} · weight {{ h.weight }} · {{ h.usage }}</span>
+          </div>
+          <excent-text [variant]="h.variant">The quick brown fox jumps over the lazy dog</excent-text>
+        </div>
+      }
+    </div>
+
+    <excent-text variant="footer-text" class="ds__muted ds__subhead">Semantic text colors</excent-text>
+    <div class="ds__swatches">
+      @for (t of textColors; track t.name) {
+        <div class="ds__swatch">
+          <span class="ds__swatch-chip" [style.background]="'var(' + t.name + ')'"></span>
+          <span class="ds__swatch-label">{{ t.label }}</span>
+          <code class="ds__swatch-code">{{ t.name }}</code>
         </div>
       }
     </div>
@@ -82,6 +101,57 @@
         </excent-card>
       }
     </div>
+  </section>
+
+  <!-- ============ Pills / Tags ============ -->
+  <section id="ds-pills" data-cy="ds-pills" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Pills / Tags</excent-text>
+    <excent-text variant="footer-text" class="ds__section-note">
+      One shared chip — <code>&lt;excent-pill&gt;</code>. Props: <code>variant</code> (soft · outline · solid) × <code>color</code> (neutral · blue · green) × <code>size</code> (sm · md · lg), plus <code>dot</code> and <code>uppercase</code>.
+    </excent-text>
+
+    <div class="ds__pills">
+      <span class="ds__pills-label">Soft</span>
+      <excent-pill variant="soft" color="neutral" [dot]="true">Live Market Access</excent-pill>
+      <excent-pill variant="soft" color="blue">Beta</excent-pill>
+      <excent-pill variant="soft" color="green" [dot]="true">Markets Open</excent-pill>
+    </div>
+    <div class="ds__pills">
+      <span class="ds__pills-label">Outline</span>
+      <excent-pill variant="outline" color="neutral">Why Trade With Us?</excent-pill>
+      <excent-pill variant="outline" color="blue" [uppercase]="true">Error 404</excent-pill>
+      <excent-pill variant="outline" color="green">Regulated</excent-pill>
+    </div>
+    <div class="ds__pills">
+      <span class="ds__pills-label">Solid</span>
+      <excent-pill variant="solid" color="blue">24/7 Human Support</excent-pill>
+      <excent-pill variant="solid" color="green">Live</excent-pill>
+      <excent-pill variant="solid" color="neutral">New</excent-pill>
+    </div>
+    <div class="ds__pills">
+      <span class="ds__pills-label">Sizes</span>
+      <excent-pill variant="soft" color="blue" size="sm">Small</excent-pill>
+      <excent-pill variant="soft" color="blue" size="md">Medium</excent-pill>
+      <excent-pill variant="soft" color="blue" size="lg">Large</excent-pill>
+    </div>
+  </section>
+
+  <!-- ============ Bento grid ============ -->
+  <section id="ds-bento" data-cy="ds-bento" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">Bento Grid</excent-text>
+    <excent-text variant="footer-text" class="ds__section-note">
+      One card shell for the whole site (blue gradient, decorative pattern, border, radius, padding, 12px gap). Only the grid changes — set <code>[cols]</code> and per-card <code>colSpan</code>/<code>rowSpan</code>. Never restyle the card.
+    </excent-text>
+    <excent-bento id="ds-bento-grid" data-cy="ds-bento-grid" name="ds-bento" [cols]="3" [items]="bentoCards" />
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="ds-faq" data-cy="ds-faq" class="ds__section">
+    <excent-text variant="subtitle" as="h2" class="ds__section-title">FAQ</excent-text>
+    <excent-text variant="footer-text" class="ds__section-note">
+      The single shared FAQ block. Reuse <code>&lt;excent-faq [title]="…" [items]="…"&gt;</code> — never rebuild the title + accordion by hand.
+    </excent-text>
+    <excent-faq id="ds-faq-block" data-cy="ds-faq-block" title="FAQ" [items]="faqItems" />
   </section>
 
   <!-- ============ Accordion ============ -->

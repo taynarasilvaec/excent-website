@@ -1,0 +1,14 @@
+<div class="excent-faq">
+  <excent-text variant="title" as="h2" class="excent-faq__title">{{ title() | translate }}</excent-text>
+
+  <excent-accordion [initialActiveId]="initialActiveId()">
+    @for (f of items(); track f.id) {
+      <excent-accordion-item
+        [itemId]="f.id"
+        [question]="f.question | translate"
+        [answer]="f.answer | translate"
+        [linkLabel]="f.link ? (f.link.label | translate) : null"
+        [linkHref]="f.link?.href ?? null" />
+    }
+  </excent-accordion>
+</div>

@@ -62,6 +62,18 @@
   animation: excent-accordion-answer-slide 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+.excent-accordion-item__link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--excent-link-blue);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
 @keyframes excent-accordion-answer-slide {
   from {
     opacity: 0;

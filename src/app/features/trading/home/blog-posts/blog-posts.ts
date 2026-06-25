@@ -57,7 +57,8 @@ export class HomeBlogPosts implements AfterViewInit {
     id: 'featured-1',
     category: 'Market Analysis',
     date: '8th dec, 2024',
-    title: 'January 2026 Market Wrap-Up: Key Economic and Trading Highlights',
+    // Line break after the colon to match the Figma (title : subtitle).
+    title: 'January 2026 Market Wrap-Up:\nKey Economic and Trading Highlights',
     description:
       'This month proved to be a dynamic start to the year, driven by geopolitical events, currency volatility, and commodities price movements.',
     image: '/assets/images/trump.png',

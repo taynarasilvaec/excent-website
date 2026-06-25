@@ -155,7 +155,13 @@ Viven en `src/app/components/` localmente y se promueven a `libraries/` cuando e
 | `excent-button` | `<excent-button>` | Botones. Props: `color`, `radius`, `size`, `width` |
 | `excent-card` | `<excent-card>` | Cards. Variants: `blue`, `blue-bright`, `white-transparent`, `transparent`, `flag`. `showGrid` para cuadrícula |
 | `excent-text` | `<excent-text>` | Tipografía con variantes |
+| `excent-pill` | `<excent-pill>` | **Pill/tag único de la identidad** (kickers, badges, eyebrows). Props: `variant` (soft · outline · solid) × `color` (neutral · blue · green) × `size` (sm · md · lg), `dot` (status), `uppercase`. Label por content projection. Ej.: "Live Market Access" (soft+dot), "Error 404" (outline blue upper), "24/7 Human Support" (solid blue). |
 | `excent-accordion` + `excent-accordion-item` | wrapper con items adentro | Acordeón reusable. Props del item: `itemId`, `question`, `answer`. Del wrapper: `initialActiveId` |
+| `excent-bento` | `<excent-bento>` | **Bento de la identidad**. UN solo shell de card (gradiente azul `#011C41` + glow + patrón decorativo absoluto: blueprint grid + sparkles + dots + cuadrados cyan, enmascarado; borde, radius 24px, padding 42px). Navy en ambos temas, no cambia. Props: `[cols]` (columnas), `[items]` (`BentoItem`: `icon?`, `media?`/`mediaPanel?`, `title?`+`titleDim?`, `description?`, `stat?`+`statLabel?`, `button?`, `link?`, `colSpan?`, `rowSpan?`), `name`. `(cardAction)` emite el item del botón. Textos aceptan string o key i18n. |
+| `excent-faq` | `<excent-faq>` | **FAQ único de la identidad** (título Title Case + `excent-accordion`). Props: `title` (string o key), `[items]` (`FaqEntry[]`: `id`, `question`, `answer` — string o key, aplica `\| translate`), `initialActiveId`. |
+| `live-spark` | `<live-spark>` | Sparkline **animado** (random-walk rolando, `requestAnimationFrame`, SSR-safe). Stroke 1px non-scaling + área con degradé a azul oscuro opacidad 0. Prop: `up` (color positive/negative). Solo decorativo (mock). |
+
+**REGLA — bento**: todos los bento usan SIEMPRE `<excent-bento>`. El **shell del card es idéntico** en todo el sitio (borde, stroke, color, gap 12px, padding, patrón) — NUNCA se reestiliza. Lo único que cambia es el **arreglo del grid**: `[cols]` + `colSpan`/`rowSpan` por card. (Ej.: MAM = 3 cols con card alto + wide; live-account security = 3 cols con assets alto.)
 
 Cuando creas un componente nuevo, evalúa primero si lo puedes resolver con un excent component existente.
 

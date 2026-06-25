@@ -13,6 +13,8 @@ export class ExcentAccordionItem {
   public readonly itemId = input.required<ExcentAccordionItemId>()
   public readonly question = input.required<string>()
   public readonly answer = input.required<string>()
+  public readonly linkLabel = input<string | null>(null)
+  public readonly linkHref = input<string | null>(null)
 
   protected readonly isOpen = computed(() => this._parent.isActive(this.itemId()))
 

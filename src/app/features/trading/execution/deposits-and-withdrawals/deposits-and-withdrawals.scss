@@ -2,3 +2,605 @@
   display: block;
   width: 100%;
 }
+
+.dw {
+  display: block;
+  width: 100%;
+}
+
+.dw__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dw-section {
+  padding: 64px 0;
+
+  @media (min-width: 1024px) {
+    padding: 96px 0;
+  }
+}
+.dw-section__title {
+  margin: 0 0 40px;
+  text-align: center;
+}
+
+/* ============ Hero ============ */
+.dw-hero {
+  position: relative;
+  padding-inline: 20px;
+  padding-bottom: 64px;
+  overflow: hidden;
+  background:
+    radial-gradient(62% 58% at 50% 100%, rgba(32, 103, 190, 0.5) 0%, rgba(2, 58, 134, 0.32) 22%, rgba(1, 29, 67, 0.14) 40%, rgba(0, 0, 0, 0) 62%),
+    linear-gradient(180deg, #02060f 0%, #03081a 55%, #02060f 100%);
+
+  @media (min-width: 1024px) { padding-bottom: 96px; }
+}
+.dw-hero__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(38% 30% at 82% 14%, rgba(8, 110, 249, 0.16) 0%, rgba(8, 110, 249, 0) 70%);
+}
+.dw-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+
+  @media (min-width: 1024px) { gap: 28px; }
+}
+
+.dw-hero__breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--excent-text-on-dark-faint);
+}
+.dw-hero__crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--excent-text-on-dark-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  svg { width: 15px; height: 15px; }
+  &:hover { color: var(--excent-text-on-dark-primary); }
+  &--current { color: var(--excent-text-on-dark-primary); }
+}
+.dw-hero__crumb-sep { color: var(--excent-text-on-dark-faint); }
+
+.dw-hero__title {
+  margin: 0;
+  color: #fff;
+
+  @media (min-width: 1024px) { white-space: nowrap; }
+}
+.dw-hero__sub {
+  margin: 0;
+  max-width: 560px;
+  color: rgba(255, 255, 255, 0.72);
+}
+.dw-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.dw-hero__trust {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+.dw-hero__avatars {
+  display: inline-flex;
+}
+.dw-hero__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #05070d;
+  margin-left: -10px;
+  background: linear-gradient(135deg, #2f77d8 0%, #0b2a4a 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+
+  &:first-child { margin-left: 0; }
+  &:nth-child(2) { background: linear-gradient(135deg, #53a3ff 0%, #1e61c4 100%); }
+  &:nth-child(3) { background: linear-gradient(135deg, #8bbcff 0%, #2f77d8 100%); }
+}
+.dw-hero__trust-label {
+  font-size: 14px;
+  color: var(--excent-text-on-dark-muted);
+}
+
+/* ============ Cards (shared look) ============ */
+.dw-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  border-radius: 24px;
+  background-color: var(--excent-security-card-bg);
+  background-image:
+    linear-gradient(180deg, transparent 0%, var(--excent-security-card-bg) 60%),
+    linear-gradient(0deg, var(--excent-security-card-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--excent-security-card-grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 56px 56px, 56px 56px;
+  border: 1px solid var(--excent-security-card-border);
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+  > *:not(excent-glow) { position: relative; z-index: 1; }
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(58, 160, 255, 0.35);
+    box-shadow: 0 16px 40px rgba(8, 110, 249, 0.16);
+  }
+}
+.dw-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  background: var(--excent-security-icon-bg);
+  box-shadow:
+    inset 0 0 12px var(--excent-security-icon-shadow-inset),
+    0 8px 19.5px var(--excent-security-icon-shadow-drop);
+  backdrop-filter: blur(40px);
+  flex-shrink: 0;
+
+  img { width: 24px; height: 24px; }
+}
+.dw-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.dw-card__title { margin: 0; }
+.dw-card__desc { margin: 0; color: var(--excent-text-on-dark-muted); }
+
+/* LIGHT MODE — cards sit on a light surface; recolor the white glyphs to dark. */
+:host-context(html:not(.dark)) .dw-card__icon img {
+  filter: var(--excent-navbar-icon-filter, none);
+}
+
+/* ============ Security grid ============ */
+.dw-security__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1.45fr 1fr;
+    grid-auto-rows: 1fr;
+  }
+}
+.dw-security__feature--tall {
+  justify-content: flex-start;
+
+  @media (min-width: 1024px) {
+    grid-row: 1 / span 2;
+  }
+}
+
+/* Decorative "segregation" visual on the tall card */
+.dw-security__visual {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  padding-top: 32px;
+}
+.dw-security__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.dw-security__stack-label {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--excent-text-on-dark-dim);
+  margin-bottom: 4px;
+}
+.dw-security__bar {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(8, 110, 249, 0.55), rgba(8, 110, 249, 0.12));
+
+  &:nth-child(3) { width: 85%; }
+  &:nth-child(4) { width: 60%; }
+}
+.dw-security__stack--muted .dw-security__bar {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03));
+}
+.dw-security__divider {
+  width: 1px;
+  align-self: stretch;
+  background: linear-gradient(180deg, transparent, rgba(58, 160, 255, 0.5), transparent);
+}
+:host-context(html:not(.dark)) .dw-security__stack--muted .dw-security__bar {
+  background: linear-gradient(90deg, rgba(17, 24, 39, 0.12), rgba(17, 24, 39, 0.03));
+}
+
+/* ============ Deposit / Withdrawal methods ============ */
+.dw-methods {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1.15fr;
+    gap: 64px;
+  }
+}
+.dw-methods__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.dw-methods__title {
+  margin: 0;
+  text-align: left;
+}
+.dw-methods__hint {
+  margin: 0;
+  color: var(--excent-text-on-dark-muted);
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.dw-methods__link {
+  color: var(--excent-link-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.dw-methods__table { width: 100%; }
+
+/* ============ Log In To Your Client Area ============ */
+.dw-client {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+}
+.dw-client__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.dw-client__title { margin: 0; text-align: left; }
+
+.dw-client__steps {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.dw-client__step {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+.dw-client__step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--excent-hairline);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--excent-text-on-dark-muted);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.dw-client__step-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--excent-text-on-dark-primary);
+}
+.dw-client__step--active .dw-client__step-num {
+  background: var(--excent-link-blue);
+  border-color: var(--excent-link-blue);
+  color: #fff;
+}
+.dw-client__step:hover .dw-client__step-num { color: var(--excent-text-on-dark-primary); }
+
+.dw-client__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.dw-client__visual-glow {
+  position: absolute;
+  inset: 10% 0 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 45%, rgba(8, 110, 249, 0.28) 0%, rgba(8, 110, 249, 0) 70%);
+}
+.dw-client__phone {
+  position: relative;
+  z-index: 1;
+  width: 260px;
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.55));
+
+  @media (min-width: 1024px) { width: 300px; }
+}
+
+/* ============ Trade in the World's Most Trusted Currency ============ */
+.dw-currency {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+  overflow: hidden;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1.1fr 1fr;
+    min-height: 460px;
+  }
+}
+.dw-currency__visual {
+  position: relative;
+  min-height: 280px;
+
+  @media (min-width: 1024px) {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+}
+.dw-currency__graph {
+  position: absolute;
+  left: 0;
+  bottom: 12%;
+  width: 100%;
+  height: 60%;
+  opacity: 0.55;
+  overflow: visible;
+}
+.dw-currency__graph-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.32);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: dw-graph-draw 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+@keyframes dw-graph-draw {
+  to { stroke-dashoffset: 0; }
+}
+.dw-currency__coin {
+  position: absolute;
+  left: -6%;
+  bottom: -8%;
+  width: 320px;
+  max-width: 60%;
+  height: auto;
+  filter: drop-shadow(0 24px 60px rgba(11, 202, 202, 0.35));
+  animation: dw-coin-float 6s ease-in-out infinite;
+
+  @media (min-width: 1024px) { width: 360px; }
+}
+@keyframes dw-coin-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-16px) rotate(2deg); }
+}
+.dw-currency__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+
+  @media (min-width: 1024px) {
+    grid-column: 2;
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+.dw-currency__title { margin: 0; }
+.dw-currency__desc {
+  margin: 0;
+  max-width: 460px;
+  color: var(--excent-text-on-dark-muted);
+}
+
+/* ============ Move Funds (Excent Wallet) ============ */
+.dw-wallet__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #011c41;
+  background-image: radial-gradient(90% 130% at 92% 12%, rgba(22, 94, 202, 0.6) 0%, rgba(9, 52, 138, 0.32) 40%, rgba(1, 28, 65, 0) 74%);
+
+  > *:not(.dw-wallet__pattern) { position: relative; z-index: 1; }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 64px;
+  }
+}
+.dw-wallet__pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(120, 170, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 170, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 100% at 88% 10%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 80% 100% at 88% 10%, #000 0%, transparent 72%);
+}
+.dw-wallet__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 520px;
+}
+.dw-wallet__title { margin: 0; color: #fff; }
+.dw-wallet__desc { margin: 0; color: rgba(255, 255, 255, 0.7); }
+.dw-wallet__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ============ FAQ ============ */
+.dw-faq {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+.dw-faq__help { align-self: flex-start; }
+
+/* ============ Payment Methods ============ */
+.dw-payment__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  @media (min-width: 768px) { grid-template-columns: 1fr 1fr; }
+}
+.dw-payment__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 40px 24px;
+  border-radius: 18px;
+  border: 1px solid var(--excent-hairline);
+  background: var(--excent-surface-translucent);
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgba(58, 160, 255, 0.35);
+    background: rgba(8, 110, 249, 0.06);
+  }
+
+  &--wide {
+    @media (min-width: 768px) { grid-column: 1 / -1; }
+  }
+}
+.dw-payment__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--excent-surface-translucent);
+  border: 1px solid var(--excent-hairline);
+
+  img { width: 28px; height: 28px; }
+}
+:host-context(html:not(.dark)) .dw-payment__icon img { filter: var(--excent-navbar-icon-filter, none); }
+.dw-payment__title {
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--excent-text-on-dark-primary);
+}
+.dw-payment__time {
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: var(--excent-text-on-dark-muted);
+}
+
+/* ============ Ready to fund ============ */
+.dw-ready__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 48px 32px;
+  border-radius: 24px;
+  border: 1px solid var(--excent-hairline);
+  background:
+    radial-gradient(60% 120% at 8% 50%, rgba(8, 110, 249, 0.12) 0%, rgba(8, 110, 249, 0) 60%),
+    radial-gradient(60% 120% at 92% 50%, rgba(11, 202, 202, 0.10) 0%, rgba(11, 202, 202, 0) 60%),
+    var(--excent-surface-translucent);
+  overflow: hidden;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 56px 64px;
+  }
+}
+.dw-ready__text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+
+  @media (min-width: 1024px) { text-align: left; }
+}
+.dw-ready__title { margin: 0; }
+.dw-ready__sub { margin: 0; color: var(--excent-text-on-dark-muted); }
+.dw-ready__logos {
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+  object-fit: contain;
+
+  // The logos are dark glyphs on transparent — keep them bright on the dark card.
+  @media (min-width: 1024px) { width: 620px; }
+}
