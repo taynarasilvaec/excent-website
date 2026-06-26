@@ -1,0 +1,11 @@
+<!-- Decorative pattern (absolute) — identical on every card -->
+<span class="excent-bento-card__pattern" aria-hidden="true">
+  @for (d of dots; track $index) {
+    <span class="excent-bento-card__dot" [style.left.%]="d.x" [style.top.%]="d.y"></span>
+  }
+  @for (q of squares; track $index) {
+    <span class="excent-bento-card__square" [style.left.%]="q.x" [style.top.%]="q.y"></span>
+  }
+</span>
+
+<ng-content />

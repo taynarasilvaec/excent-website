@@ -1,11 +1,13 @@
 import { Component, input, output } from '@angular/core'
 import { TranslateModule } from '@ngx-translate/core'
 import { ExcentButton } from '../excent-button/excent-button'
+import { BentoVariant, ExcentBentoCard } from '../excent-bento-card/excent-bento-card'
 
 /**
- * One bento card. The SHELL (blue gradient, decorative pattern, border, radius,
- * padding) is always identical — only the content slots and the grid span vary.
- * Text fields accept a final string or an i18n key (the grid applies translate).
+ * One bento card. The SHELL (gradient, decorative pattern, border, radius,
+ * padding) is owned by <excent-bento-card> and is always identical — only the
+ * content slots, the grid span, and the optional `variant` vary. Text fields
+ * accept a final string or an i18n key (the grid applies translate).
  */
 export interface BentoItem {
   icon?: string
@@ -23,20 +25,22 @@ export interface BentoItem {
   statLabel?: string
   /** Renders a CTA button with this label. */
   button?: string
+  /** Shell fill — navy (default) or the sanctioned blue-bright restyle. */
+  variant?: BentoVariant
   /** Grid span — lets the arrangement change while the card style stays the same. */
   colSpan?: number
   rowSpan?: number
 }
 
 /**
- * Excent signature bento — ONE card style for the whole site (border, stroke,
- * colour, gap, padding, decorative pattern). Only the grid arrangement changes:
- * pass `cols` and per-item `colSpan`/`rowSpan`. Gap is always constant.
+ * Excent signature bento — ONE card style for the whole site (see
+ * <excent-bento-card>). Only the grid arrangement changes: pass `cols` and
+ * per-item `colSpan`/`rowSpan`. Gap is always constant.
  */
 @Component({
   selector: 'excent-bento',
   standalone: true,
-  imports: [TranslateModule, ExcentButton],
+  imports: [TranslateModule, ExcentButton, ExcentBentoCard],
   templateUrl: './excent-bento.html',
   styleUrl: './excent-bento.scss',
 })
@@ -46,19 +50,6 @@ export class ExcentBento {
   readonly items = input.required<BentoItem[]>()
 
   readonly cardAction = output<BentoItem>()
-
-  // Shared decorative pattern — same dot/square scatter on every card.
-  protected readonly dots = [
-    { x: 37, y: 44 },
-    { x: 63, y: 31 },
-    { x: 69, y: 56 },
-    { x: 18, y: 50 },
-  ]
-  protected readonly squares = [
-    { x: 69, y: 38 },
-    { x: 13, y: 58 },
-    { x: 83, y: 57 },
-  ]
 
   protected span(item: BentoItem): string {
     return `grid-column: span ${item.colSpan ?? 1}; grid-row: span ${item.rowSpan ?? 1};`
