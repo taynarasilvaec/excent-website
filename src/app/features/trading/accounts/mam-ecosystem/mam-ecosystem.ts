@@ -69,9 +69,19 @@ export class MamEcosystem {
   // (cols + spans) changes. Copy follows the MAM "Highlights" docx (Figma 714-959).
   protected readonly bentoCards: BentoItem[] = [
     { mediaPanel: true, title: 'Built for professionals, backed by regulation.', button: 'Get Started', rowSpan: 2 },
-    { icon: '/assets/icons/balance.svg', title: 'Manage More,', titleDim: 'Operate Less' },
+    { icon: '/assets/icons/terminal.svg', title: 'Manage More,', titleDim: 'Operate Less' },
     { icon: '/assets/icons/security.svg', stat: '24/7', statLabel: 'Dedicated Support' },
-    { icon: '/assets/icons/terminal.svg', title: 'Trades executed once.', titleDim: 'Reflected everywhere.', colSpan: 2 },
+    { icon: '/assets/icons/balance.svg', title: 'Trades Executed Once.', titleDim: 'Reflected Everywhere.', colSpan: 2 },
+  ]
+
+  // "Your Master Account Fully Equipped" feature tags (Figma 631-5354 / copy doc).
+  protected readonly equippedTags: string[] = [
+    'Master Dashboard',
+    'Public Master Profile',
+    'Invitation Link',
+    'Follower Analytics',
+    'Allocation Visibility',
+    'Real-Time Replication',
   ]
 
   protected readonly personas: Persona[] = [
@@ -157,6 +167,10 @@ export class MamEcosystem {
   }
 
   protected onTalkToTeam(): void {
+    this._sso.goTo('sign-up')
+  }
+
+  protected onApplyMaster(): void {
     this._sso.goTo('sign-up')
   }
 }

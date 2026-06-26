@@ -141,7 +141,7 @@
    image; only the copy + CTAs sit on top, aligned to the right. */
 .mam-hero {
   position: relative;
-  // height + top padding come from the .section-hero standard (80vh / 180px).
+  // height + top padding come from the .section-hero standard (100vh / 180px).
   padding-inline: 20px;
   padding-bottom: 64px;
   overflow: hidden;
@@ -410,34 +410,7 @@
   }
 }
 
-/* ============ How Your Profit (blue band) ============ */
-.mam-profit {
-  margin: 24px 0;
-  padding: 0 20px;
-}
-.mam-profit__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 18px;
-  padding: 64px 28px;
-  border-radius: 24px;
-  background:
-    radial-gradient(120% 140% at 50% 0%, rgba(8, 110, 249, 0.45) 0%, rgba(8, 110, 249, 0) 60%),
-    linear-gradient(180deg, #054295 0%, #032c64 60%, #021022 100%);
-  border: 1px solid rgba(160, 196, 255, 0.18);
-  color: #fff;
-}
-.mam-profit__title { color: #fff; }
-.mam-profit__desc {
-  max-width: 760px;
-  color: rgba(255, 255, 255, 0.82);
-}
-
-/* ============ Final CTA ============ */
+/* ============ Your Master Account Fully Equipped (CTA) ============ */
 .mam-cta {
   display: flex;
   flex-direction: column;
@@ -445,6 +418,7 @@
   text-align: center;
   gap: 16px;
 }
+.mam-cta__title { max-width: 760px; }
 .mam-cta__sub { max-width: 560px; }
 .mam-cta__actions {
   display: flex;
@@ -453,9 +427,45 @@
   gap: 12px;
   margin-top: 10px;
 }
+/* Continuous marquee of checkmark feature tags (two copies → seamless loop). */
+.mam-cta__tags {
+  width: 100%;
+  margin-top: 40px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
 
-/* ============ FAQ (shared <excent-faq>) ============ */
+  &:hover .mam-cta__track { animation-play-state: paused; }
+}
+.mam-cta__track {
+  display: flex;
+  width: max-content;
+  animation: mam-tags-marquee 32s linear infinite;
+}
+@keyframes mam-tags-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.mam-cta__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 48px; // uniform spacing (incl. last) so -50% loops seamlessly
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: var(--excent-text-on-dark-muted);
+  white-space: nowrap;
+
+  svg { width: 16px; height: 16px; color: #ffffff; flex-shrink: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mam-cta__track { animation: none; }
+}
+
+/* ============ FAQ — full-width, SAME margin pattern as the live-account FAQ ============ */
 .mam-faq {
-  max-width: 920px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 80px 110px;
+
+  @media (max-width: 1023px) { padding: 64px 20px; }
 }

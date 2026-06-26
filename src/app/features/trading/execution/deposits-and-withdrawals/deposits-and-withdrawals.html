@@ -1,7 +1,9 @@
-<div id="dw" data-cy="dw" class="dw">
+<div id="dw" data-cy="dw" class="dw page-sections">
 
-  <!-- ============ Hero ============ -->
+  <!-- ============ Hero (contained block) ============ -->
+  <div class="dw-hero-wrap section-contained">
   <section id="dw-hero" data-cy="dw-hero" class="dw-hero section-hero">
+    <img class="dw-hero__bg" src="/assets/images/background-depositsandwithdrawals.png" alt="" aria-hidden="true" />
     <div class="dw-hero__glow" aria-hidden="true"></div>
 
     <div appReveal [fade]="true" class="dw-hero__inner">
@@ -44,6 +46,7 @@
       </div>
     </div>
   </section>
+  </div>
 
   <div class="dw__container section-contained">
 
@@ -59,22 +62,6 @@
           <div class="dw-card__body">
             <excent-text variant="subtitle" as="h3" class="dw-card__title">{{ securityCards[0].title }}</excent-text>
             <excent-text variant="body" class="dw-card__desc">{{ securityCards[0].description }}</excent-text>
-          </div>
-          <!-- Decorative segregation visual: two separated fund stacks -->
-          <div class="dw-security__visual" aria-hidden="true">
-            <div class="dw-security__stack">
-              <span class="dw-security__stack-label">Client Funds</span>
-              <span class="dw-security__bar"></span>
-              <span class="dw-security__bar"></span>
-              <span class="dw-security__bar"></span>
-            </div>
-            <span class="dw-security__divider"></span>
-            <div class="dw-security__stack dw-security__stack--muted">
-              <span class="dw-security__stack-label">Operational Funds</span>
-              <span class="dw-security__bar"></span>
-              <span class="dw-security__bar"></span>
-              <span class="dw-security__bar"></span>
-            </div>
           </div>
         </article>
 
@@ -148,7 +135,7 @@
       </div>
 
       <div appReveal [from]="'right'" class="dw-currency__content">
-        <excent-text variant="title" as="h2" class="dw-section__title dw-currency__title">Trade in the World's<br />Most Trusted Currency</excent-text>
+        <excent-text variant="title" as="h2" class="dw-section__title dw-currency__title">Trade In The World's<br />Most Trusted Currency</excent-text>
         <excent-text variant="body" class="dw-currency__desc">
           All Excent Capital trading accounts are funded in US dollars, the world's most liquid and widely accepted reserve currency.
         </excent-text>
@@ -216,7 +203,7 @@
     <section id="dw-ready" data-cy="dw-ready" class="dw-section dw-ready">
       <div appReveal class="dw-ready__card">
         <div class="dw-ready__text">
-          <excent-text variant="title" as="h2" class="dw-ready__title">Ready to fund your account?</excent-text>
+          <excent-text variant="title" as="h2" class="dw-ready__title">Ready To Fund Your Account?</excent-text>
           <excent-text variant="body" class="dw-ready__sub">Deposit securely using your preferred payment method.</excent-text>
         </div>
         <img class="dw-ready__logos" alt="Pix, Mastercard, SPEI, SWIFT" [src]="paymentLogos" />

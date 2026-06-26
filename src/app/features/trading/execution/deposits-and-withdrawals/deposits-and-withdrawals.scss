@@ -3,22 +3,26 @@
   width: 100%;
 }
 
+/* Root is a stack of section containers with a uniform 20px gap between them
+   (.page-sections). The gap is the distance BETWEEN containers, independent of
+   each section's internal padding. */
 .dw {
-  display: block;
   width: 100%;
 }
 
 .dw__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--excent-section-gap);
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
 
+/* Section vertical padding removed: the inter-section spacing now comes from the
+   20px gap, not from each section's own top/bottom padding. */
 .dw-section {
-  padding: 64px 0;
-
-  @media (min-width: 1024px) {
-    padding: 96px 0;
-  }
+  padding: 0;
 }
 .dw-section__title {
   margin: 0 0 40px;
@@ -26,16 +30,37 @@
 }
 
 /* ============ Hero ============ */
+/* Hero is a CONTAINED block: the .dw-hero-wrap provides the lateral gutter, the
+   hero itself caps at 1400px, centers, and rounds its corners so the bg sits
+   inside the page frame instead of bleeding to the viewport edges. */
+.dw-hero-wrap {
+  width: 100%;
+}
 .dw-hero {
   position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
   padding-inline: 20px;
   padding-bottom: 64px;
+  border-radius: 24px;
   overflow: hidden;
   background:
     radial-gradient(62% 58% at 50% 100%, rgba(32, 103, 190, 0.5) 0%, rgba(2, 58, 134, 0.32) 22%, rgba(1, 29, 67, 0.14) 40%, rgba(0, 0, 0, 0) 62%),
     linear-gradient(180deg, #02060f 0%, #03081a 55%, #02060f 100%);
 
   @media (min-width: 1024px) { padding-bottom: 96px; }
+}
+.dw-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
 }
 .dw-hero__glow {
   position: absolute;
@@ -199,45 +224,6 @@
   }
 }
 
-/* Decorative "segregation" visual on the tall card */
-.dw-security__visual {
-  margin-top: auto;
-  display: flex;
-  align-items: flex-end;
-  gap: 20px;
-  padding-top: 32px;
-}
-.dw-security__stack {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
-.dw-security__stack-label {
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--excent-text-on-dark-dim);
-  margin-bottom: 4px;
-}
-.dw-security__bar {
-  height: 12px;
-  border-radius: 6px;
-  background: linear-gradient(90deg, rgba(8, 110, 249, 0.55), rgba(8, 110, 249, 0.12));
-
-  &:nth-child(3) { width: 85%; }
-  &:nth-child(4) { width: 60%; }
-}
-.dw-security__stack--muted .dw-security__bar {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03));
-}
-.dw-security__divider {
-  width: 1px;
-  align-self: stretch;
-  background: linear-gradient(180deg, transparent, rgba(58, 160, 255, 0.5), transparent);
-}
-:host-context(html:not(.dark)) .dw-security__stack--muted .dw-security__bar {
-  background: linear-gradient(90deg, rgba(17, 24, 39, 0.12), rgba(17, 24, 39, 0.03));
-}
 
 /* ============ Deposit / Withdrawal methods ============ */
 .dw-methods {
