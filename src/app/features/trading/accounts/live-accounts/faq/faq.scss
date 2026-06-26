@@ -10,6 +10,9 @@
   width: 100%;
   padding: 80px 110px;
   gap: 12px;
+
+  @media (max-width: 1439px) { padding: 64px 40px; }
+  @media (max-width: 1023px) { padding: 48px 20px; }
 }
 
 
@@ -30,6 +33,21 @@
   > *:not(excent-glow) {
     position: relative;
     z-index: 1;
+  }
+
+  @media (max-width: 1439px) {
+    width: calc(100% + 80px);
+    margin-left: -40px;
+    margin-right: -40px;
+    padding: 24px 40px 120px;
+    gap: 120px;
+  }
+  @media (max-width: 1023px) {
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 24px 20px 72px;
+    gap: 64px;
   }
 }
 
@@ -67,4 +85,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  @media (max-width: 1439px) { font-size: 56px; }
+  @media (max-width: 1023px) { font-size: 34px; }
 }

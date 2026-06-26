@@ -15,17 +15,17 @@ export const NAVBAR_ITEMS: NavItem[] = [
         {
           title: 'Accounts',
           items: [
-            { label: 'Live Account', link: 'trading/accounts/live-account' },
-            { label: 'Demo Account', link: 'trading/accounts/demo-account' },
-            { label: 'MAM Account', link: 'trading/accounts/mam-ecosystem' },
+            { label: 'Live Account', link: 'live-account' },
+            { label: 'Demo Account', link: 'demo-account' },
+            { label: 'MAM Account', link: 'mam-ecosystem' },
           ]
         },
         {
           title: 'Execution',
           items: [
-            { label: 'Platform', link: 'trading/execution/platform' },
-            { label: 'Deposits & Withdrawals', link: 'trading/execution/deposits-and-withdrawals' },
-            { label: 'Instant Execution', link: 'trading/execution/instant-execution' },
+            { label: 'Platform', link: 'platform' },
+            { label: 'Deposits & Withdrawals', link: 'deposits-and-withdrawals' },
+            { label: 'Instant Execution', link: 'instant-execution' },
           ]
         }
       ],

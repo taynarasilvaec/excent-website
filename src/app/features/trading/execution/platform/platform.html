@@ -1,3 +1,136 @@
-<section id="platform-section" data-cy="platform-section">
-  <h1>Platform</h1>
-</section>
+<div id="platform" data-cy="platform" class="platform">
+
+  <!-- ============ Hero ============ -->
+  <section id="platform-hero" data-cy="platform-hero" class="platform-hero section-contained">
+    <div
+      appReveal
+      [fade]="true"
+      id="platform-hero-card"
+      data-cy="platform-hero-card"
+      class="platform-hero__card"
+      [style.background-image]="'url(' + heroBg + ')'">
+
+      <excent-text id="platform-hero-title" data-cy="platform-hero-title" variant="display" as="h1" color="inherit" class="platform-hero__title">
+        The Excent<br />Trading Platform
+      </excent-text>
+
+      <!-- Button order swaps by device (see Platform.appFirst). Styling is fixed:
+           Download App = primary (white), Web Version = secondary (outline). -->
+      <div
+        id="platform-hero-actions"
+        data-cy="platform-hero-actions"
+        class="platform-hero__actions"
+        [class.platform-hero__actions--app-first]="appFirst">
+        <excent-button id="platform-hero-download-btn" data-cy="platform-hero-download-btn" class="platform-hero__btn platform-hero__btn--app" color="white" radius="sm" size="lg" width="auto" (click)="onDownloadApp()">
+          <img btn-icon-left alt="" width="16" height="16" src="/assets/icons/smartphone.svg" />
+          Download App
+        </excent-button>
+        <excent-button id="platform-hero-web-btn" data-cy="platform-hero-web-btn" class="platform-hero__btn platform-hero__btn--web" color="outline-white" radius="sm" size="lg" width="auto" (click)="onWebVersion()">
+          <img btn-icon-left alt="" width="16" height="16" src="/assets/icons/monitor.svg" />
+          Web Version
+        </excent-button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Capabilities bento ============ -->
+  <section id="platform-capabilities" data-cy="platform-capabilities" class="pcap section-contained">
+    <div appReveal id="platform-capabilities-grid" data-cy="platform-capabilities-grid" class="pcap__grid">
+
+      <!-- Left column -->
+      <div class="pcap__col pcap__col--left">
+        <!-- Top row: two metric cards -->
+        <div class="pcap__row-metrics">
+          <excent-bento-card id="platform-cap-fast" data-cy="platform-cap-fast" name="platform-cap-fast" variant="blue-bright" [pad]="false" class="pcap__card">
+            <div class="pcap__metric">
+              <span class="pcap__metric-value">15ms</span>
+              <span class="pcap__metric-label">Fast Execution</span>
+            </div>
+          </excent-bento-card>
+
+          <excent-bento-card id="platform-cap-support" data-cy="platform-cap-support" name="platform-cap-support" variant="navy" [pad]="false" class="pcap__card">
+            <div class="pcap__metric">
+              <span class="pcap__metric-value">24/7</span>
+              <span class="pcap__metric-label">Dedicated Human Support</span>
+            </div>
+          </excent-bento-card>
+        </div>
+
+        <!-- 150+ Assets -->
+        <excent-bento-card id="platform-cap-assets" data-cy="platform-cap-assets" name="platform-cap-assets" variant="navy" [pad]="false" class="pcap__card">
+          <div class="pcap__assets">
+            <div class="pcap__assets-row" aria-hidden="true">
+              <img alt="" [src]="assetsImg" />
+            </div>
+            <h3 class="pcap__assets-title">150+ Assets</h3>
+          </div>
+        </excent-bento-card>
+
+        <!-- Integrated Risk Management -->
+        <excent-bento-card id="platform-cap-risk" data-cy="platform-cap-risk" name="platform-cap-risk" variant="blue-bright" [pad]="false" class="pcap__card">
+          <div class="pcap__titlecard">
+            <h3 class="pcap__titlecard-title">Integrated Risk Management</h3>
+          </div>
+        </excent-bento-card>
+      </div>
+
+      <!-- Right column -->
+      <div class="pcap__col pcap__col--right">
+        <!-- Always Evolving + sub-panel -->
+        <excent-bento-card id="platform-cap-evolving" data-cy="platform-cap-evolving" name="platform-cap-evolving" variant="navy" [pad]="false" class="pcap__card">
+          <div class="pcap__evolving">
+            <h3 class="pcap__evolving-title">Always<br />Evolving</h3>
+          </div>
+          <div class="pcap__subpanel">
+            <p class="pcap__subpanel-text">New features released continuously, based on real trader feedback.</p>
+          </div>
+        </excent-bento-card>
+
+        <!-- Manage all accounts (MAM) -->
+        <excent-bento-card id="platform-cap-mam" data-cy="platform-cap-mam" name="platform-cap-mam" variant="navy" [pad]="false" class="pcap__card">
+          <div class="pcap__mam">
+            <div class="pcap__mam-head">
+              <h3 class="pcap__mam-title">Manage all<br />echo accounts in<br />one place</h3>
+              <span class="pcap__mam-avatars" aria-hidden="true">
+                <span class="pcap__mam-avatar"></span>
+                <span class="pcap__mam-avatar"></span>
+                <span class="pcap__mam-avatar"></span>
+                <span class="pcap__mam-avatar"></span>
+              </span>
+            </div>
+
+            <div class="pcap__widget" aria-hidden="true">
+              <div class="pcap__widget-top">
+                <div class="pcap__widget-client">
+                  <span class="pcap__widget-eyebrow">See other clients</span>
+                  <span class="pcap__widget-id">
+                    <span class="pcap__widget-avatar"></span>
+                    <span class="pcap__widget-name">Mary Allan</span>
+                  </span>
+                </div>
+                <span class="pcap__widget-profit">Profit: $1,433.39</span>
+              </div>
+
+              <span class="pcap__widget-spark"><live-spark [up]="true" /></span>
+
+              <div class="pcap__widget-bottom">
+                <span class="pcap__widget-balance">$453,224</span>
+                <span class="pcap__widget-acct">id: 987654</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pcap__footer">
+            <span class="pcap__footer-label">MAM Accounts</span>
+            <excent-button id="platform-cap-mam-btn" data-cy="platform-cap-mam-btn" color="white" radius="sm" size="md" width="auto" (click)="onMamLearnMore()">
+              Learn More
+              <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
+            </excent-button>
+          </div>
+        </excent-bento-card>
+      </div>
+
+    </div>
+  </section>
+
+</div>

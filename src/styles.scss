@@ -195,6 +195,7 @@ body {
   --excent-gutter: 6px;            /* mobile */
   --excent-fullbleed-pad: 40px;
   --excent-card-pad: 20px;
+  --excent-section-gap: 20px;      /* distance BETWEEN section containers (sitewide) */
 }
 @media (min-width: 1024px) { :root { --excent-gutter: 16px; } }   /* tablet */
 @media (min-width: 1440px) { :root { --excent-gutter: 20px; } }   /* desktop */
@@ -203,6 +204,16 @@ body {
    each section (via .section-contained), never imposed on everyone by the parent.
    This lets full-bleed sections reach the viewport edges. */
 .page-shell {
+  width: 100%;
+}
+
+/* Vertical rhythm: every page is a stack of section containers separated by a
+   single uniform gap. This is the distance BETWEEN section containers and is
+   independent of each section's own internal padding. Used on every page root. */
+.page-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--excent-section-gap);
   width: 100%;
 }
 
@@ -221,10 +232,10 @@ body {
 }
 
 /* First-hero standard for INNER pages (not the home hero, which is full-bleed
-   100vh). 80vh tall with top padding so content clears the floating fixed navbar
-   and the menu never sits on top of it initially. */
+   100vh). Full viewport height with top padding so content clears the floating
+   fixed navbar and the menu never sits on top of it initially. */
 .section-hero {
-  min-height: 80vh;
+  min-height: 100vh;
   padding-top: 120px;
 
   @media (min-width: 1024px) { padding-top: 180px; }

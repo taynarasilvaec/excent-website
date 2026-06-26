@@ -1,0 +1,67 @@
+/* ===== Card shell — IDENTICAL on every card (gradient, border, radius, pattern,
+   hover). Navy in both themes. `blue-bright` is the only sanctioned restyle. ===== */
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #011c41;
+  background-image: radial-gradient(118% 96% at 26% 8%, rgba(22, 94, 202, 0.85) 0%, rgba(9, 52, 138, 0.5) 38%, rgba(1, 28, 65, 0) 74%);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Default content padding — opt out with `pad="false"` when the projected
+   content owns its own padding (full-bleed media, sub-panels). */
+:host(.excent-bento-card--pad) { padding: 32px; }
+@media (min-width: 1024px) {
+  :host(.excent-bento-card--pad) { padding: 42px; }
+}
+
+/* Brighter royal-blue field — base #01296e plus a centred blue glow. */
+:host(.excent-bento-card--blue-bright) {
+  background-color: #01296e;
+  background-image: radial-gradient(96% 132% at 50% 58%, rgba(20, 104, 246, 0.95) 0%, rgba(8, 74, 206, 0.6) 45%, rgba(1, 41, 110, 0) 82%);
+  border-color: rgba(120, 170, 255, 0.18);
+}
+
+:host > *:not(.excent-bento-card__pattern) { position: relative; z-index: 1; }
+
+:host(:hover) {
+  transform: translateY(-4px);
+  border-color: rgba(58, 160, 255, 0.4);
+  box-shadow: 0 18px 44px rgba(8, 110, 249, 0.18);
+}
+
+/* ===== Decorative pattern (absolute) ===== */
+.excent-bento-card__pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(120, 170, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 170, 255, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 92% 82% at 55% 28%, #000 8%, transparent 80%);
+  mask-image: radial-gradient(ellipse 92% 82% at 55% 28%, #000 8%, transparent 80%);
+}
+.excent-bento-card__dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(11, 202, 202, 0.9);
+  box-shadow: 0 0 6px rgba(11, 202, 202, 0.8);
+}
+.excent-bento-card__square {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  transform: translate(-50%, -50%);
+  background: rgba(11, 202, 202, 0.12);
+}

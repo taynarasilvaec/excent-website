@@ -6,60 +6,54 @@
   class="excent-bento"
   [style.--bento-cols]="cols()">
   @for (card of it; track $index) {
-    <article
+    <excent-bento-card
       [id]="name() + '-card-' + $index"
       [attr.data-cy]="name() + '-card-' + $index"
-      class="excent-bento__card"
+      class="excent-bento__cell"
+      [variant]="card.variant ?? 'navy'"
       [attr.style]="span(card)">
 
-      <!-- Decorative pattern (absolute) — identical on every card -->
-      <span class="excent-bento__pattern" aria-hidden="true">
-        @for (d of dots; track $index) {
-          <span class="excent-bento__dot" [style.left.%]="d.x" [style.top.%]="d.y"></span>
-        }
-        @for (q of squares; track $index) {
-          <span class="excent-bento__square" [style.left.%]="q.x" [style.top.%]="q.y"></span>
-        }
-      </span>
+      <div class="excent-bento__inner">
 
-      <!-- Top: media or icon -->
-      @if (card.media || card.mediaPanel) {
-        <div class="excent-bento__media">
-          @if (card.media) { <img alt="" [src]="card.media" /> }
+        <!-- Top: media or icon -->
+        @if (card.media || card.mediaPanel) {
+          <div class="excent-bento__media">
+            @if (card.media) { <img alt="" [src]="card.media" /> }
+          </div>
+        } @else if (card.icon) {
+          <span class="excent-bento__icon"><img alt="" width="24" height="24" [src]="card.icon" /></span>
+        }
+
+        <!-- If there's a description, the title sits in the top group with the icon -->
+        @if (card.description && card.title) {
+          <h3 class="excent-bento__title excent-bento__title--top">{{ card.title | translate }}@if (card.titleDim) {<span class="excent-bento__title-dim"> {{ card.titleDim | translate }}</span>}</h3>
+        }
+
+        <!-- Bottom group -->
+        <div class="excent-bento__body">
+          @if (card.stat) {
+            <span class="excent-bento__stat">{{ card.stat | translate }}</span>
+            @if (card.statLabel) { <span class="excent-bento__stat-label">{{ card.statLabel | translate }}</span> }
+          }
+          @if (card.title && !card.description) {
+            <h3 class="excent-bento__title">{{ card.title | translate }}@if (card.titleDim) {<span class="excent-bento__title-dim"> {{ card.titleDim | translate }}</span>}</h3>
+          }
+          @if (card.description) {
+            <p class="excent-bento__desc">{{ card.description | translate }}</p>
+          }
+          @if (card.link) {
+            <a class="excent-bento__link">{{ card.link | translate }}
+              <img alt="" width="16" height="16" src="/assets/icons/arrow-right.svg" />
+            </a>
+          }
+          @if (card.button) {
+            <excent-button class="excent-bento__btn" color="white" radius="sm" size="md" width="auto" (click)="cardAction.emit(card)">
+              {{ card.button | translate }}
+              <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
+            </excent-button>
+          }
         </div>
-      } @else if (card.icon) {
-        <span class="excent-bento__icon"><img alt="" width="24" height="24" [src]="card.icon" /></span>
-      }
-
-      <!-- If there's a description, the title sits in the top group with the icon -->
-      @if (card.description && card.title) {
-        <h3 class="excent-bento__title excent-bento__title--top">{{ card.title | translate }}@if (card.titleDim) {<span class="excent-bento__title-dim"> {{ card.titleDim | translate }}</span>}</h3>
-      }
-
-      <!-- Bottom group -->
-      <div class="excent-bento__body">
-        @if (card.stat) {
-          <span class="excent-bento__stat">{{ card.stat | translate }}</span>
-          @if (card.statLabel) { <span class="excent-bento__stat-label">{{ card.statLabel | translate }}</span> }
-        }
-        @if (card.title && !card.description) {
-          <h3 class="excent-bento__title">{{ card.title | translate }}@if (card.titleDim) {<span class="excent-bento__title-dim"> {{ card.titleDim | translate }}</span>}</h3>
-        }
-        @if (card.description) {
-          <p class="excent-bento__desc">{{ card.description | translate }}</p>
-        }
-        @if (card.link) {
-          <a class="excent-bento__link">{{ card.link | translate }}
-            <img alt="" width="16" height="16" src="/assets/icons/arrow-right.svg" />
-          </a>
-        }
-        @if (card.button) {
-          <excent-button class="excent-bento__btn" color="white" radius="sm" size="md" width="auto" (click)="cardAction.emit(card)">
-            {{ card.button | translate }}
-            <img btn-icon-right alt="" width="16" height="16" src="/assets/icons/arrow-right-up.svg" />
-          </excent-button>
-        }
       </div>
-    </article>
+    </excent-bento-card>
   }
 </div>

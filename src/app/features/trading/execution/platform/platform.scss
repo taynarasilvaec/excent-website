@@ -1,0 +1,349 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* ============ Hero ============
+   Contained rounded card with the space/earth artwork as background. The
+   floating navbar overlays the top of the card, so the card's internal
+   top-padding (not a section margin) clears it — same mechanism as the Figma
+   `pt-180`. The card is inset evenly (top + sides) via the global gutter. */
+.platform-hero {
+  padding-top: var(--excent-gutter);
+}
+
+.platform-hero__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 560px;
+  padding: 120px 24px 48px;
+  border-radius: 22px;
+  overflow: hidden;
+  color: var(--excent-text-on-dark-primary);
+  text-align: center;
+  background-color: #030a1a; /* fallback behind the artwork */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  @media (min-width: 1024px) {
+    min-height: 693px;
+    padding: 180px 90px 80px;
+  }
+}
+
+.platform-hero__title {
+  max-width: 745px;
+}
+
+.platform-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: auto; /* pin the actions toward the bottom of the card */
+}
+
+/* Default (desktop / SSR): "Web Version" leads. */
+.platform-hero__btn--web { order: 0; }
+.platform-hero__btn--app { order: 1; }
+
+/* Mobile OS: "Download App" leads. */
+.platform-hero__actions--app-first {
+  .platform-hero__btn--app { order: 0; }
+  .platform-hero__btn--web { order: 1; }
+}
+
+/* ============ Capabilities bento ============
+   Two independent columns (the uniform bento grid can't express the asymmetric
+   row heights), each a stack of <excent-bento-card> shells. Desktop keeps the
+   Figma proportion via aspect-ratio + fractional rows; mobile stacks. */
+.pcap {
+  padding-top: 64px;
+
+  @media (min-width: 1024px) { padding-top: 120px; }
+}
+
+.pcap__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    aspect-ratio: 1440 / 720;
+  }
+}
+
+.pcap__col {
+  display: grid;
+  gap: 12px;
+}
+.pcap__col--left {
+  @media (min-width: 1024px) { grid-template-rows: 194fr 222fr 280fr; }
+}
+.pcap__col--right {
+  @media (min-width: 1024px) { grid-template-rows: 311fr 397fr; }
+}
+
+.pcap__row-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pcap__card {
+  @media (max-width: 1023px) { min-height: 170px; }
+}
+
+/* ----- Metric cards (15ms / 24-7): centred value + label ----- */
+.pcap__metric {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 28px;
+  text-align: center;
+}
+.pcap__metric-value {
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -1px;
+
+  @media (min-width: 1024px) { font-size: 56px; }
+}
+.pcap__metric-label {
+  color: var(--excent-text-on-dark-secondary);
+  font-size: 15px;
+
+  @media (min-width: 1024px) { font-size: 18px; }
+}
+
+/* ----- 150+ Assets: full-bleed icon row above, title pinned bottom ----- */
+.pcap__assets {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  min-height: 200px;
+}
+.pcap__assets-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+
+  img { width: 100%; height: auto; display: block; }
+}
+.pcap__assets-title {
+  margin: 0;
+  padding: 0 32px 32px;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+
+  @media (min-width: 1024px) { font-size: 28px; }
+}
+
+/* ----- Integrated Risk Management: title pinned bottom ----- */
+.pcap__titlecard {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+}
+.pcap__titlecard-title {
+  margin: 0;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+
+  @media (min-width: 1024px) { font-size: 28px; }
+}
+
+/* ----- Bright-blue sub-panel / footer (full-bleed strips) ----- */
+%pcap-blue-panel {
+  background-color: #0846c8;
+  background-image: radial-gradient(140% 180% at 25% -40%, rgba(34, 122, 255, 0.95) 0%, rgba(8, 74, 206, 0.7) 55%, rgba(4, 52, 150, 0.6) 100%);
+}
+
+/* ----- Always Evolving: headline + bright-blue note ----- */
+.pcap__evolving {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  padding: 40px 44px 24px;
+}
+.pcap__evolving-title {
+  margin: 0;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.1;
+
+  @media (min-width: 1024px) { font-size: 44px; }
+}
+.pcap__subpanel {
+  @extend %pcap-blue-panel;
+  padding: 28px 32px;
+}
+.pcap__subpanel-text {
+  margin: 0;
+  max-width: 520px;
+  color: #fff;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+
+  @media (min-width: 1024px) { font-size: 17px; }
+}
+
+/* ----- MAM card: body (title + avatars + client widget) + blue footer ----- */
+.pcap__mam {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 32px;
+}
+.pcap__mam-head {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.pcap__mam-title {
+  margin: 0;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.15;
+
+  @media (min-width: 1024px) { font-size: 30px; }
+}
+.pcap__mam-avatars {
+  display: inline-flex;
+  padding-left: 8px;
+}
+.pcap__mam-avatar {
+  width: 38px;
+  height: 38px;
+  margin-left: -8px;
+  border-radius: 50%;
+  border: 2px solid #011c41;
+  background: linear-gradient(135deg, #2b6fff 0%, #0b2a6b 100%);
+
+  &:nth-child(2) { background: linear-gradient(135deg, #18b3c9 0%, #0b2a6b 100%); }
+  &:nth-child(3) { background: linear-gradient(135deg, #6c8cff 0%, #122a5e 100%); }
+  &:nth-child(4) { background: linear-gradient(135deg, #3aa0ff 0%, #0b2a6b 100%); }
+}
+
+/* Client widget (mock) */
+.pcap__widget {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  width: 260px;
+  max-width: 46%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(49, 49, 49, 0.2);
+  overflow: hidden;
+
+  @media (max-width: 1023px) { display: none; }
+}
+.pcap__widget-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.pcap__widget-client {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.pcap__widget-eyebrow {
+  color: var(--excent-text-on-dark-soft);
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 9px;
+}
+.pcap__widget-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.pcap__widget-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: linear-gradient(135deg, #2b6fff, #0b2a6b);
+}
+.pcap__widget-name {
+  color: var(--excent-text-on-dark-soft);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
+.pcap__widget-profit {
+  color: #00bd23;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.pcap__widget-spark {
+  position: absolute;
+  right: 16px;
+  bottom: 18px;
+  width: 104px;
+  height: 50px;
+  pointer-events: none;
+}
+.pcap__widget-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pcap__widget-balance {
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 21px;
+}
+.pcap__widget-acct {
+  color: var(--excent-text-on-dark-soft);
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+}
+
+.pcap__footer {
+  @extend %pcap-blue-panel;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 32px;
+}
+.pcap__footer-label {
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 22px;
+}
