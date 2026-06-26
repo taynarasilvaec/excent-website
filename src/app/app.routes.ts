@@ -53,6 +53,13 @@ export const routes: Routes = [
             './features/trading/execution/deposits-and-withdrawals/deposits-and-withdrawals'
           ).then(m => m.DepositsAndWithdrawals),
       },
+      {
+        path: 'platform',
+        loadComponent: () =>
+          import('./features/trading/execution/platform/platform').then(
+            m => m.Platform,
+          ),
+      },
       // Everything else isn't built yet → 404
       { path: '**', ...notFound },
     ],
