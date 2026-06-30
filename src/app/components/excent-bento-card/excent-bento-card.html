@@ -1,11 +1,65 @@
-<!-- Decorative pattern (absolute) — identical on every card -->
-<span class="excent-bento-card__pattern" aria-hidden="true">
-  @for (d of dots; track $index) {
-    <span class="excent-bento-card__dot" [style.left.%]="d.x" [style.top.%]="d.y"></span>
-  }
-  @for (q of squares; track $index) {
-    <span class="excent-bento-card__square" [style.left.%]="q.x" [style.top.%]="q.y"></span>
-  }
+<!-- Decorative bg (faithful to Figma) — glow + cyan grid + sparkles + dots.
+     Sits behind the projected content; identical structure on every card. -->
+<span class="excent-bento-card__bg" aria-hidden="true">
+
+  <!-- Glow (Figma "Ellipse 2") — positioned per card via CSS custom props -->
+  <svg class="excent-bento-card__glow" viewBox="0 0 1694.67 1822.67" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="bcGlowBlur" x="0" y="0" width="1694.67" height="1822.67" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="149.667" />
+      </filter>
+      <linearGradient id="bcGlowFill" x1="847.334" y1="299.334" x2="847.334" y2="1335.77" gradientUnits="userSpaceOnUse">
+        <stop offset="0.26" stop-color="#161616" stop-opacity="0" />
+        <stop offset="0.615" stop-color="#006DFF" />
+        <stop offset="0.795" stop-color="#0074FF" />
+        <stop offset="0.985" stop-color="#0050FF" />
+      </linearGradient>
+    </defs>
+    <g opacity="0.4" filter="url(#bcGlowBlur)">
+      <ellipse cx="847.334" cy="911.334" rx="548" ry="612" fill="url(#bcGlowFill)" />
+    </g>
+  </svg>
+
+  <!-- Cyan blueprint grid — CSS, covers any card size, radial-masked -->
+  <span class="excent-bento-card__grid"></span>
+
+  <!-- Sparkles + dots accents (768 tile), positioned per card, radial-masked -->
+  <svg class="excent-bento-card__accents" viewBox="0 0 768 768" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="bcFade" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="#fff" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </radialGradient>
+      <mask id="bcMask"><rect width="768" height="768" fill="url(#bcFade)" /></mask>
+      <linearGradient id="bcSparkV" gradientUnits="userSpaceOnUse" x1="12" y1="0" x2="12" y2="24">
+        <stop stop-color="#fff" stop-opacity="0" />
+        <stop offset="0.5" stop-color="#fff" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="bcSparkH" gradientUnits="userSpaceOnUse" x1="0" y1="12" x2="24" y2="12">
+        <stop stop-color="#fff" stop-opacity="0" />
+        <stop offset="0.5" stop-color="#fff" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </linearGradient>
+      <g id="bcSpark">
+        <line x1="12" y1="0" x2="12" y2="24" stroke="url(#bcSparkV)" />
+        <line x1="0" y1="12" x2="24" y2="12" stroke="url(#bcSparkH)" />
+      </g>
+    </defs>
+    <g mask="url(#bcMask)">
+      <circle cx="288" cy="336" r="2" fill="#0BCACA" />
+      <circle cx="480" cy="240" r="2" fill="#0BCACA" />
+      <circle cx="529" cy="432" r="2" fill="#0BCACA" />
+      <circle cx="144" cy="384" r="2" fill="#0BCACA" />
+      <use href="#bcSpark" x="372" y="276" />
+      <use href="#bcSpark" x="228" y="376" />
+      <use href="#bcSpark" x="613" y="515" />
+      <use href="#bcSpark" x="564" y="372" />
+      <use href="#bcSpark" x="181" y="468" />
+      <use href="#bcSpark" x="565" y="228" />
+      <use href="#bcSpark" x="468" y="323" />
+    </g>
+  </svg>
 </span>
 
 <ng-content />

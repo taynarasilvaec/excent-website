@@ -1,16 +1,20 @@
-import { Component, input } from '@angular/core'
+import { Component, computed, input } from '@angular/core'
 
 export type BentoVariant = 'navy' | 'blue-bright'
 
 /**
  * Excent signature bento SHELL — the single source of truth for one bento card's
- * look (border, radius, decorative blueprint pattern, hover). The fill is navy by
- * default; `blue-bright` is the only sanctioned restyle (matches excent-card's
- * blue-bright). Everything else is content, projected via <ng-content>.
+ * look (border, radius, decorative pattern, hover). The decorative `bg` is
+ * faithful to Figma: a positionable blurred blue glow ("Ellipse 2") + a cyan
+ * blueprint grid + sparkles + dots, all under a radial alpha mask.
  *
- * Used both by <excent-bento> (the grid) and directly, when a layout needs a
- * custom arrangement the uniform grid can't express. Set `pad="false"` when the
- * projected content owns its own padding (e.g. full-bleed sub-panels).
+ * The fill is navy by default; `blue-bright` is the only sanctioned restyle.
+ * Everything else is content, projected via <ng-content>. Set `pad="false"`
+ * when the projected content owns its own padding (full-bleed sub-panels).
+ *
+ * Glow/pattern placement is positionable per card (glowX/glowY/glowW/glowFlip,
+ * patX/patY) so each card lights its own corner, exactly like Figma. Defaults
+ * give a sensible look for cards that don't set them.
  */
 @Component({
   selector: 'excent-bento-card',
@@ -20,6 +24,13 @@ export type BentoVariant = 'navy' | 'blue-bright'
   host: {
     '[class.excent-bento-card--pad]': 'pad()',
     '[class.excent-bento-card--blue-bright]': "variant() === 'blue-bright'",
+    '[class.excent-bento-card--flip]': 'glowFlip()',
+    '[style.--bento-glow-x.px]': 'glowX()',
+    '[style.--bento-glow-y.px]': 'glowY()',
+    '[style.--bento-glow-w.px]': 'glowW()',
+    '[style.--bento-glow-h.px]': 'glowH()',
+    '[style.--bento-pat-x.px]': 'patX()',
+    '[style.--bento-pat-y.px]': 'patY()',
   },
 })
 export class ExcentBentoCard {
@@ -27,16 +38,16 @@ export class ExcentBentoCard {
   readonly variant = input<BentoVariant>('navy')
   readonly pad = input<boolean>(true)
 
-  // Shared decorative pattern — same dot/square scatter on every card.
-  protected readonly dots = [
-    { x: 37, y: 44 },
-    { x: 63, y: 31 },
-    { x: 69, y: 56 },
-    { x: 18, y: 50 },
-  ]
-  protected readonly squares = [
-    { x: 69, y: 38 },
-    { x: 13, y: 58 },
-    { x: 83, y: 57 },
-  ]
+  // Glow placement (px, relative to the card's top-left).
+  readonly glowX = input<number>(-205)
+  readonly glowY = input<number>(120)
+  readonly glowW = input<number>(1096)
+  readonly glowFlip = input<boolean>(true)
+
+  // Decorative accents tile (768×768) placement (px).
+  readonly patX = input<number>(190)
+  readonly patY = input<number>(-150)
+
+  // Glow keeps the source aspect ratio (1694.67 × 1822.67).
+  protected readonly glowH = computed(() => Math.round((this.glowW() * 1822.67) / 1694.67))
 }
